@@ -1,0 +1,52 @@
+<form action="/mibiblioteca">
+  <div class="form-group row">
+    <label for="mibusqueda" class="col-4 col-form-label">
+      Search by Keywords or press search to see all
+    </label>
+    <div class="col-8">
+      <input class="form-control" type="text" placeholder="Seach" id="mibiblioteca"
+             name="mibiblioteca">
+    </div>
+  </div>
+  <button class="btn btn-success btn-block">Search</button>
+</form>
+
+<br>
+<br>
+
+<div class="row">
+  <% for(var i=0;i<MiArticulo.length;i++){ %>
+  <div class="card" style="width: 20rem;">
+    <div class="card-block">
+      <h4 class="card-title"><%=MiArticulo[i].title%></h4>
+      <p class="card-text"><h10><b>Autors:</b></h10><%=MiArticulo[i].authors%></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><h10><b>Category:</b></h10><%=MiArticulo[i].category%></li>
+      <li class="list-group-item"><h10><b>Languajescd :</b></h10><%=MiArticulo[i].language%></li>
+      <li class="list-group-item"><h10><b>Year of Publication:</b></h10><%=MiArticulo[i].year%></li>
+    </ul>
+    <div class="card-block">
+      <form action="/Saludo/eliminarmiArticulo" method="post">
+        <input hidden
+               type="text"
+               value="<%=MiArticulo[i].id%>"
+               name="id">
+        <button  type="submit"
+                 class="btn btn-outline-danger">Delete</button>
+
+        <a href="/VerMisArticulo?id=<%=MiArticulo[i].id%>">
+          <button type="button" class="btn btn-primary">
+            See
+          </button>
+        </a>
+      </form>
+    </div>
+  </div>
+  <%}%>
+</div>
+<hr>
+<br>
+<br>
+<br>
+
