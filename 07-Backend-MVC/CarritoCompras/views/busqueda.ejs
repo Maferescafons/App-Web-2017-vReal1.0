@@ -713,6 +713,7 @@
         "<div >" +
         "<font color='#01549b'><h4><b> Title: </b></h4></font><h4><b>" + title + "</h4></b><br>" +
         "<font color='#01549b'><h4><b> Journal:</b></h4></font><h4><b>" + journal + "</h4></b><br>" +
+
         "<font color='#01549b'><h4><b> Abstract:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
         "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
         "<font color='#01549b'><h4><b> Editorial:</b></h4></font><h4><b>" + editorial + "</h4></b><br>" +
@@ -965,34 +966,116 @@
         editorial = data.records[i].publisher;
         starpage = data.records[i].startingPage;
         endpage = data.records[i].endingPage;
-        url=data.records[i].url
+        year= data.records[i].publicationDate;
         pages = starpage +"-"+ endpage;
-        abstract = '';
+        abstract = data.records[i].abstract;
         keywords = '';
         autores='';
         cate='';
         language = '';
         country = '';
-        var urlHtml =devolverHtmlUrl(data.records[i].url) ;
 
-        var imprimir = "<div class='container-fluid'>  " +
-          "<div class='container-fluid'> <div class='container-fluid'>" +
-          "<div class='container-fluid'>" +
-          "<h5> Titulo: </h5>" + title + "<br>" +
-          "</div>" +
+        for (var j = 0; j < 10; j++) {
+          if (typeof data.records[i].creators[0] !== 'undefined') {
 
-          "<h5>Numero: </h5>" + number + "<br>" +
-          "<h5>Volumen:</h5> " + volume + "<br>" +
-          "<h5>issns:</h5> " + issns + "<br>" +
+            var autorHtml = data.records[i].creators[0].creator;
+            var autores = autorHtml;
+            var authorb = autores.charAt(0);
+            textoAuthorDividido = autorHtml.split(" ");
+            numeroPalabras = textoAuthorDividido.length;
+            if (numeroPalabras >= 4) {
+              nameAuthor = autores.split(/\s+/, 2);
+              //var output = autores.split(/\s+/).pop();
+              //output es el apellido del autor
+              //nombreA es el nombre del autor
+              var output1 = textoAuthorDividido[textoAuthorDividido.length - 2];
+              var output12 = textoAuthorDividido[textoAuthorDividido.length - 1];
+              var apellido = output1 + ' ' + output12;
 
-          "<h5>fecha de publicacion: </h5>" + year + "<br>" +
-          "<h5>journal: </h5>" + journal + "<br>" +
-          "<h5>Editorial: </h5>" + editorial + "<br>" +
 
-          "<h5>Paginas: </h5>" + pages + "<br>" +
-          "<br>"+
-          "<h5>FullText: </h5>"
-          +  urlHtml +"<br>"+
+            }
+            else {
+              nameAuthor = autores.split(/\s+/, 1);
+              //var output = autores.split(/\s+/).pop();
+              var apellido  = textoAuthorDividido[textoAuthorDividido.length - 1];
+
+
+            }
+            var nombreA0 = (nameAuthor.join(" "));
+            var nombreA = nombreA0;
+
+            var authorbibliograpyIEEE = authorb + ' ' + apellido;
+            var authorsb = authorbibliograpyIEEE;
+            var nombreAuthores=[nombreA];
+            var apellidoAuthores=[apellido];
+          }
+          console.log("author1", nombreA + apellido);
+
+
+        }
+
+
+        for (var j = 0; j < 10; j++) {
+          if (data.records[i].url[j] !== 'undefined') {
+
+            var urlHtml = devolverHtmlUrl(data.records[i].url[0].value);
+            var url = data.records[i].url[0].value;
+          }
+        }
+
+
+
+        var imprimir = "<div class='row'> " +
+          "<div class='card'> <div class='card-block'>" +
+          "<div>" +
+          "<font color='#01549b'><h4><b> Title: </b></h4></font><h4><b>" + title + "</h4></b><br>" +
+          "<font color='#01549b'><h4><b> Journal:</b></h4></font><h4><b>" + journal + "</h4></b><br>" +
+
+          "<font color='#01549b'><h4><b> Abstract:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
+         // "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
+          "<font color='#01549b'><h4><b> Editorial:</b></h4></font><h4><b>" + editorial + "</h4></b><br>" +
+          //"<font color='#01549b'><h4><b> Category:</b></h4></font><h4><b>"+cate + "</h4></b><br>" +
+          "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>"+ autorHtml + "</h4><br><h4><b>" +
+          //autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" + autor4 + "</h4></b><br>" +
+         // "<div class='row'></b>" +
+
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Number: </b></h4></font> </div>" +
+          "<div class='col-md-3'><h4><b>" + number + "</h4></b></div>" +
+          "<div class='col-md-3'> </div>" +
+          "<div class='col-md-3'> </div>" +
+
+
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Volume: </b></h4></font> </div>" +
+          "<div class='col-md-3'><h4><b>" + volume + "</h4></b></div>" +
+          "<div class='col-md-3'> </div>" +
+          "<div class='col-md-3'> </div>" +
+
+
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Issns: </b></h4></font> </div>" +
+          "<div class='col-md-3'><h4><b>" + issns + "</h4></b></div>" +
+          "<div class='col-md-3'> </div>" +
+          "<div class='col-md-3'> </div>" +
+
+
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Year: </b></h4></font> </div>" +
+          "<div class='col-md-3'><h4><b>" + year + "</h4></b></div>" +
+          "<div class='col-md-3'> </div>" +
+          "<div class='col-md-3'> </div>" +
+
+
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Pages: </b></h4></font> </div>" +
+          "<div class='col-md-3'><h4><b>" + pages + "</h4></b></div>" +
+          "<div class='col-md-3'> </div>" +
+          "<div class='col-md-3'> </div>" +
+
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Link: </b></h4></font> </div>" +
+          "<div class='col-md-3'>" + urlHtml + "</div>" +
+          "<div class='col-md-3'> </div>" +
+          "<div class='col-md-3'> </div>" +
+
+          //"<p>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' + year + "</p>" +
+
+          " </div>" +
 
           "<form action='/GuardarArticulo/crearArticuloQuemado' method='post'>" +
           "<input hidden type='text' name='title' value='" + title + "'>" +

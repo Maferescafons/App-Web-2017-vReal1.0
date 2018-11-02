@@ -50,15 +50,21 @@ module.exports = {
       })
   },
   BusquedaFile: function (req, res) {
-    File.findOne({ fkIdArticulo:parametros.id }).exec(function (err, file) {
-      if (err)
-        return res.negotiate(err);
-      sails.log.info("File", file);
-      return res.view('editarArticulo', {
-        file: file
+    var parametros = req.allParams();
+    if (req.method == "GET" && parametros.id) {
+      File.findOne({fkIdArticulo:parametros.id }).exec(function (err, File) {
+        if (err){
+          return res.negotiate(err);
+        }else
+          sails.log.info("File", File);
+        return res.ok(File)
+
       });
-    });
+    }else{
+      return res.negotiate(err);
+    }
   },
+
   download: function(req, res) {
     var params = req.allParams();
     sails.log.info("Parametros", params);
@@ -71,7 +77,9 @@ module.exports = {
             return res.serverError(err)
           }
           if (!file) {
-            return res.notFound()
+            return res.badRequest(
+              'There is no file attached to this article .'
+            );
           }
           // we use the res.download function to download the file
           // and send a ok response
@@ -87,7 +95,6 @@ module.exports = {
     }
   },
   /* verArchivo:function  (req, res) {
-
    File.find().exec(function (err, articulos) {
    if (err)
    return res.negotiate(err);

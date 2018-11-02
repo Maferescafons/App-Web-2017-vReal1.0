@@ -27,8 +27,19 @@ module.exports = {
                     return res.serverError(err);
                 if (articuloEditado) {
                     //Si encontro
-                    return res.view('editarArticulo', {
-                        articulos: articuloEditado
+                    File.findOne({ fkIdArticulo: parametros.id }).exec(function (error, File) {
+                        if (error) {
+                            return res.serverError(error);
+                        }
+                        if (!File) {
+                            return res.view('editarArticulo', {
+                                articulos: articuloEditado
+                            });
+                        }
+                        return res.view('editarArticulo', {
+                            articulos: articuloEditado,
+                            File: File
+                        });
                     });
                 }
                 else {

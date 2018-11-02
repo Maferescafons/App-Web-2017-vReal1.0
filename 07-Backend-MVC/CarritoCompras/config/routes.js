@@ -59,6 +59,8 @@ module.exports.routes = {
   'get /VerMisArticulo':
     'SaludoController.VerMiArticulo',
   'get /filedownloader': 'FileController.download',
+  'get /VerFile':
+    'FileController.BusquedaFile',
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

@@ -250,15 +250,15 @@
 
 
   <div class="form-group row">
-    <label for="pages" class="col-2 col-form-label"><h5><b>Files</b></h5></label>
+    <label for="pages" class="col-2 col-form-label"><h5><b>File</b></h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
              readonly
              placeholder="Ingrese sus nombres"
-             id="pages"
-             name="pages"
-             value="<%= articulos.files %>"
+             id="file"
+             name="file"
+             value="<%= File.filename%>"
 
       >
     </div>
@@ -289,17 +289,50 @@
     <input type="submit" value="Upload" class="btn btn-primary">
   </form>
 
-  <form action="/filedownloader" method="get">
-    <input hidden
-           type="text"
-           value="<%=articulos.id%>"
-           name="id">
-    <button  type="submit"
-             class="btn btn-outline-danger">Download</button>
-
-  </form>
 
 
+
+
+
+  <!-- Button trigger modal -->
+  <button  id="dtndwnl" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Download file
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Download file</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/filedownloader" method="get">
+            <ul class="list-group list-group-flush" >
+              <li class="list-group-item" ><h10><b>File name:</b></h10><%=File.filename%></li>
+              <li class="list-group-item" ><h10><b>Last modificate:</b></h10><%=File.updatedAt%></li>
+            </ul>
+            <input hidden
+                   type="text"
+                   value="<%=articulos.id%>"
+                   name="id">
+
+
+            <button  type="submit"
+                     id="botonDownload"
+
+                     class="btn btn-outline-danger">Download</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 </div>
 <br>
@@ -350,4 +383,3 @@
 <br>
 <br>
 <br>
-
