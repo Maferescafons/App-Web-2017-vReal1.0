@@ -953,7 +953,7 @@
 
     function webServiceResult1(data) {
 
-
+      var busqueda = document.getElementById("homepage-search-input").value;
       $("#resultado_json").empty();
 
       for (var i = 0; i < 500000; i++) {
@@ -969,11 +969,11 @@
         year= data.records[i].publicationDate;
         pages = starpage +"-"+ endpage;
         abstract = data.records[i].abstract;
-        keywords = '';
-        autores='';
-        cate='';
-        language = '';
-        country = '';
+        doi= data.records[i].doi;
+        keywords = busqueda;
+        cate='General';
+        language = 'EN';
+        country = 'EU';
 
         for (var j = 0; j < 10; j++) {
           if (typeof data.records[i].creators[0] !== 'undefined') {
@@ -1014,6 +1014,220 @@
 
         }
 
+        for (var j = 0; j < 10; j++) {
+          if (typeof data.records[i].creators[1] !== 'undefined') {
+            var autor1 = data.records[i].creators[1].creator;
+            var autores = autorHtml + ' ' + 'y ' + ' ' + autor1;
+            var authorb1 = autor1.charAt(0);
+            var textoAuthorDividido1 = autor1.split(" ");
+            var numeroPalabras1 = textoAuthorDividido1.length;
+
+
+            if (numeroPalabras1 >= 4) {
+              nameAuthor1 = autor1.split(/\s+/, 2);
+              //var output = autores.split(/\s+/).pop();
+              //apellido1 es el apellido del autor
+              //nombreA es el nombre del autor
+              var output21 = textoAuthorDividido1[textoAuthorDividido1.length - 2];
+              var output22 = textoAuthorDividido1[textoAuthorDividido1.length - 1];
+              apellido1 = output21 + ' ' + output22;
+
+            }
+            else {
+              nameAuthor1 = autor1.split(/\s+/, 1);
+              //var output = autores.split(/\s+/).pop();
+              apellido1 = textoAuthorDividido1[textoAuthorDividido1.length - 1];
+
+            }
+            nombreA1 = (nameAuthor1.join(" "));
+            var authorbibliograpyIEEE1 = authorb1 + ' ' + apellido1;
+            var authorsb = authorbibliograpyIEEE + ' ' + 'y ' + ' ' + authorbibliograpyIEEE1;
+            var nombreAuthores=[nombreA,nombreA1];
+            var apellidoAuthores=[apellido,apellido1];
+
+          }
+
+          else {
+            var autor1 = '';
+            var authorb1 = '';
+            var output1 = '';
+            var authorbibliograpyIEEE1 = '';
+            var nombreA1 = '';
+            var apellido1 = '';
+
+
+          }
+
+        }
+
+        for (var j = 0; j < 10; j++) {
+          if (typeof data.records[i].creators[2] !== 'undefined') {
+            var autor2 = data.records[i].creators[2].creator;
+            var autores = autorHtml + ', ' + autor1 + ' ' + 'y ' + ' ' + autor2;
+            var authorb2 = autor2.charAt(0);
+            var textoAuthorDividido2 = autor2.split(" ");
+            var numeroPalabras2 = textoAuthorDividido2.length;
+
+
+            if (numeroPalabras2 >= 4) {
+              nameAuthor2 = autor2.split(/\s+/, 2);
+              //var output = autores.split(/\s+/).pop();
+              //apellido2 es el apellido del autor
+              //nombreA es el nombre del autor
+              var output31 = textoAuthorDividido2[textoAuthorDividido2.length - 2];
+              var output32 = textoAuthorDividido2[textoAuthorDividido2.length - 1];
+              apellido2 = output31 + ' ' + output32;
+
+            }
+            else {
+              nameAuthor2 = autor2.split(/\s+/, 1);
+              //var output = autores.split(/\s+/).pop();
+              apellido2 = textoAuthorDividido2[textoAuthorDividido2.length - 1];
+
+            }
+            nombreA2 = (nameAuthor2.join(" "));
+            var authorbibliograpyIEEE2 = authorb2 + ' ' + apellido2;
+            var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE2;
+            var nombreAuthores=[nombreA,nombreA1,nombreA2];
+            var apellidoAuthores=[apellido,apellido1,apellido2];
+          }
+          else {
+            var autor2 = ' ';
+            var authorb2 = '';
+            var output2 = '';
+            var authorbibliograpyIEEE2 = '';
+            var nombreA2 = '';
+            var apellido2 = '';
+          }
+
+        }
+
+        for (var j = 0; j < 10; j++) {
+          if (typeof data.records[i].creators[3] !== 'undefined') {
+            var autor3 = data.records[i].creators[3].creator;
+            var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ' ' + 'y ' + ' ' + autor3;
+            var authorb3 = autor3.charAt(0);
+            var textoAuthorDividido3 = autor3.split(" ");
+            var numeroPalabras3 = textoAuthorDividido3.length;
+
+            if (numeroPalabras3 >= 4) {
+              nameAuthor3 = autor3.split(/\s+/, 2);
+              //var output = autores.split(/\s+/).pop();
+              //apellido2 es el apellido del autor
+              //nombreA es el nombre del autor
+              var output41 = textoAuthorDividido3[textoAuthorDividido3.length - 2];
+              var output42 = textoAuthorDividido3[textoAuthorDividido3.length - 1];
+              apellido3 = output41 + ' ' + output42;
+
+            }
+            else {
+              nameAuthor3 = autor3.split(/\s+/, 1);
+              //var output = autores.split(/\s+/).pop();
+              apellido3 = textoAuthorDividido3[textoAuthorDividido3.length - 1];
+
+            }
+            nombreA3 = (nameAuthor3.join(" "));
+            var authorbibliograpyIEEE3 = authorb3 + ' ' + apellido3;
+            var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ', ' + ' ' + authorbibliograpyIEEE2 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE3;
+            var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3];
+            var apellidoAuthores=[apellido,apellido1,apellido2,apellido3];
+          }
+          else {
+            var autor3 = ' ';
+            var authorb3 = '';
+            var output3 = '';
+            var authorbibliograpyIEEE3 = '';
+            var nombreA3 = '';
+            var apellido3 = '';
+          }
+
+        }
+
+        for (var j = 0; j < 10; j++) {
+          if (typeof data.records[i].creators[4] !== 'undefined') {
+            var autor4 = data.records[i].creators[4].creator;
+            var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ', ' + autor3 + ' ' + 'y ' + ' ' + autor4;
+            var authorb4 = autor4.charAt(0);
+            var textoAuthorDividido4 = autor4.split(" ");
+            var numeroPalabras4 = textoAuthorDividido4.length;
+
+            if (numeroPalabras4 >= 4) {
+              nameAuthor4 = autor4.split(/\s+/, 2);
+              //var output = autores.split(/\s+/).pop();
+              //apellido2 es el apellido del autor
+              //nombreA es el nombre del autor
+              var output51 = textoAuthorDividido4[textoAuthorDividido4.length - 2];
+              var output52 = textoAuthorDividido4[textoAuthorDividido4.length - 1];
+              apellido4 = output51 + ' ' + output52;
+
+            }
+            else {
+              nameAuthor4 = autor4.split(/\s+/, 1);
+              //var output = autores.split(/\s+/).pop();
+              apellido4 = textoAuthorDividido4[textoAuthorDividido4.length - 1];
+
+            }
+            nombreA4 = (nameAuthor4.join(" "));
+            var authorbibliograpyIEEE4 = authorb4 + ' ' + apellido4;
+            var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ',' + ' ' + authorbibliograpyIEEE2 + ',' + ' ' + authorbibliograpyIEEE3 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE4;
+            var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3,nombreA4];
+            var apellidoAuthores=[apellido,apellido1,apellido2,apellido3,apellido4];
+          }
+          else {
+            var autor4 = ' ';
+            var authorb4 = '';
+            var output4 = '';
+            var authorbibliograpyIEEE4 = '';
+            var nombreA4 = '';
+            var apellido4 = '';
+          }
+
+        }
+
+        for (var j = 0; j < 10; j++) {
+          if (typeof data.records[i].creators[5] !== 'undefined') {
+            var autor5 = data.records[i].creators[5].creator;
+            var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ', ' + autor3 + ', ' + autor4 + ' ' + 'y ' + ' ' + autor5;
+            var authorb5 = autor5.charAt(0);
+            var textoAuthorDividido5 = autor5.split(" ");
+            var numeroPalabras5 = textoAuthorDividido5.length;
+
+
+            if (numeroPalabras5 >= 4) {
+              nameAuthor5 = autor5.split(/\s+/, 2);
+              //var output = autores.split(/\s+/).pop();
+              //apellido2 es el apellido del autor
+              //nombreA es el nombre del autor
+              var output61 = textoAuthorDividido5[textoAuthorDividido5.length - 2];
+              var output62 = textoAuthorDividido5[textoAuthorDividido5.length - 1];
+              apellido5 = output61 + ' ' + output62;
+
+            }
+            else {
+
+              nameAuthor5 = autor5.split(/\s+/, 1);
+              var nombreA5 = (nameAuthor5.join(" "));
+              var authorbibliograpyIEEE5 = authorb5 + ' ' + apellido5;
+              var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ',' + ' ' + authorbibliograpyIEEE2 + ',' + ' ' + authorbibliograpyIEEE3 + ',' + ' ' + authorbibliograpyIEEE4 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE5;
+            }
+            var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3,nombreA4,nombreA5];
+            var apellidoAuthores=[apellido,apellido1,apellido2,apellido3,apellido4,apellido5];
+          }
+          else {
+            var autor5 = ' ';
+            var authorb5 = '';
+            var output5 = '';
+            var authorbibliograpyIEEE5 = '';
+            var nameAuthor5 = '';
+            var apellido5 = '';
+          }
+
+        }
+        tamAut=nombreAuthores.length;
+        tamAutap=apellidoAuthores.length;
+        console.log("autores", authorsb,tamAut,tamAutap);
+        console.log("autoreswkd:", nombreA + " "+apellido+ " "+ nombreA1 +  " "+apellido1+  " "+nombreA2 +  " "+apellido2+ " "+ nombreA3 + " "+ apellido3+ " "+ nombreA4 + " "+ apellido4+  " "+nombreA5 +  " "+apellido5);
+
 
         for (var j = 0; j < 10; j++) {
           if (data.records[i].url[j] !== 'undefined') {
@@ -1036,7 +1250,7 @@
           "<font color='#01549b'><h4><b> Editorial:</b></h4></font><h4><b>" + editorial + "</h4></b><br>" +
           //"<font color='#01549b'><h4><b> Category:</b></h4></font><h4><b>"+cate + "</h4></b><br>" +
           "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>"+ autorHtml + "</h4><br><h4><b>" +
-          //autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" + autor4 + "</h4></b><br>" +
+          autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" + autor4 + "</h4></b><br><h4><b>" + autor5 + "</h4></b><br>"+
          // "<div class='row'></b>" +
 
           "<div class='col-md-3'><font color='#01549b'><h4><b> Number: </b></h4></font> </div>" +
@@ -1073,7 +1287,7 @@
           "<div class='col-md-3'> </div>" +
           "<div class='col-md-3'> </div>" +
 
-          //"<p>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' + year + "</p>" +
+          "<p>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' + year + "</p>" +
 
           " </div>" +
 
@@ -1089,15 +1303,28 @@
           "<input hidden type='text' name='editorial' value='" + editorial + "'>" +
           "<input hidden type='text' name='abstract' value='" + abstract + "'>" +
           "<input hidden type='text' name='keywords' value='" + keywords + "'>" +
+          "<input hidden type='text' name='doi' value='" + doi + "'>" +
           "<input hidden type='text' name='link' value='" + url + "'>" +
           "<input hidden type='text' name='authores' value='" + autores + "'>" +
-
+          "<input hidden type='text' name='nombreAuthores' value='" + nombreA + "'>" +
+          "<input hidden type='text' name='apellidoAuthores' value='" + apellido + "'>" +
+          "<input hidden type='text' name='nombreAuthores1' value='" + nombreA1 + "'>" +
+          "<input hidden type='text' name='apellidoAuthores1' value='" + apellido1 + "'>" +
+          "<input hidden type='text' name='nombreAuthores2' value='" + nombreA2 + "'>" +
+          "<input hidden type='text' name='apellidoAuthores2' value='" + apellido2 + "'>" +
+          "<input hidden type='text' name='nombreAuthores3' value='" + nombreA3 + "'>" +
+          "<input hidden type='text' name='apellidoAuthores3' value='" + apellido3 + "'>" +
+          "<input hidden type='text' name='nombreAuthores4' value='" + nombreA4 + "'>" +
+          "<input hidden type='text' name='apellidoAuthores4' value='" + apellido4 + "'>" +
+          "<input hidden type='text' name='nombreAuthores5' value='" + nombreA5 + "'>" +
+          "<input hidden type='text' name='apellidoAuthores5' value='" + apellido5 + "'>" +
+          "<input hidden type='number' name='numero_autores' value='" + tamAut + "'>" +
           "<input hidden type='text' name='category' value='" + cate + "'>" +
           "<input hidden type='text' name='pages' value='" + pages + "'>" +
 
           "<button class='btn btn-outline-success'>Guardar en biblioteca</button>" +
           "</div> </div>" +
-          "</form>"
+          "</form>"+ "<br><br>"
         $("#resultado_json2").append()
         $("#resultado_json").append($(imprimir));
 
