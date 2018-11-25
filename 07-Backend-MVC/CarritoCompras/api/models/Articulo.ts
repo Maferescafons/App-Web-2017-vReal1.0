@@ -71,6 +71,9 @@ module.exports = {
     files: {
       collection: 'File',
       via: 'fkIdArticulo'
+    },
+    fkIdUser:{
+      model:'User'
     }
 
   }

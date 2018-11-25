@@ -3,20 +3,32 @@
  */
 module.exports = {
     attributes: {
-        nombres: {
-            type: "string"
-        },
-        apellidos: {
-            type: "string"
+        email: {
+            type: 'email',
+            required: true
         },
         password: {
-            type: "string"
+            type: 'string',
+            required: true
         },
-        correo: {
-            type: "email"
+        signup: function (inputs, cb) {
+            // Create a user
+            Usuario.create({
+                name: inputs.name,
+                email: inputs.email,
+                // TODO: But encrypt the password first
+                password: inputs.password
+            })
+                .exec(cb);
         },
-        fechaNacimiento: {
-            type: "date"
+        attemptLogin: function (inputs, cb) {
+            // Create a user
+            Usuario.findOne({
+                email: inputs.email,
+                // TODO: But encrypt the password first
+                password: inputs.password
+            })
+                .exec(cb);
         }
     }
 };

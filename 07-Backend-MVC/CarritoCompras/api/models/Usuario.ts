@@ -3,25 +3,39 @@
  */
 
 declare var module:any;
+declare var Usuario;
 
 module.exports = {
 
   attributes:{
-    nombres:{
-      type:"string"
+    email: {
+      type: 'email',
+      required: true
     },
-    apellidos:{
-      type:"string"
+    password: {
+      type: 'string',
+      required: true
     },
-    password:{
-      type:"string"
+    signup: function (inputs, cb) {
+      // Create a user
+      Usuario.create({
+        name: inputs.name,
+        email: inputs.email,
+        // TODO: But encrypt the password first
+        password: inputs.password
+      })
+        .exec(cb);
     },
-    correo:{
-      type:"email"
-    },
-    fechaNacimiento:{
-      type:"date"
+    attemptLogin: function (inputs, cb) {
+      // Create a user
+      Usuario.findOne({
+        email: inputs.email,
+        // TODO: But encrypt the password first
+        password: inputs.password
+      })
+        .exec(cb);
     }
+
   }
 
 };

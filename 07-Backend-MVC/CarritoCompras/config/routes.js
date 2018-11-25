@@ -33,7 +33,8 @@ module.exports.routes = {
   ***************************************************************************/
   //No necesitan seguridad (libres)
 
-  'get /': 'VistaController.biblioteca',
+  //'get /': 'VistaController.biblioteca',
+  '/': { view: 'UsuarioGestion/login' },
   '/perfil':{
     view:'UsuarioGestion/perfil'
   },
@@ -61,6 +62,16 @@ module.exports.routes = {
   'get /filedownloader': 'FileController.download',
   'get /VerFile':
     'FileController.BusquedaFile',
+
+  //login
+  'get /login': { view: 'UsuarioGestion/login' },
+  'get /signup': { view: 'UsuarioGestion/signup' },
+  '/welcome': { view: 'UsuarioGestion/perfil' },
+
+  // Endpoints
+  'post /login': 'UserController.login',
+  'post /signup': 'UserController.signup',
+  '/logout': 'UserController.logout',
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
