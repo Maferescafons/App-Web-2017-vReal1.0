@@ -44,12 +44,12 @@ module.exports = {
                 }
                 else {
                     //No encontro
-                    return res.redirect('/');
+                    return res.redirect('/biblioteca');
                 }
             });
         }
         else {
-            return res.redirect('/');
+            return res.redirect('/biblioteca');
         }
     },
     editanota: function (req, res) {

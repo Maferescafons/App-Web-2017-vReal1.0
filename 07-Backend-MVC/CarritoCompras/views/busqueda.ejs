@@ -955,6 +955,20 @@
 
       var busqueda = document.getElementById("homepage-search-input").value;
       $("#resultado_json").empty();
+      var hoy = new Date();
+      var dd = hoy.getDate();
+      var mm = hoy.getMonth()+1; //hoy es 0!
+      var yyyy = hoy.getFullYear();
+
+      if(dd<10) {
+        dd='0'+dd
+      }
+
+      if(mm<10) {
+        mm='0'+mm
+      }
+
+      hoy = dd+'/'+mm+'/'+yyyy;
 
       for (var i = 0; i < 500000; i++) {
 
@@ -1212,6 +1226,8 @@
             }
             var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3,nombreA4,nombreA5];
             var apellidoAuthores=[apellido,apellido1,apellido2,apellido3,apellido4,apellido5];
+            var apellidoAuthoresISO=[apellido.toUpperCase(),' ',nombreA,apellido1.toUpperCase(),' ',nombreA1,apellido2.toUpperCase(),' ',nombreA2,apellido3.toUpperCase(),' ',nombreA3,apellido4.toUpperCase(),' ',nombreA4,' y ',apellido5.toUpperCase(),' ',nombreA5];
+            var apellidoAuthoreshardvard=[apellido,' ',nombreA.charAt(0),apellido1,' ',nombreA1.charAt(0),apellido2,' ',nombreA2.charAt(0),apellido3,' ',nombreA3.charAt(0),apellido4,' ',nombreA4.charAt(0),' y ',apellido5,' ',nombreA5.charAt(0)];
           }
           else {
             var autor5 = ' ';
@@ -1238,20 +1254,21 @@
         }
 
 
-
         var imprimir = "<div class='row'> " +
           "<div class='card'> <div class='card-block'>" +
           "<div>" +
           "<font color='#01549b'><h4><b> Title: </b></h4></font><h4><b>" + title + "</h4></b><br>" +
-          "<font color='#01549b'><h4><b> Journal:</b></h4></font><h4><b>" + journal + "</h4></b><br>" +
+          "<font color='#01549b'><h4><b> Journal:</b></h4></font><h4><b>" + journal + "</h4></b><br>"+
 
+          "<button type='button' class='btn btn-outline-info' data-toggle='collapse' data-target='#demo"+i+"'>Leer más...</button>"+
+          "<div id='demo"+i+"' class='collapse in'>"+
           "<font color='#01549b'><h4><b> Abstract:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
-         // "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
+          // "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
           "<font color='#01549b'><h4><b> Editorial:</b></h4></font><h4><b>" + editorial + "</h4></b><br>" +
           //"<font color='#01549b'><h4><b> Category:</b></h4></font><h4><b>"+cate + "</h4></b><br>" +
-          "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>"+ autorHtml + "</h4><br><h4><b>" +
-          autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" + autor4 + "</h4></b><br><h4><b>" + autor5 + "</h4></b><br>"+
-         // "<div class='row'></b>" +
+          "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>" + autorHtml + "</h4><br><h4><b>" +
+          autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" + autor4 + "</h4></b><br><h4><b>" + autor5 + "</h4></b><br>" +
+          // "<div class='row'></b>" +
 
           "<div class='col-md-3'><font color='#01549b'><h4><b> Number: </b></h4></font> </div>" +
           "<div class='col-md-3'><h4><b>" + number + "</h4></b></div>" +
@@ -1286,10 +1303,41 @@
           "<div class='col-md-3'>" + urlHtml + "</div>" +
           "<div class='col-md-3'> </div>" +
           "<div class='col-md-3'> </div>" +
+          <!-- Button trigger modal -->
+          "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal"+i+"'> Launch demo modal </button>"+
 
-          "<p>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' + year + "</p>" +
+        <!-- Modal -->
+        "<div class='modal fade' id='exampleModal"+i+"' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel"+i+"' aria-hidden='true'>"+
+          "<div class='modal-dialog' role='document'>"+
+          "<div class='modal-content'>"+
+          "<div class='modal-header'>"+
+          "<h5 class='modal-title' id='exampleModalLabel"+i+"'>Modal title</h5>"+
+        "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"+
+          "<span aria-hidden='true'>&times;</span>"+
+        "</button>"+
+        "</div>"+
+        "<div class='modal-body'>"+
 
-          " </div>" +
+          "<label for='apa' class='col-2 col-form-label'><h5>APA</h5></label>"+
+          "<p ALIGN='justify'>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</p>"+
+
+        "<label for='ieee' class='col-2 col-form-label'><h5>IEEE</h5></label>"+
+          "<div class='col-10'>"+
+          "<p>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</p>" +
+
+       "</div>" +
+        "<label for='harvard' class='col-2 col-form-label'><h5>ISO</h5></label>"+
+          "<div class='col-10'>"+
+          "<p ALIGN='justify'>" + authorsb + ", "+year+ ","+title +".<i><u>" +journal + "</u></i>,[Fecha de consulta:"+hoy+"],pp.pages .Disponible en:"+ urlHtml + "</a></p>"+
+          "</div>"+
+        "<div class='modal-footer'>"+
+          "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"+
+          "<button type='button' class='btn btn-primary'>Save changes</button>"+
+        "</div></div>"+
+          "</div> " +
+          "</div> " +
+          "</div> " +
+          ////////////////////////////////////////////////////////////
 
           "<form action='/GuardarArticulo/crearArticuloQuemado' method='post'>" +
           "<input hidden type='text' name='title' value='" + title + "'>" +
@@ -1323,7 +1371,8 @@
           "<input hidden type='text' name='pages' value='" + pages + "'>" +
 
           "<button class='btn btn-outline-success'>Guardar en biblioteca</button>" +
-          "</div> </div>" +
+
+          "</div> " +
           "</form>"+ "<br><br>"
         $("#resultado_json2").append()
         $("#resultado_json").append($(imprimir));
