@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 
-  <html lang="es-Es" xmlns="http://www.w3.org/1999/xhtml">
+  <body lang="es-Es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8">
 
@@ -59,7 +59,7 @@
 
     <div id='oculto' style='display:none;'>
       <form id="formRadio" name="categoria">
-        <input type="button" class="btn btn-success" value="-" onclick="ocultar()">
+        <input type="button" class="btn btn-info" value="-" onclick="ocultar()">
         <br>
         <div class="row">
 
@@ -97,193 +97,36 @@
 
 
   </head>
-<body>
-<input type="button" class="btn btn-success" id="catego" value="Ver categorias" onclick="mostrar()">
+<div>
+
+<input type="button" class="btn btn-info" id="catego" value="Ver categorias" onclick="mostrar()">
 <br>
 <br>
 
 <div class="container-fluid" >
 
   <div class="row" id="articulos">
-    <input type="text" class="form-control" name="q" placeholder="search DOAJ" id="homepage-search-input">
+    <input type="text" class="form-control my-2" name="q" placeholder="Buscar en DOAJ" id="homepage-search-input">
 
     <br>
     <br>
 
 
     <button type="button" class="btn btn-primary" onclick="javascript:callWebService();limpiar();limpiardoaj()">Busqueda DOAJ</button>
-    <button type="button" onclick="javascript:callWebService2();limpiar();limpiardoaj()">Busqueda SPRINGER</button>
-    <button type="button" onclick="descargaArchivo();limpiar();limpiardoaj()">VER RECOMENDACIONES</button>
+    <button type="button" class="btn btn-success" onclick="javascript:limpiar();limpiardoaj();callWebService1()">Recomendaciones</button>
+
 
     <!--  <button type="button" onclick="limpiar();">limpiar</button>-->
 
 
     <script type="text/javascript">
-      function descargaArchivo() {
 
-        // $("p").empty();
-        // Obtener la instancia del objeto XMLHttpRequest
-        if(window.XMLHttpRequest) {
-          peticionHttp = new XMLHttpRequest();
-        }
-        else if(window.ActiveXObject) {
-          peticionHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        // Preparar la funcion de respuesta
-        peticionHttp.onreadystatechange = muestraContenido;
-        // Realizar peticion HTTP
-
-        var busquedarxiv = document.getElementById("homepage-search-input").value;
-
-        var par1= 'http://export.arxiv.org/api/query?search_query=all:';
-        mm= busquedarxiv;
-        console.log("Este es el valor del cookie:",mm);
-        var concatenacion1= par1+busquedarxiv;
-        peticionHttp.open('GET',concatenacion1, true);
-        peticionHttp.send(null);
-        function muestraContenido() {
-          if(peticionHttp.readyState == 4) {
-            if(peticionHttp.status == 200) {
-              //Creamos el objeto de tipo documento XML
-              var documentoXml = peticionHttp.responseXML;
-              //Obtenemos la raíz del documento
-              var root = documentoXml.getElementsByTagName("feed")[0];
-              var tope = root.getElementsByTagName("entry").length;
-              //Recorremos todos los elementos Libro del documento
-              for(var i = 0; i < tope; i++){
-                libro = root.getElementsByTagName("entry")[i];
-                title = libro.getElementsByTagName("title")[0].firstChild.nodeValue;
-                summary = libro.getElementsByTagName("summary")[0].firstChild.nodeValue;
-                link = libro.getElementsByTagName("id")[0].firstChild.nodeValue;
-
-                for (var j = 0; j < 10; j++) {
-                  if (typeof libro.getElementsByTagName("arxiv:comment")[0]!== 'undefined') {
-                    coment = libro.getElementsByTagName("arxiv:comment")[0].firstChild.nodeValue;
-
-                  }
-                  else {
-
-                    var coment= '';
-
-
-                  }
-
-                }
-                for (var j = 0; j < 10; j++) {
-                  if (typeof libro.getElementsByTagName("arxiv:journal_ref")[0]!== 'undefined') {
-                    coment2 = libro.getElementsByTagName("arxiv:journal_ref")[0].firstChild.nodeValue;
-
-                  }
-                  else {
-
-                    var coment2= '';
-
-
-                  }
-
-                }
-                for (var j = 0; j < 10; j++) {
-                  if (typeof libro.getElementsByTagName("author")[0]!== 'undefined') {
-
-                    author = libro.getElementsByTagName("author")[0];
-                    nombre = author.getElementsByTagName("name")[0].firstChild.nodeValue;
-                    var nombres= nombre;
-                  }
-                  else {
-
-                    var nombre= '';
-
-
-                  }
-
-                }
-                for (var j = 0; j < 10; j++) {
-                  if (typeof libro.getElementsByTagName("author")[1]!== 'undefined') {
-
-                    author1 = libro.getElementsByTagName("author")[1];
-                    nombre1 = author1.getElementsByTagName("name")[0].firstChild.nodeValue;
-                    var nombres= nombre +' ,'+nombre1;
-                    console.log("autor2", nombres);
-                  }
-                  else {
-
-                    var nombre1= '';
-
-
-                  }
-
-                }
-                for (var j = 0; j < 10; j++) {
-                  if (typeof libro.getElementsByTagName("author")[2]!== 'undefined') {
-
-                    author2 = libro.getElementsByTagName("author")[2];
-                    nombre2 = author2.getElementsByTagName("name")[0].firstChild.nodeValue;
-                    var nombres= nombre +' ,'+nombre1+' ,'+nombre2;
-                  }
-                  else {
-
-                    var nombre2= ' ';
-
-
-                  }
-
-                }
-                for (var j = 0; j < 10; j++) {
-                  if (typeof libro.getElementsByTagName("author")[3]!== 'undefined') {
-
-                    author3 = libro.getElementsByTagName("author")[3];
-                    nombre3 = author3.getElementsByTagName("name")[0].firstChild.nodeValue;
-                    var nombres= nombre +' ,'+nombre1+' ,'+nombre2+' ,'+nombre3;
-                  }
-                  else {
-
-                    var nombre3= ' ';
-
-
-                  }
-
-                }
-
-                var comentary = coment+' '+coment2;
-
-
-
-
-                muestraHTML('pRespuesta',"<div class='row'>  " +
-                  "<div class='container'>" +
-
-                  "<div class='card'> <div class='card-block'>" +
-                  "<div >" +
-                  "<font color='#01549b'><h4><b> Title: </b></h4></font>"+'<a href= '+link+'><h4><b>' + title  +'</b></h4></a>'+
-                  "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>" +nombres+"</h4></b> <br>"+
-                  "<font color='#01549b'><h4><b> Coments: </b></h4></font><h4><b>" + comentary + "</h4></b><br>" +
-                  "<font color='#01549b'><h4><b><u>Abstract </u> </b></h4></font><h4><b>" + "<p ><b><h4><p align='justify'>" + summary + "</p></p></h4></b></p>" + "</h4></b><br>" +
-
-                  // "<div align='left'>"+"<input type='checkbox' id='spoiler2' align='left'></input> <label for='spoiler2' align='left'><p id='spoiler2' align='left'><h4><u>Abstract</p></h4></u></label> <div class='spoiler'>"+"<p ><b><h4><p align='justify'>" + summary + "</p></p></h4></b></p>" +"</div>"+"</div>"+
-
-
-                  "</div></div> </div></div>"
-                );
-
-              }
-
-            }
-          }
-        }
-        function muestraHTML(id, texto){
-          if(document.getElementById){
-            document.getElementById(id).innerHTML += texto;
-          }
-
-        }
-
-      }
       function limpiar(){
         var resultados = document.getElementById("pRespuesta");
         resultados.innerHTML='';
 
       }
-      window.onload = descargaArchivo;
+
     </script>
 
     <p id="pRespuesta"></p>
@@ -293,7 +136,7 @@
 
   </div>
 </div>
-
+</div>
 
 <script type="text/javascript">
   function mostrar(){
@@ -340,7 +183,22 @@
 
 
   function webServiceResult(data) {
+    var busqueda = document.getElementById("homepage-search-input").value;
+    $("#resultado_json").empty();
+    var hoy = new Date();
+    var dd = hoy.getDate();
+    var mm = hoy.getMonth()+1; //hoy es 0!
+    var yyyy = hoy.getFullYear();
 
+    if(dd<10) {
+      dd='0'+dd
+    }
+
+    if(mm<10) {
+      mm='0'+mm
+    }
+
+    hoy = dd+'/'+mm+'/'+yyyy;
 
     $("#resultado_json").empty();
 
@@ -471,6 +329,8 @@
           var authorsb = authorbibliograpyIEEE;
           var nombreAuthores=[nombreA];
           var apellidoAuthores=[apellido];
+          var apellidoAuthoresISO= apellido.toUpperCase()+' '+nombreA;
+          var apellidoAuthoreshardvard= apellido+', '+nombreA.charAt(0)+'.';
         }
         console.log("author1", nombreA + apellido);
 
@@ -506,6 +366,8 @@
           var authorsb = authorbibliograpyIEEE + ' ' + 'y ' + ' ' + authorbibliograpyIEEE1;
           var nombreAuthores=[nombreA,nombreA1];
           var apellidoAuthores=[apellido,apellido1];
+          var apellidoAuthoresISO= apellido.toUpperCase()+', '+nombreA +';  '+apellido1.toUpperCase()+', '+nombreA1;
+          var apellidoAuthoreshardvard= apellido+', '+nombreA.charAt(0)+'.'+apellido1+', '+nombreA1.charAt(0)+'.';
 
         }
 
@@ -551,6 +413,8 @@
           var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE2;
           var nombreAuthores=[nombreA,nombreA1,nombreA2];
           var apellidoAuthores=[apellido,apellido1,apellido2];
+          var apellidoAuthoresISO= apellido.toUpperCase()+' '+nombreA +', '+apellido1.toUpperCase()+', '+nombreA1 +';'+apellido2.toUpperCase()+','+nombreA2;
+          var apellidoAuthoreshardvard= apellido+', '+nombreA.charAt(0)+'.'+apellido1+', '+nombreA1.charAt(0)+'.'+apellido2+' '+nombreA2.charAt(0)+'.';
         }
         else {
           var autor2 = ' ';
@@ -591,6 +455,8 @@
           var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ', ' + ' ' + authorbibliograpyIEEE2 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE3;
           var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3];
           var apellidoAuthores=[apellido,apellido1,apellido2,apellido3];
+          var apellidoAuthoresISO= apellido.toUpperCase()+', '+nombreA +' et al.';
+          var apellidoAuthoreshardvard= apellido+', '+authorb+'., et al';
         }
         else {
           var autor3 = ' ';
@@ -631,6 +497,8 @@
           var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ',' + ' ' + authorbibliograpyIEEE2 + ',' + ' ' + authorbibliograpyIEEE3 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE4;
           var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3,nombreA4];
           var apellidoAuthores=[apellido,apellido1,apellido2,apellido3,apellido4];
+          var apellidoAuthoresISO= apellido.toUpperCase()+', '+nombreA +' et al.';
+          var apellidoAuthoreshardvard= apellido+', '+authorb+'., et al';
         }
         else {
           var autor4 = ' ';
@@ -670,6 +538,8 @@
           }
           var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3,nombreA4,nombreA5];
           var apellidoAuthores=[apellido,apellido1,apellido2,apellido3,apellido4,apellido5];
+          var apellidoAuthoresISO= apellido.toUpperCase()+', '+nombreA +' et al.';
+          var apellidoAuthoreshardvard= apellido+', '+authorb+'., et al';
         }
         else {
           var autor5 = ' ';
@@ -708,12 +578,13 @@
 
       //var bla = "<a href='#' class='btn btn-primary'>full text</a>"
 
-      var imprimir = "<div class='row'>  " +
-        "<div class='card'> <div class='card-block'>" +
+      var imprimir =
+        "<div class='card my-2'>" +
         "<div >" +
-        "<font color='#01549b'><h4><b> Title: </b></h4></font><h4><b>" + title + "</h4></b><br>" +
+        "<h4><b></h4></b><br>" +"<a href=" +url+"><h4><b>" + title  +"</b></h4></a>"+
         "<font color='#01549b'><h4><b> Journal:</b></h4></font><h4><b>" + journal + "</h4></b><br>" +
-
+        "<button type='button' class='btn btn-outline-info' data-toggle='collapse' data-target='#demo"+i+"'>Leer más...</button>"+
+        "<div id='demo"+i+"' class='collapse in'>"+
         "<font color='#01549b'><h4><b> Abstract:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
         "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
         "<font color='#01549b'><h4><b> Editorial:</b></h4></font><h4><b>" + editorial + "</h4></b><br>" +
@@ -779,35 +650,49 @@
         "<div class='col-md-2'> </div>" +
         "<div class='col-md-2'> </div>" +
         "<div class='col-md-2'> </div>" +
-        "<p>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' + year + "</p>" +
+          "</div>" +
 
-        " </div>" +
+        <!-- Button trigger modal -->
+        "<button type='button' class='btn btn-primary mb-2' data-toggle='modal' data-target='#exampleModal"+i+"'> Bibliografía </button>"+
 
-        "<form action='/GuardarArticulo/crearArticuloQuemado' method='post'>" +
-        "<input hidden type='text' name='title' value='" + title + "'>" +
-        "<input hidden type='text' name='country' value='" + country + "'>" +
-        "<input hidden type='text' name='number' value='" + number + "'>" +
-        "<input hidden type='text' name='volume' value='" + volume + "'>" +
-        "<input hidden type='text' name='issns' value='" + issns + "'>" +
-        "<input hidden type='text' name='language' value='" + language + "'>" +
-        "<input hidden type='text' name='year' value='" + year + "'>" +
-        "<input hidden type='text' name='journal' value='" + journal + "'>" +
-        "<input hidden type='text' name='editorial' value='" + editorial + "'>" +
-        "<input hidden type='text' name='abstract' value='" + abstract + "'>" +
-        "<input hidden type='text' name='keywords' value='" + keywords + "'>" +
-        "<input hidden type='text' name='link' value='" + url + "'>" +
-        "<input hidden type='text' name='authores' value='" + autores + "'>" +
-        "<input hidden type='text' name='texSearch' value='" + busqueda + "'>" +
-        "<input hidden type='text' name='nombreAuthores' value='" + nombreA + "'>" +
+        <!-- Modal -->
+        "<div class='modal fade' id='exampleModal"+i+"' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel"+i+"' aria-hidden='true'>"+
+        "<div class='modal-dialog modal-lg' role='document'>"+
+        "<div class='modal-content'>"+
+        "<div class='modal-header'>"+
+        "<h5 class='modal-title' id='exampleModalLabel"+i+"'>Bibliografía</h5>"+
+        "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"+
+        "<span aria-hidden='true'>&times;</span>"+
+        "</button>"+
+        "</div>"+
+        "<div class='modal-body'>"+
 
+        "<label for='apa' class='col-2 col-form-label'><h5>APA</h5></label>"+
+        "<div class='col-12'>"+
+        "<p ALIGN='justify'>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</p>"+
 
-        "<input hidden type='text' name='category' value='" + cate + "'>" +
-        "<input hidden type='text' name='pages' value='" + pages + "'>" +
+        "</div>" +
+        "<label for='ieee' class='col-2 col-form-label'><h5>IEEE</h5></label>"+
+        "<div class='col-10'>"+
+        "<p ALIGN='justify'>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</p>" +
 
-        "<button class='btn btn-outline-primary'>Save in my library</button>" +
-        "<br>" +
-        "<br>" +
-        "</div> </div></form>" +
+        "</div>" +
+        "<label for='iso' class='col-2 col-form-label'><h5>ISO</h5></label>"+
+        "<div class='col-12'>"+
+        "<p ALIGN='justify'>" + apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '".En: '+"<i>" + journal + "</i>[en línea]." +editorial+ '. V.' + volume + ', no.' + number + ', pp.' + pages + "[consulta:"+hoy+"].Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+ "</p>" +
+
+        "</div>" +
+        "<label for='harvard' class='col-2 col-form-label'><h5>Harvard</h5></label>"+
+        "<div class='col-12'>"+
+        "<p ALIGN='justify'>" + apellidoAuthoreshardvard + '(' + year.substr(-20,4) + '), "' + title  +'"'+".<i>" +journal + "</i>,"+volume+ "("+number+"),pp."+pages+ ".Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+"<br>[Consultado:"+hoy+"]</p>"+
+        "</div>"+
+        "<div class='modal-footer'>"+
+        "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"+
+        "</div>"+
+        "</div>"+
+        "</div>"+
+        "</div>"+
+        "</div>"+
 
         "<form action='/Wkx_category/crearArticuloQuemado' method='post'>" +
         "<input hidden type='text' name='title' value='" + title + "'>" +
@@ -845,10 +730,14 @@
         "<input hidden type='text' name='category' value='" + cate + "'>" +
         "<input hidden type='text' name='pages' value='" + pages + "'>" +
 
-        "<button class='btn btn-outline-primary'>Synchronize with wikindx</button>" +
+        "<button class='btn btn-outline-primary my-2'>Save</button>" +
         "<br>" +
         "<br>" +
-        "</div> </div></form>" + "<br><br>"
+        " </div>" +
+        "</div> </div></form>" +
+        "</div>"+
+        "</div>"
+
 
       $("#resultado_json").append($(imprimir));
 
@@ -941,405 +830,305 @@
   }
 </script>
 </div>
-
 </div>
 
+<!- -------------BUSQUEDA DE MR DLIB--------------->
+
+<div id="resultado_json">
+<script type="text/javascript">
+
+function webServiceResult1(data) {
+var busqueda = document.getElementById("homepage-search-input").value;
+
+$("#resultado_json").empty();
+var hoy = new Date();
+var dd = hoy.getDate();
+var mm = hoy.getMonth()+1; //hoy es 0!
+var yyyy = hoy.getFullYear();
+
+if(dd<10) {
+dd='0'+dd
+}
+
+if(mm<10) {
+mm='0'+mm
+}
+
+hoy = dd+'/'+mm+'/'+yyyy;
+
+for (i = 0; i <+data.data.length; i++) {
+
+title = data.data[i].title;
+number = '';
+volume = '';
+issns = '';
+journal = '';
+editorial =''
+doi='';
+publisher = data.data[i].publisher; //poner un if
+year = data.data[i].datePublished; //poner un if
+starpage = '';
+endpage = '';
+pages = '';
+keywords = busqueda;
+cate= data.data[i].topics[0]; //poner un if
+abstract= data.data[i].description;
+language = 'EN/ES';
+country = '';
+var url = data.data[i].downloadUrl;
+
+
+for (var j = 0; j < 10; j++) {
+if (typeof data.data[i].authors[0] !== 'undefined') {
+
+var autorHtml = data.data[i].authors[0];
+var autores = autorHtml;
+var authorb = autores.charAt(0);
+textoAuthorDividido = autorHtml.split(" ");
+numeroPalabras = textoAuthorDividido.length;
+if (numeroPalabras >= 4) {
+nameAuthor = autores.split(/\s+/, 2);
+//var output = autores.split(/\s+/).pop();
+//output es el apellido del autor
+//nombreA es el nombre del autor
+var output1 = textoAuthorDividido[textoAuthorDividido.length - 2];
+var output12 = textoAuthorDividido[textoAuthorDividido.length - 1];
+var apellido = output1 + ' ' + output12;
+
+
+}
+else {
+nameAuthor = autores.split(/\s+/, 1);
+//var output = autores.split(/\s+/).pop();
+var apellido  = textoAuthorDividido[textoAuthorDividido.length - 1];
+
+
+}
+var nombreA0 = (nameAuthor.join(" "));
+var nombreA = nombreA0;
+
+var authorbibliograpyIEEE = authorb + ' ' + apellido;
+var authorsb = authorbibliograpyIEEE;
+var nombreAuthores=[nombreA];
+var apellidoAuthores=[apellido];
+var apellidoAuthoresISO=apellido.toUpperCase()+', '+nombreA;
+var apellidoAuthoreshardvard=apellido+', '+nombreA.charAt(0)+'.';
+}
+console.log("author1", nombreA + apellido);
+
+
+}
+
+for (var j = 0; j < 10; j++) {
+if (typeof data.data[i].authors[1] !== 'undefined') {
+var autor1 = data.data[i].authors[1];
+var autores = autorHtml + ' ' + 'y ' + ' ' + autor1;
+var authorb1 = autor1.charAt(0);
+var textoAuthorDividido1 = autor1.split(" ");
+var numeroPalabras1 = textoAuthorDividido1.length;
+
+
+if (numeroPalabras1 >= 4) {
+nameAuthor1 = autor1.split(/\s+/, 2);
+//var output = autores.split(/\s+/).pop();
+//apellido1 es el apellido del autor
+//nombreA es el nombre del autor
+var output21 = textoAuthorDividido1[textoAuthorDividido1.length - 2];
+var output22 = textoAuthorDividido1[textoAuthorDividido1.length - 1];
+apellido1 = output21 + ' ' + output22;
+
+}
+else {
+nameAuthor1 = autor1.split(/\s+/, 1);
+//var output = autores.split(/\s+/).pop();
+apellido1 = textoAuthorDividido1[textoAuthorDividido1.length - 1];
+
+}
+nombreA1 = (nameAuthor1.join(" "));
+var authorbibliograpyIEEE1 = authorb1 + ' ' + apellido1;
+var authorsb = authorbibliograpyIEEE + ' ' + 'y ' + ' ' + authorbibliograpyIEEE1;
+var nombreAuthores=[nombreA,nombreA1];
+var apellidoAuthores=[apellido,apellido1];
+var apellidoAuthoresISO=apellido.toUpperCase()+', '+nombreA+' '+apellido1.toUpperCase()+', '+nombreA1;
+var apellidoAuthoreshardvard=apellido+', '+nombreA.charAt(0)+'. '+apellido1+', '+nombreA1.charAt(0)+'.';
+
+}
+
+else {
+var autor1 = '';
+var authorb1 = '';
+var output1 = '';
+var authorbibliograpyIEEE1 = '';
+var nombreA1 = '';
+var apellido1 = '';
+
+
+}
+
+}
+
+for (var j = 0; j < 10; j++) {
+if (typeof data.data[i].authors[2] !== 'undefined') {
+var autor2 = data.data[i].authors[2];
+var autores = autorHtml + ', ' + autor1 + ' ' + 'y ' + ' ' + autor2;
+var authorb2 = autor2.charAt(0);
+var textoAuthorDividido2 = autor2.split(" ");
+var numeroPalabras2 = textoAuthorDividido2.length;
+
+
+if (numeroPalabras2 >= 4) {
+nameAuthor2 = autor2.split(/\s+/, 2);
+//var output = autores.split(/\s+/).pop();
+//apellido2 es el apellido del autor
+//nombreA es el nombre del autor
+var output31 = textoAuthorDividido2[textoAuthorDividido2.length - 2];
+var output32 = textoAuthorDividido2[textoAuthorDividido2.length - 1];
+apellido2 = output31 + ' ' + output32;
+
+}
+else {
+nameAuthor2 = autor2.split(/\s+/, 1);
+//var output = autores.split(/\s+/).pop();
+apellido2 = textoAuthorDividido2[textoAuthorDividido2.length - 1];
+
+}
+nombreA2 = (nameAuthor2.join(" "));
+var authorbibliograpyIEEE2 = authorb2 + ' ' + apellido2;
+var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE2;
+var nombreAuthores=[nombreA,nombreA1,nombreA2];
+var apellidoAuthores=[apellido,apellido1,apellido2];
+var apellidoAuthoresISO= apellido.toUpperCase()+' '+nombreA +'  '+apellido1.toUpperCase()+' '+nombreA1 +' '+apellido2.toUpperCase()+' '+nombreA2;
+var apellidoAuthoreshardvard= apellido+', '+nombreA.charAt(0)+'.'+apellido1+', '+nombreA1.charAt(0)+'.'+apellido2+' '+nombreA2.charAt(0)+'.';
+}
+else {
+var autor2 = ' ';
+var authorb2 = '';
+var output2 = '';
+var authorbibliograpyIEEE2 = '';
+var nombreA2 = '';
+var apellido2 = '';
+}
+
+}
+
+for (var j = 0; j < 10; j++) {
+if (typeof data.data[i].authors[3] !== 'undefined') {
+var autor3 = data.data[i].authors[1];
+var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ' ' + 'y ' + ' ' + autor3;
+var authorb3 = autor3.charAt(0);
+var textoAuthorDividido3 = autor3.split(" ");
+var numeroPalabras3 = textoAuthorDividido3.length;
+
+if (numeroPalabras3 >= 4) {
+nameAuthor3 = autor3.split(/\s+/, 2);
+//var output = autores.split(/\s+/).pop();
+//apellido2 es el apellido del autor
+//nombreA es el nombre del autor
+var output41 = textoAuthorDividido3[textoAuthorDividido3.length - 2];
+var output42 = textoAuthorDividido3[textoAuthorDividido3.length - 1];
+apellido3 = output41 + ' ' + output42;
+
+}
+else {
+nameAuthor3 = autor3.split(/\s+/, 1);
+//var output = autores.split(/\s+/).pop();
+apellido3 = textoAuthorDividido3[textoAuthorDividido3.length - 1];
+
+}
+nombreA3 = (nameAuthor3.join(" "));
+var authorbibliograpyIEEE3 = authorb3 + ' ' + apellido3;
+var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ', ' + ' ' + authorbibliograpyIEEE2 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE3;
+var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3];
+var apellidoAuthores=[apellido,apellido1,apellido2,apellido3];
+var apellidoAuthoresISO= apellido.toUpperCase()+', '+nombreA +' et al';
+var apellidoAuthoreshardvard= apellido+', '+authorb+'., et al.';
+}
+else {
+var autor3 = ' ';
+var authorb3 = '';
+var output3 = '';
+var authorbibliograpyIEEE3 = '';
+var nombreA3 = '';
+var apellido3 = '';
+}
 
 
 
-<div class="container-fluid">
-  <script type="text/javascript">
-    // Procesar resultados del webservice
-
-    function webServiceResult1(data) {
-
-      var busqueda = document.getElementById("homepage-search-input").value;
-      $("#resultado_json").empty();
-      var hoy = new Date();
-      var dd = hoy.getDate();
-      var mm = hoy.getMonth()+1; //hoy es 0!
-      var yyyy = hoy.getFullYear();
-
-      if(dd<10) {
-        dd='0'+dd
-      }
-
-      if(mm<10) {
-        mm='0'+mm
-      }
-
-      hoy = dd+'/'+mm+'/'+yyyy;
-
-      for (var i = 0; i < 500000; i++) {
-
-        title = data.records[i].title;
-        number = data.records[i].number;
-        volume = data.records[i].volume;
-        issns = data.records[i].issn;
-        journal = data.records[i].publicationName;
-        editorial = data.records[i].publisher;
-        starpage = data.records[i].startingPage;
-        endpage = data.records[i].endingPage;
-        year= data.records[i].publicationDate;
-        pages = starpage +"-"+ endpage;
-        abstract = data.records[i].abstract;
-        doi= data.records[i].doi;
-        keywords = busqueda;
-        cate='General';
-        language = 'EN';
-        country = 'EU';
-
-        for (var j = 0; j < 10; j++) {
-          if (typeof data.records[i].creators[0] !== 'undefined') {
-
-            var autorHtml = data.records[i].creators[0].creator;
-            var autores = autorHtml;
-            var authorb = autores.charAt(0);
-            textoAuthorDividido = autorHtml.split(" ");
-            numeroPalabras = textoAuthorDividido.length;
-            if (numeroPalabras >= 4) {
-              nameAuthor = autores.split(/\s+/, 2);
-              //var output = autores.split(/\s+/).pop();
-              //output es el apellido del autor
-              //nombreA es el nombre del autor
-              var output1 = textoAuthorDividido[textoAuthorDividido.length - 2];
-              var output12 = textoAuthorDividido[textoAuthorDividido.length - 1];
-              var apellido = output1 + ' ' + output12;
+}
+tamAut=nombreAuthores.length;
+tamAutap=apellidoAuthores.length;
+console.log("autores", authorsb,tamAut,tamAutap);
+console.log("autoreswkd:", nombreA + " "+apellido+ " "+ nombreA1 +  " "+apellido1+  " "+nombreA2 +  " "+apellido2+ " "+ nombreA3 + " "+ apellido3);
 
 
-            }
-            else {
-              nameAuthor = autores.split(/\s+/, 1);
-              //var output = autores.split(/\s+/).pop();
-              var apellido  = textoAuthorDividido[textoAuthorDividido.length - 1];
+for (var j = 0; j < 10; j++) {
+if (data.data[i].downloadUrl[j] !== 'undefined') {
+
+var urlHtml = devolverHtmlUrl(data.data[i].downloadUrl[0].value);
+//var url = data.data[i].downloadUrl[0].value;
+}
+}
 
 
-            }
-            var nombreA0 = (nameAuthor.join(" "));
-            var nombreA = nombreA0;
-
-            var authorbibliograpyIEEE = authorb + ' ' + apellido;
-            var authorsb = authorbibliograpyIEEE;
-            var nombreAuthores=[nombreA];
-            var apellidoAuthores=[apellido];
-          }
-          console.log("author1", nombreA + apellido);
-
-
-        }
-
-        for (var j = 0; j < 10; j++) {
-          if (typeof data.records[i].creators[1] !== 'undefined') {
-            var autor1 = data.records[i].creators[1].creator;
-            var autores = autorHtml + ' ' + 'y ' + ' ' + autor1;
-            var authorb1 = autor1.charAt(0);
-            var textoAuthorDividido1 = autor1.split(" ");
-            var numeroPalabras1 = textoAuthorDividido1.length;
-
-
-            if (numeroPalabras1 >= 4) {
-              nameAuthor1 = autor1.split(/\s+/, 2);
-              //var output = autores.split(/\s+/).pop();
-              //apellido1 es el apellido del autor
-              //nombreA es el nombre del autor
-              var output21 = textoAuthorDividido1[textoAuthorDividido1.length - 2];
-              var output22 = textoAuthorDividido1[textoAuthorDividido1.length - 1];
-              apellido1 = output21 + ' ' + output22;
-
-            }
-            else {
-              nameAuthor1 = autor1.split(/\s+/, 1);
-              //var output = autores.split(/\s+/).pop();
-              apellido1 = textoAuthorDividido1[textoAuthorDividido1.length - 1];
-
-            }
-            nombreA1 = (nameAuthor1.join(" "));
-            var authorbibliograpyIEEE1 = authorb1 + ' ' + apellido1;
-            var authorsb = authorbibliograpyIEEE + ' ' + 'y ' + ' ' + authorbibliograpyIEEE1;
-            var nombreAuthores=[nombreA,nombreA1];
-            var apellidoAuthores=[apellido,apellido1];
-
-          }
-
-          else {
-            var autor1 = '';
-            var authorb1 = '';
-            var output1 = '';
-            var authorbibliograpyIEEE1 = '';
-            var nombreA1 = '';
-            var apellido1 = '';
-
-
-          }
-
-        }
-
-        for (var j = 0; j < 10; j++) {
-          if (typeof data.records[i].creators[2] !== 'undefined') {
-            var autor2 = data.records[i].creators[2].creator;
-            var autores = autorHtml + ', ' + autor1 + ' ' + 'y ' + ' ' + autor2;
-            var authorb2 = autor2.charAt(0);
-            var textoAuthorDividido2 = autor2.split(" ");
-            var numeroPalabras2 = textoAuthorDividido2.length;
-
-
-            if (numeroPalabras2 >= 4) {
-              nameAuthor2 = autor2.split(/\s+/, 2);
-              //var output = autores.split(/\s+/).pop();
-              //apellido2 es el apellido del autor
-              //nombreA es el nombre del autor
-              var output31 = textoAuthorDividido2[textoAuthorDividido2.length - 2];
-              var output32 = textoAuthorDividido2[textoAuthorDividido2.length - 1];
-              apellido2 = output31 + ' ' + output32;
-
-            }
-            else {
-              nameAuthor2 = autor2.split(/\s+/, 1);
-              //var output = autores.split(/\s+/).pop();
-              apellido2 = textoAuthorDividido2[textoAuthorDividido2.length - 1];
-
-            }
-            nombreA2 = (nameAuthor2.join(" "));
-            var authorbibliograpyIEEE2 = authorb2 + ' ' + apellido2;
-            var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE2;
-            var nombreAuthores=[nombreA,nombreA1,nombreA2];
-            var apellidoAuthores=[apellido,apellido1,apellido2];
-          }
-          else {
-            var autor2 = ' ';
-            var authorb2 = '';
-            var output2 = '';
-            var authorbibliograpyIEEE2 = '';
-            var nombreA2 = '';
-            var apellido2 = '';
-          }
-
-        }
-
-        for (var j = 0; j < 10; j++) {
-          if (typeof data.records[i].creators[3] !== 'undefined') {
-            var autor3 = data.records[i].creators[3].creator;
-            var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ' ' + 'y ' + ' ' + autor3;
-            var authorb3 = autor3.charAt(0);
-            var textoAuthorDividido3 = autor3.split(" ");
-            var numeroPalabras3 = textoAuthorDividido3.length;
-
-            if (numeroPalabras3 >= 4) {
-              nameAuthor3 = autor3.split(/\s+/, 2);
-              //var output = autores.split(/\s+/).pop();
-              //apellido2 es el apellido del autor
-              //nombreA es el nombre del autor
-              var output41 = textoAuthorDividido3[textoAuthorDividido3.length - 2];
-              var output42 = textoAuthorDividido3[textoAuthorDividido3.length - 1];
-              apellido3 = output41 + ' ' + output42;
-
-            }
-            else {
-              nameAuthor3 = autor3.split(/\s+/, 1);
-              //var output = autores.split(/\s+/).pop();
-              apellido3 = textoAuthorDividido3[textoAuthorDividido3.length - 1];
-
-            }
-            nombreA3 = (nameAuthor3.join(" "));
-            var authorbibliograpyIEEE3 = authorb3 + ' ' + apellido3;
-            var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ', ' + ' ' + authorbibliograpyIEEE2 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE3;
-            var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3];
-            var apellidoAuthores=[apellido,apellido1,apellido2,apellido3];
-          }
-          else {
-            var autor3 = ' ';
-            var authorb3 = '';
-            var output3 = '';
-            var authorbibliograpyIEEE3 = '';
-            var nombreA3 = '';
-            var apellido3 = '';
-          }
-
-        }
-
-        for (var j = 0; j < 10; j++) {
-          if (typeof data.records[i].creators[4] !== 'undefined') {
-            var autor4 = data.records[i].creators[4].creator;
-            var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ', ' + autor3 + ' ' + 'y ' + ' ' + autor4;
-            var authorb4 = autor4.charAt(0);
-            var textoAuthorDividido4 = autor4.split(" ");
-            var numeroPalabras4 = textoAuthorDividido4.length;
-
-            if (numeroPalabras4 >= 4) {
-              nameAuthor4 = autor4.split(/\s+/, 2);
-              //var output = autores.split(/\s+/).pop();
-              //apellido2 es el apellido del autor
-              //nombreA es el nombre del autor
-              var output51 = textoAuthorDividido4[textoAuthorDividido4.length - 2];
-              var output52 = textoAuthorDividido4[textoAuthorDividido4.length - 1];
-              apellido4 = output51 + ' ' + output52;
-
-            }
-            else {
-              nameAuthor4 = autor4.split(/\s+/, 1);
-              //var output = autores.split(/\s+/).pop();
-              apellido4 = textoAuthorDividido4[textoAuthorDividido4.length - 1];
-
-            }
-            nombreA4 = (nameAuthor4.join(" "));
-            var authorbibliograpyIEEE4 = authorb4 + ' ' + apellido4;
-            var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ',' + ' ' + authorbibliograpyIEEE2 + ',' + ' ' + authorbibliograpyIEEE3 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE4;
-            var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3,nombreA4];
-            var apellidoAuthores=[apellido,apellido1,apellido2,apellido3,apellido4];
-          }
-          else {
-            var autor4 = ' ';
-            var authorb4 = '';
-            var output4 = '';
-            var authorbibliograpyIEEE4 = '';
-            var nombreA4 = '';
-            var apellido4 = '';
-          }
-
-        }
-
-        for (var j = 0; j < 10; j++) {
-          if (typeof data.records[i].creators[5] !== 'undefined') {
-            var autor5 = data.records[i].creators[5].creator;
-            var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ', ' + autor3 + ', ' + autor4 + ' ' + 'y ' + ' ' + autor5;
-            var authorb5 = autor5.charAt(0);
-            var textoAuthorDividido5 = autor5.split(" ");
-            var numeroPalabras5 = textoAuthorDividido5.length;
-
-
-            if (numeroPalabras5 >= 4) {
-              nameAuthor5 = autor5.split(/\s+/, 2);
-              //var output = autores.split(/\s+/).pop();
-              //apellido2 es el apellido del autor
-              //nombreA es el nombre del autor
-              var output61 = textoAuthorDividido5[textoAuthorDividido5.length - 2];
-              var output62 = textoAuthorDividido5[textoAuthorDividido5.length - 1];
-              apellido5 = output61 + ' ' + output62;
-
-            }
-            else {
-
-              nameAuthor5 = autor5.split(/\s+/, 1);
-              var nombreA5 = (nameAuthor5.join(" "));
-              var authorbibliograpyIEEE5 = authorb5 + ' ' + apellido5;
-              var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ',' + ' ' + authorbibliograpyIEEE2 + ',' + ' ' + authorbibliograpyIEEE3 + ',' + ' ' + authorbibliograpyIEEE4 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE5;
-            }
-            var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3,nombreA4,nombreA5];
-            var apellidoAuthores=[apellido,apellido1,apellido2,apellido3,apellido4,apellido5];
-            var apellidoAuthoresISO=[apellido.toUpperCase(),' ',nombreA,apellido1.toUpperCase(),' ',nombreA1,apellido2.toUpperCase(),' ',nombreA2,apellido3.toUpperCase(),' ',nombreA3,apellido4.toUpperCase(),' ',nombreA4,' y ',apellido5.toUpperCase(),' ',nombreA5];
-            var apellidoAuthoreshardvard=[apellido,' ',nombreA.charAt(0),apellido1,' ',nombreA1.charAt(0),apellido2,' ',nombreA2.charAt(0),apellido3,' ',nombreA3.charAt(0),apellido4,' ',nombreA4.charAt(0),' y ',apellido5,' ',nombreA5.charAt(0)];
-          }
-          else {
-            var autor5 = ' ';
-            var authorb5 = '';
-            var output5 = '';
-            var authorbibliograpyIEEE5 = '';
-            var nameAuthor5 = '';
-            var apellido5 = '';
-          }
-
-        }
-        tamAut=nombreAuthores.length;
-        tamAutap=apellidoAuthores.length;
-        console.log("autores", authorsb,tamAut,tamAutap);
-        console.log("autoreswkd:", nombreA + " "+apellido+ " "+ nombreA1 +  " "+apellido1+  " "+nombreA2 +  " "+apellido2+ " "+ nombreA3 + " "+ apellido3+ " "+ nombreA4 + " "+ apellido4+  " "+nombreA5 +  " "+apellido5);
-
-
-        for (var j = 0; j < 10; j++) {
-          if (data.records[i].url[j] !== 'undefined') {
-
-            var urlHtml = devolverHtmlUrl(data.records[i].url[0].value);
-            var url = data.records[i].url[0].value;
-          }
-        }
-
-
-        var imprimir = "<div class='row'> " +
-          "<div class='card'> <div class='card-block'>" +
-          "<div>" +
-          "<font color='#01549b'><h4><b> Title: </b></h4></font><h4><b>" + title + "</h4></b><br>" +
-          "<font color='#01549b'><h4><b> Journal:</b></h4></font><h4><b>" + journal + "</h4></b><br>"+
-
-          "<button type='button' class='btn btn-outline-info' data-toggle='collapse' data-target='#demo"+i+"'>Leer más...</button>"+
-          "<div id='demo"+i+"' class='collapse in'>"+
-          "<font color='#01549b'><h4><b> Abstract:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
-          // "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
-          "<font color='#01549b'><h4><b> Editorial:</b></h4></font><h4><b>" + editorial + "</h4></b><br>" +
-          //"<font color='#01549b'><h4><b> Category:</b></h4></font><h4><b>"+cate + "</h4></b><br>" +
-          "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>" + autorHtml + "</h4><br><h4><b>" +
-          autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" + autor4 + "</h4></b><br><h4><b>" + autor5 + "</h4></b><br>" +
+var imprimir =
+  "<div style='width: 1000px;' class='card my-2'>" +
+  "<div >" +
+    "<b></b><br>" +"<a href=" +url+"><h4><b>" + title  +"</b></h4></a>"+
+    "<font color='#01549b'><h4><b> Publisher:</b></h4></font><h4><b>" + publisher + "</b></h4><br>" +
+    "<button type='button' class='btn btn-outline-info' data-toggle='collapse' data-target='#demo"+i+"'>Leer más...</button>"+
+    "<div id='demo"+i+"' class='collapse in'>"+
+      "<font color='#01549b'><h4><b> Abstract:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
+      // "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
+      //"<font color='#01549b'><h4><b> Category:</b></h4></font><h4><b>"+cate + "</h4></b><br>" +
+      "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>" + autorHtml + "</h4><br><h4><b>" +
+          autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" +
           // "<div class='row'></b>" +
 
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Number: </b></h4></font> </div>" +
-          "<div class='col-md-3'><h4><b>" + number + "</h4></b></div>" +
-          "<div class='col-md-3'> </div>" +
-          "<div class='col-md-3'> </div>" +
 
-
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Volume: </b></h4></font> </div>" +
-          "<div class='col-md-3'><h4><b>" + volume + "</h4></b></div>" +
-          "<div class='col-md-3'> </div>" +
-          "<div class='col-md-3'> </div>" +
-
-
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Issns: </b></h4></font> </div>" +
-          "<div class='col-md-3'><h4><b>" + issns + "</h4></b></div>" +
-          "<div class='col-md-3'> </div>" +
-          "<div class='col-md-3'> </div>" +
-
-
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Year: </b></h4></font> </div>" +
-          "<div class='col-md-3'><h4><b>" + year + "</h4></b></div>" +
-          "<div class='col-md-3'> </div>" +
-          "<div class='col-md-3'> </div>" +
-
-
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Pages: </b></h4></font> </div>" +
-          "<div class='col-md-3'><h4><b>" + pages + "</h4></b></div>" +
-          "<div class='col-md-3'> </div>" +
-          "<div class='col-md-3'> </div>" +
-
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Link: </b></h4></font> </div>" +
-          "<div class='col-md-3'>" + urlHtml + "</div>" +
-          "<div class='col-md-3'> </div>" +
-          "<div class='col-md-3'> </div>" +
-          <!-- Button trigger modal -->
-          "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal"+i+"'> Launch demo modal </button>"+
+        <!-- Button trigger modal -->
+        "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal"+i+"'> Bibliografía </button>"+
 
         <!-- Modal -->
         "<div class='modal fade' id='exampleModal"+i+"' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel"+i+"' aria-hidden='true'>"+
-          "<div class='modal-dialog' role='document'>"+
-          "<div class='modal-content'>"+
-          "<div class='modal-header'>"+
-          "<h5 class='modal-title' id='exampleModalLabel"+i+"'>Modal title</h5>"+
-        "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"+
-          "<span aria-hidden='true'>&times;</span>"+
-        "</button>"+
-        "</div>"+
-        "<div class='modal-body'>"+
+          "<div class='modal-dialog modal-lg' role='document'>"+
+            "<div class='modal-content'>"+
+              "<div class='modal-header'>"+
+                "<h5 class='modal-title' id='exampleModalLabel"+i+"'>Bibliografía</h5>"+
+                "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"+
+                  "<span aria-hidden='true'>&times;</span>"+
+                  "</button>"+
+                "</div>"+
+              "<div class='modal-body'>"+
 
-          "<label for='apa' class='col-2 col-form-label'><h5>APA</h5></label>"+
-          "<p ALIGN='justify'>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</p>"+
+                "<label for='apa' class='col-2 col-form-label'><h4>APA</h4></label>"+
+                "<div class='col-10'>"+
+                  "<p ALIGN='justify'><h5>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</h5></p>"+
+                  "</div> " +
 
-        "<label for='ieee' class='col-2 col-form-label'><h5>IEEE</h5></label>"+
-          "<div class='col-10'>"+
-          "<p>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</p>" +
+                "<label for='ieee' class='col-2 col-form-label'><h4>IEEE</h4></label>"+
+                "<div class='col-10'>"+
+                  "<p ALIGN='justify'><h5>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</h5></p>" +
 
-       "</div>" +
-        "<label for='harvard' class='col-2 col-form-label'><h5>ISO</h5></label>"+
-          "<div class='col-10'>"+
-          "<p ALIGN='justify'>" + authorsb + ", "+year+ ","+title +".<i><u>" +journal + "</u></i>,[Fecha de consulta:"+hoy+"],pp.pages .Disponible en:"+ urlHtml + "</a></p>"+
-          "</div>"+
-        "<div class='modal-footer'>"+
-          "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"+
-          "<button type='button' class='btn btn-primary'>Save changes</button>"+
-        "</div></div>"+
+                  "</div>" +
+                "<label for='iso' class='col-2 col-form-label'><h4>ISO</h4></label>"+
+                "<div class='col-10'>"+
+                  "<p ALIGN='justify'><h5>" + apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '".En: '+"<i>" + journal + "</i>[en línea]." + '. V.' + volume + ', no.' + number + ', pp.' + pages + "[consulta:"+hoy+"].Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+ "</h5></p>" +
+
+                  "</div>" +
+                "<label for='harvard' class='col-2 col-form-label'><h4>Harvard</h4></label>"+
+                "<div class='col-10'>"+
+                  "<p ALIGN='justify'><h5>" + apellidoAuthoreshardvard + '(' + year.substr(-20,4) + '), "' + title  +'"'+".<i>" +journal + "</i>,"+volume+ "("+number+"),pp."+pages+ ".Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+"[Consultado:"+hoy+"]</h5></p>"+
+                  "</div>"+
+                "<div class='modal-footer'>"+
+                  "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"+
+                  "</div></div>"+
+              "</div> " +
+            "</div> " +
           "</div> " +
-          "</div> " +
-          "</div> " +
-          ////////////////////////////////////////////////////////////
 
-          "<form action='/GuardarArticulo/crearArticuloQuemado' method='post'>" +
+        ////////////////////////////////////////////////////////////
+
+        "<form action='/GuardarArticulo/crearArticuloQuemado' method='post'>" +
           "<input hidden type='text' name='title' value='" + title + "'>" +
           "<input hidden type='text' name='country' value='" + country + "'>" +
           "<input hidden type='text' name='number' value='" + number + "'>" +
@@ -1362,10 +1151,6 @@
           "<input hidden type='text' name='apellidoAuthores2' value='" + apellido2 + "'>" +
           "<input hidden type='text' name='nombreAuthores3' value='" + nombreA3 + "'>" +
           "<input hidden type='text' name='apellidoAuthores3' value='" + apellido3 + "'>" +
-          "<input hidden type='text' name='nombreAuthores4' value='" + nombreA4 + "'>" +
-          "<input hidden type='text' name='apellidoAuthores4' value='" + apellido4 + "'>" +
-          "<input hidden type='text' name='nombreAuthores5' value='" + nombreA5 + "'>" +
-          "<input hidden type='text' name='apellidoAuthores5' value='" + apellido5 + "'>" +
           "<input hidden type='number' name='numero_autores' value='" + tamAut + "'>" +
           "<input hidden type='text' name='category' value='" + cate + "'>" +
           "<input hidden type='text' name='pages' value='" + pages + "'>" +
@@ -1373,73 +1158,65 @@
           "<button class='btn btn-outline-success'>Guardar en biblioteca</button>" +
 
           "</div> " +
-          "</form>"+ "<br><br>"
-        $("#resultado_json2").append()
-        $("#resultado_json").append($(imprimir));
-
-        /* title = $("#resultado_json").append("Titulo: " + data.records[i].title + "<br>");
-         number= $("#resultado_json").append("Numero: " + data.records[i].number + "<br>");
-         volume= $("#resultado_json").append("Volumen: " + data.records[i].volume + "<br>");
-         issns = $("#resultado_json").append("issns: " + data.records[i].issn + "<br>");
-         doi= $("#resultado_json").append("DOI: " + data.records[i].doi + "<br>");
-         journal = $("#resultado_json").append("Journal: " + data.records[i].publicationName+ "<br>");
-         editorial= $("#resultado_json").append("Editorial: " + data.records[i].publisher+ "<br>");
-         starpage= $("#resultado_json").append("startingPage: " + data.records[i].startingPage+ "<br>");
-         endpage= $("#resultado_json").append("endpage: " + data.records[i].endingPage+ "<br>");
-         year= $("#resultado_json").append("fecha de publicacion: " + data.records[i].publicationDate+ "<br>");
-         url = $("#resultado_json").append(" url: " + data.records[i].url+ "<br>");*/
+    "</form>"+ "<br><br>"+
+    "</div> "
 
 
+  $("#resultado_json").append($(imprimir));
+
+  /* title = $("#resultado_json").append("Titulo: " + data.records[i].title + "<br>");
+  number= $("#resultado_json").append("Numero: " + data.records[i].number + "<br>");*/
+
+  }
+
+  }
 
 
+function devolverHtmlUrl(arregloUrl){
+  console.log("Arreglo Url: ",arregloUrl)
+
+  htmlURL = '<a href= '+arregloUrl+'> ver PDF </a>'
+
+  htmlURL = htmlURL +  '</ul>'
+  console.log("HTML URL",htmlURL)
+  return htmlURL
+}
+
+// Llamada al webservice
+function callWebService1()
+{
+  var busqueda = document.getElementById("homepage-search-input").value;
+  var var1= "https://core.ac.uk/api-v2/articles/search/";
+  var var2= "?page=1&pageSize=10&metadata=true&fulltext=false&citations=false&similar=false&duplicate=false&urls=false&faithfulMetadata=false&apiKey=7scnV9e3mTBKqirNjPlUO8whkZC1bxaA";
+  mm= busqueda;
+  console.log("Este es el valor del cookie:",mm);
+  var concatenacion= var1+busqueda+var2;
+  console.log("la url es:"+concatenacion);
+  try {
 
 
+    $.ajax({
+        url: concatenacion,
+        //url: "&jsoncallback=?",
+        type: 'GET',//tipo de petición
+        dataType: 'json', //tipo de datos
+        //jsonpCallback: 'envoltorio',  //nombre de la funcion que envuelve la respuesta
+        error: function(xhr, status, error) {
+          alert("error");
+        },
+        success: function(msg) { webServiceResult1(msg) }
       }
+    );
+  }
 
-    }
+  catch (err)
+  {
+    alert(err);
+  }
+}
 
-    function devolverHtmlUrl(arregloUrl){
-      console.log("Arreglo Url: ",arregloUrl)
 
-      htmlURL = '<a href= '+arregloUrl+'> ver PDF </a>'
-
-      htmlURL = htmlURL +  '</ul>'
-      console.log("HTML URL",htmlURL)
-      return htmlURL
-    }
-    // Llamada al webservice
-    function callWebService2()
-    {
-      var busquedaspring = document.getElementById("homepage-search-input").value;//Obtenemos la palabra o frace a buscar
-      var par1= "http://api.springer.com/openaccess/json?api_key=1658039d51219dac5ea8a55ca7058953&q=keyword%3A";//link del API RestFull
-      var par2= "&s=1&p=10";//definimos cuantos resultados queremos obtener
-      mm= busquedaspring;
-      console.log("Este es el valor del cookie:",mm);
-      var concatenacion1= par1+busquedaspring+par2;// concatenamos para obtener la ruta completa del APiRestFull
-      console.log("la url es:"+concatenacion1);
-
-      try {
-
-        $.ajax({
-          url: concatenacion1, // url de la ruta del APiRestFull
-          type: "get", // es una solicitud de tipo GET
-          async: true,
-          contentType: "text/json; charset=utf-8",
-          dataType: "json", //especificamos que vamos a utilizar un archivo JSON
-          success: function(msg) { webServiceResult1(msg) },
-          error: function(jqXmlHttpRequest, textStatus, errorThrown) {
-            alert("Error leyendo datos.");
-          }
-        });
-      }
-
-      catch (err)
-      {
-        alert(err);
-      }
-
-    }
-  </script>
+</script>
 </div>
-</body>
+  </body>
 </html>

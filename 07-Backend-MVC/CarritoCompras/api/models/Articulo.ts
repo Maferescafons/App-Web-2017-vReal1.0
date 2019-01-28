@@ -13,7 +13,7 @@ module.exports = {
     },
 
     title:{
-      type:"string"
+      type:"longtext"
     },
     country:{
       type:"string"

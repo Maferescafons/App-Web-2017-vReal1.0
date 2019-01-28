@@ -41,6 +41,18 @@ module.exports.routes = {
   '/busqueda':{
     view:'busqueda'
   },
+  '/busquedaSpringer':{
+    view:'busquedaSpringer'
+  },
+  '/busquedaArxiv':{
+    view:'busquedaArxiv'
+  },
+  '/busquedaScopus':{
+    view:'busquedaScopus'
+  },
+  '/busquedaDoaj':{
+    view:'busquedaDoaj'
+  },
   '/MisArticulos':{
     view:'MisArticulos'
   },

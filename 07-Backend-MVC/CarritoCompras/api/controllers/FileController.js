@@ -43,7 +43,7 @@ module.exports = {
           if (err) { return res.serverError(err)
           }else {
             // if it was successful return the registry in the response
-            return res.json(file)
+            return res.redirect('/VerArticulo?id=' + parametros.id)
             //return res.attachment('');
           }
         })
@@ -58,6 +58,7 @@ module.exports = {
         }else
           sails.log.info("File", File);
         return res.ok(File)
+        //return res.redirect('/VerArticulo?id=' + parametros.id)
 
       });
     }else{

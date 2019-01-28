@@ -23,6 +23,8 @@ declare var Wkx_resource_text;
 declare var Wkx_resource_year;
 declare var numero_authors;
 declare var CreatorSurname1;
+declare var PublisherId;
+declare var ResourceId;
 // /Saludo/crearMiArticulo
 
 module.exports = {

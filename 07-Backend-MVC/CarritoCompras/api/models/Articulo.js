@@ -7,7 +7,7 @@ module.exports = {
             primaryKey: true
         },
         title: {
-            type: "string"
+            type: "longtext"
         },
         country: {
             type: "string"
