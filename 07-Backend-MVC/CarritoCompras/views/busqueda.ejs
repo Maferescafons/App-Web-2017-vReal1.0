@@ -339,7 +339,7 @@
       for (var j = 0; j < 10; j++) {
         if (typeof bibl.author[1] !== 'undefined') {
           var autor1 = bibl.author[1].name;
-          var autores = autorHtml + ' ' + 'y ' + ' ' + autor1;
+          var autores = autorHtml + '; '+autor1;
           var authorb1 = autor1.charAt(0);
           var textoAuthorDividido1 = autor1.split(" ");
           var numeroPalabras1 = textoAuthorDividido1.length;
@@ -386,7 +386,7 @@
       for (var j = 0; j < 10; j++) {
         if (typeof bibl.author[2] !== 'undefined') {
           var autor2 = bibl.author[2].name;
-          var autores = autorHtml + ', ' + autor1 + ' ' + 'y ' + ' ' + autor2;
+          var autores = autorHtml + '; ' + autor1 + '; ' + autor2;
           var authorb2 = autor2.charAt(0);
           var textoAuthorDividido2 = autor2.split(" ");
           var numeroPalabras2 = textoAuthorDividido2.length;
@@ -429,7 +429,7 @@
       for (var j = 0; j < 10; j++) {
         if (typeof bibl.author[3] !== 'undefined') {
           var autor3 = bibl.author[3].name;
-          var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ' ' + 'y ' + ' ' + autor3;
+          var autores = autorHtml + '; ' + autor1 + '; ' + autor2 + '; ' + autor3;
           var authorb3 = autor3.charAt(0);
           var textoAuthorDividido3 = autor3.split(" ");
           var numeroPalabras3 = textoAuthorDividido3.length;
@@ -471,7 +471,7 @@
       for (var j = 0; j < 10; j++) {
         if (typeof bibl.author[4] !== 'undefined') {
           var autor4 = bibl.author[4].name;
-          var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ', ' + autor3 + ' ' + 'y ' + ' ' + autor4;
+          var autores = autorHtml + '; ' + autor1 + '; ' + autor2 + '; ' + autor3 + '; ' + autor4;
           var authorb4 = autor4.charAt(0);
           var textoAuthorDividido4 = autor4.split(" ");
           var numeroPalabras4 = textoAuthorDividido4.length;
@@ -513,7 +513,7 @@
       for (var j = 0; j < 10; j++) {
         if (typeof bibl.author[5] !== 'undefined') {
           var autor5 = bibl.author[5].name;
-          var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ', ' + autor3 + ', ' + autor4 + ' ' + 'y ' + ' ' + autor5;
+          var autores = autorHtml + '; ' + autor1 + '; ' + autor2 + '; ' + autor3 + '; ' + autor4 + '; ' + autor5;
           var authorb5 = autor5.charAt(0);
           var textoAuthorDividido5 = autor5.split(" ");
           var numeroPalabras5 = textoAuthorDividido5.length;
@@ -565,7 +565,7 @@
         }
       }
       // Usage:
-      utoa(url); // 4pyTIMOgIGxhIG1vZGU=
+     // utoa(url); // 4pyTIMOgIGxhIG1vZGU=
 
       var URlBase64 =utoa(url);
       console.log("UrlBase64",URlBase64 );
@@ -673,8 +673,8 @@
 
         "</div>" +
         "<label for='ieee' class='col-2 col-form-label'><h5>IEEE</h5></label>"+
-        "<div class='col-10'>"+
-        "<p ALIGN='justify'>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</p>" +
+        "<div class='col-12'>"+
+        "<p ALIGN='justify'>" + authorsb + ',"' + title + '", ' + "<i>" + journal + "</i>" + '., vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</p>" +
 
         "</div>" +
         "<label for='iso' class='col-2 col-form-label'><h5>ISO</h5></label>"+
@@ -684,7 +684,7 @@
         "</div>" +
         "<label for='harvard' class='col-2 col-form-label'><h5>Harvard</h5></label>"+
         "<div class='col-12'>"+
-        "<p ALIGN='justify'>" + apellidoAuthoreshardvard + '(' + year.substr(-20,4) + '), "' + title  +'"'+".<i>" +journal + "</i>,"+volume+ "("+number+"),pp."+pages+ ".Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+"<br>[Consultado:"+hoy+"]</p>"+
+        "<p ALIGN='justify'>" + apellidoAuthoreshardvard + '(' + year.substr(-20,4) + ') "' + title  +'"'+", <i>" +journal + "</i>,"+volume+ "("+number+"),pp."+pages+ ".Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+"<br>[Consultado:"+hoy+"]</p>"+
         "</div>"+
         "<div class='modal-footer'>"+
         "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"+
@@ -708,7 +708,7 @@
         "<input hidden type='text' name='abstract' value='" + abstract + "'>" +
         "<input hidden type='text' name='keywords' value='" + keywords + "'>" +
         "<input hidden type='text' name='doi' value='" + doi + "'>" +
-        "<input hidden type='text' name='link' value='" + URlBase64 + "'>" +
+        "<input hidden type='text' name='link' value='" + url + "'>" +
         "<input hidden type='text' id= 'author'name='authores' value='" + autores + "'>" +
         "<input hidden type='text' name='nombreAuthores' value='" + nombreA + "'>" +
         "<input hidden type='text' name='apellidoAuthores' value='" + apellido + "'>" +
@@ -922,7 +922,7 @@ console.log("author1", nombreA + apellido);
 for (var j = 0; j < 10; j++) {
 if (typeof data.data[i].authors[1] !== 'undefined') {
 var autor1 = data.data[i].authors[1];
-var autores = autorHtml + ' ' + 'y ' + ' ' + autor1;
+var autores = autorHtml + '; ' + autor1;
 var authorb1 = autor1.charAt(0);
 var textoAuthorDividido1 = autor1.split(" ");
 var numeroPalabras1 = textoAuthorDividido1.length;
@@ -970,7 +970,7 @@ var apellido1 = '';
 for (var j = 0; j < 10; j++) {
 if (typeof data.data[i].authors[2] !== 'undefined') {
 var autor2 = data.data[i].authors[2];
-var autores = autorHtml + ', ' + autor1 + ' ' + 'y ' + ' ' + autor2;
+var autores = autorHtml + '; ' + autor1 + '; ' + autor2;
 var authorb2 = autor2.charAt(0);
 var textoAuthorDividido2 = autor2.split(" ");
 var numeroPalabras2 = textoAuthorDividido2.length;
@@ -1014,7 +1014,7 @@ var apellido2 = '';
 for (var j = 0; j < 10; j++) {
 if (typeof data.data[i].authors[3] !== 'undefined') {
 var autor3 = data.data[i].authors[1];
-var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ' ' + 'y ' + ' ' + autor3;
+var autores = autorHtml + '; ' + autor1 + '; ' + autor2 +'; ' +autor3;
 var authorb3 = autor3.charAt(0);
 var textoAuthorDividido3 = autor3.split(" ");
 var numeroPalabras3 = textoAuthorDividido3.length;

@@ -7,7 +7,7 @@ declare var sails;
 declare var Usuario;
 declare var Articulo;
 declare var MiArticulo;
-
+declare var MiFile;
 // /Saludo/crearMiArticulo
 
 module.exports = {
@@ -127,8 +127,8 @@ else
     }
 
   },
-  VerMiArticulo:(req,res)=>{
 
+  VerMiArticulo:(req,res)=>{
     let parametros = req.allParams();
 
     if(parametros.id){
@@ -137,20 +137,40 @@ else
       })
 
         .exec((err,articuloEditado)=>{
-          if(err) return res.serverError(err);
+          if(err) {return res.serverError(err);}
           if(articuloEditado){
             //Si encontro
-            return res.view('verMisArticulos',{
-              Miarticulo:articuloEditado
-            })
+            MiFile.find()
+              .where({
+                fkIdMiArticulo:parametros.id
+
+              }).exec(
+              (err,MiFile)=>{
+                if(err){
+                  return res.serverError(err);
+                }
+                if (!MiFile) {
+                  return res.view('verMisArticulos',{
+                    Miarticulo:articuloEditado
+
+                  })
+                }
+                return res.view('verMisArticulos',{
+                  Miarticulo:articuloEditado,
+                  MiFile:MiFile
+
+                })
+              }
+            )
+
           }else{
             //No encontro
-            return res.redirect('/')
+            return res.view('MisArticulos')
           }
         })
     }else{
-      return res.redirect('/')
+      return res.view('MisArticulos')
     }
+  },
 
-  }
 };

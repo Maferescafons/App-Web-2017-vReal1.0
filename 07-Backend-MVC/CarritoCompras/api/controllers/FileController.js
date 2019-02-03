@@ -38,12 +38,12 @@ module.exports = {
 
           path: uploads[0].fd,
           filename: uploads[0].filename,
-          fkIdArticulo:parametros.id,
+          fkIdArticulo:parametros.idArticulo,
         }).exec(function(err, file) {
           if (err) { return res.serverError(err)
           }else {
             // if it was successful return the registry in the response
-            return res.redirect('/VerArticulo?id=' + parametros.id)
+            return res.redirect('/VerArticulo?id=' + parametros.idArticulo)
             //return res.attachment('');
           }
         })
@@ -51,8 +51,8 @@ module.exports = {
   },
   BusquedaFile: function (req, res) {
     var parametros = req.allParams();
-    if (req.method == "GET" && parametros.id) {
-      File.findOne({fkIdArticulo:parametros.id }).exec(function (err, File) {
+    if (req.method == "GET" && parametros.idArticulo) {
+      File.findOne({fkIdArticulo:parametros.idArticulo }).exec(function (err, File) {
         if (err){
           return res.negotiate(err);
         }else
@@ -72,7 +72,7 @@ module.exports = {
     //var fileID = req.param('id')
     // gets the id either in urlencode, body or url query
     if (req.method == "GET" && params.id) {
-      File.findOne({fkIdArticulo: params.id})
+      File.findOne({id: params.id})
         .exec(function (err, file) {
           if (err) {
             return res.serverError(err)
@@ -93,6 +93,23 @@ module.exports = {
             }
           })
         })
+    }
+  },
+
+  eliminarFile: function (req, res) {
+    var params = req.allParams();
+    sails.log.info("Parametros", params);
+    if (req.method == "POST" && params.id) {
+      File.destroy({
+        id: params.id
+      }).exec(function (err, articuloBorrado) {
+        if (err)
+          return res.serverError(err);
+        return res.redirect('/VerArticulo?id=' + params.idArticulo);
+      });
+    }
+    else {
+      return res.badRequest();
     }
   },
   /* verArchivo:function  (req, res) {

@@ -9,7 +9,7 @@ module.exports = {
             }).exec(function (err, articuloBorrado) {
                 if (err)
                     return res.serverError(err);
-                return res.redirect("/busqueda");
+                return res.redirect("/biblioteca");
             });
         }
         else {
@@ -27,7 +27,10 @@ module.exports = {
                     return res.serverError(err);
                 if (articuloEditado) {
                     //Si encontro
-                    File.findOne({ fkIdArticulo: parametros.id }).exec(function (error, File) {
+                    File.find()
+                        .where({
+                        fkIdArticulo: parametros.id
+                    }).exec(function (error, File) {
                         if (error) {
                             return res.serverError(error);
                         }
@@ -57,20 +60,40 @@ module.exports = {
         if (parametros.title &&
             parametros.country &&
             parametros.notas &&
+            parametros.number &&
+            parametros.volume &&
+            parametros.year &&
+            parametros.journal &&
+            parametros.editorial &&
+            parametros.abstract &&
+            parametros.issns &&
+            parametros.language &&
+            parametros.category &&
+            parametros.pages &&
             parametros.id) {
             Articulo.update({
                 id: parametros.id
             }, {
                 title: parametros.title,
                 country: parametros.country,
-                notas: parametros.notas
+                notas: parametros.notas,
+                number: parametros.number,
+                volume: parametros.volume,
+                year: parametros.year,
+                journal: parametros.journal,
+                editorial: parametros.editorial,
+                abstract: parametros.abstract,
+                issns: parametros.issns,
+                language: parametros.language,
+                category: parametros.category,
+                pages: parametros.pages,
             })
                 .exec(function (err, Editado) {
                 if (err)
                     return res.serverError(err);
                 if (Editado) {
                     //Si encontro
-                    return res.redirect("/");
+                    return res.redirect('/VerArticulo?id=' + parametros.id);
                 }
                 else {
                     //No encontro

@@ -1,5 +1,5 @@
-<h3>You are editing:</h3>
-<h3> <%= articulos.title %></h3>
+<font color="#01549b"><h3>Estas editando:</h3></font>
+<font color="#449d44"> <h3> <%= articulos.title %></h3></font>
 
 
 
@@ -9,8 +9,8 @@
   <input hidden
          class="form-control"
          type="text"
-         id="id"
-         name="id"
+         id="idArticulo"
+         name="idArticulo"
          value="<%= articulos.id %>">
 
   <div class="form-group row">
@@ -33,7 +33,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="country"
              name="country"
@@ -50,7 +49,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="number"
              name="number"
@@ -65,7 +63,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="volume"
              name="volume"
@@ -80,7 +77,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="year"
              name="year"
@@ -95,7 +91,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="journal"
              name="journal"
@@ -110,7 +105,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="editorial"
              name="editorial"
@@ -126,7 +120,6 @@
     <label for="abstract" class="col-2 col-form-label"><h5><b>Abstract</b></h5></label>
     <div class="col-10">
       <textarea
-        readonly
         id="abstract"
         name="abstract"
         rows="5" cols="110"
@@ -141,7 +134,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="issns"
              name="issns"
@@ -155,7 +147,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="language"
              name="language"
@@ -184,6 +175,7 @@
     <label for="link" class="col-2 col-form-label"><h5><b>Link</b></h5></label>
     <div class="col-10">
       <a href="<%= articulos.link %>">Full text</a>
+      <input hidden type='text' id="link" name='link' value="<%= articulos.link %>">
 
 
     </div>
@@ -208,7 +200,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="category"
              name="category"
@@ -223,7 +214,6 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             readonly
              placeholder="Ingrese sus nombres"
              id="pages"
              name="pages"
@@ -246,97 +236,332 @@
       >"<%= articulos.notas %>"</textarea>
     </div>
   </div>
+  <button class="btn btn-outline-success">Guardar </button>
+</form>
+<br>
+<br>
+  <% for(var i=0;i<File.length;i++){ %>
 
-
-
-  <div class="form-group row">
+  <div class="form-group row" >
     <label for="pages" class="col-2 col-form-label"><h5><b>File</b></h5></label>
-    <div class="col-10">
-      <input class="form-control"
-             type="text"
-             readonly
-             placeholder="Ingrese sus nombres"
-             id="file"
-             name="file"
-             value="<%= File.filename%>"
+    <div class="col-5">
+      <div class="card" style="width: 50rem;">
+        <div class="card-block">
+          <h6 class="card-title"><b><%=File[i].filename%></b></h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card-block">
+        <form action="/File/eliminarFile" method="post">
+          <input hidden
+                 class="form-control"
+                 type="text"
+                 id="idArticulo"
+                 name="idArticulo"
+                 value="<%= articulos.id %>">
+          <input hidden
+                 type="text"
+                 value="<%=File[i].id%>"
+                 name="id">
+          <button  type="submit"
+                   class="btn btn-outline-danger ">Delete</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card-block">
+        <form action="/filedownloader" method="get">
+          <input hidden
+                 type="text"
+                 value="<%=File[i].id%>"
+                 name="id">
+          <button  type="submit"
+                   class="btn btn-outline-success">download</button>
 
-      >
+        </form>
+      </div>
     </div>
   </div>
+  <%}%>
 
-  <button
-    class="btn btn-outline-success">Guardar </button>
-</form>
+
+
+
 
 <br>
-<br>
+<hr>
 
 <div class="container">
   <form action="http://localhost:1337/file/upload" enctype="multipart/form-data" method="post">
     <input hidden
            class="form-control"
            type="text"
-           id="id"
-           name="id"
+           id="idArticulo"
+           name="idArticulo"
            value="<%= articulos.id %>">
 
 
-
     <!--<input type="text" name="title"><br>-->
-    <label for="avatar"><b>Choose attachments to upload</b></label><br>
+    <label for="avatar"><font color='#01549b'><h4><b>Choose attachments to upload</b></h4></font></label><br>
+
     <input type="file" id="avatar" name="avatar" multiple="multiple"><br>
-
-    <input type="submit" value="Upload" class="btn btn-primary">
+    <button type="submit" class="btn btn-primary my-2">Submit</button>
   </form>
-
-
-
-
-
-
-  <!-- Button trigger modal -->
-  <button  id="dtndwnl" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Download file
-  </button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Download file</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="/filedownloader" method="get">
-            <ul class="list-group list-group-flush" >
-              <li class="list-group-item" ><h10><b>File name:</b></h10><%=File.filename%></li>
-              <li class="list-group-item" ><h10><b>Last modificate:</b></h10><%=File.updatedAt%></li>
-            </ul>
-            <input hidden
-                   type="text"
-                   value="<%=articulos.id%>"
-                   name="id">
-
-
-            <button  type="submit"
-                     id="botonDownload"
-
-                     class="btn btn-outline-danger">Download</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
 </div>
-<br>
-<br>
+
+<script type="text/javascript">
+
+  var hoy = new Date();
+  var dd = hoy.getDate();
+  var mm = hoy.getMonth()+1; //hoy es 0!
+  var yyyy = hoy.getFullYear();
+
+  if(dd<10) {
+    dd='0'+dd
+  }
+
+  if(mm<10) {
+    mm='0'+mm
+  }
+
+  hoy = dd+'/'+mm+'/'+yyyy;
+
+
+  var title = document.getElementById('title').value;
+  var country= document.getElementById('country').value;
+  var number= document.getElementById('number').value;
+  var volume= document.getElementById('volume').value;
+  var year= document.getElementById('year').value;
+  var journal= document.getElementById('journal').value;
+  var editorial= document.getElementById('editorial').value;
+  var issns= document.getElementById('issns').value;
+  var link= document.getElementById('link').value;
+  var category= document.getElementById('category').value;
+  var pages= document.getElementById('pages').value;
+
+
+
+  var Archivo = document.getElementById('file').value;
+  var author= document.getElementById('author').value;
+  var textoAuthorDividido = author.split("; ");
+  var numeroPalabras = textoAuthorDividido.length;
+  console.log("numeroPalabras",numeroPalabras);
+
+  if (numeroPalabras >= 1) {
+    var autor = textoAuthorDividido[0];
+    var autores=autor;
+    var authorb = autores.charAt(0);
+    var textoAuthorDividido0 = autores.split(" ");
+    var numeroPalabras1 = textoAuthorDividido0.length;
+    if (numeroPalabras1 >= 4) {
+      nameAuthor = autores.split(/\s+/, 2);
+//var output = autores.split(/\s+/).pop();
+//output es el apellido del autor
+//nombreA es el nombre del autor
+      var output1 = textoAuthorDividido0[textoAuthorDividido0.length - 2];
+      var output12 = textoAuthorDividido0[textoAuthorDividido0.length - 1];
+      var apellido = output1 + ' ' + output12;
+
+    }
+    else {
+      nameAuthor = autores.split(/\s+/, 1);
+//var output = autores.split(/\s+/).pop();
+      var apellido  = textoAuthorDividido0[textoAuthorDividido0.length - 1];
+
+
+    }
+    var nombreA0 = (nameAuthor.join(" "));
+    var nombreA = nombreA0;
+
+    var authorbibliograpyIEEE = authorb + ' ' + apellido;
+    var authorsb = authorbibliograpyIEEE;
+    var nombreAuthores=[nombreA];
+    var apellidoAuthores=[apellido];
+    var apellidoAuthoresISO=apellido.toUpperCase()+', '+nombreA;
+    var apellidoAuthoreshardvard=apellido+', '+nombreA.charAt(0)+'.';
+  }
+  console.log("author1", nombreA + ' '+apellido);
+
+
+  if (numeroPalabras >= 2) {
+
+    var autor1 = textoAuthorDividido[1];
+    var autores = autor + '; ' + autor1;
+    var authorb1 = autor1.charAt(0);
+    var textoAuthorDividido1 = autor1.split(" ");
+    var numeroPalabras1 = textoAuthorDividido1.length;
+
+
+    if (numeroPalabras1 >= 4) {
+      nameAuthor1 = autor1.split(/\s+/, 2);
+      //var output = autores.split(/\s+/).pop();
+      //apellido1 es el apellido del autor
+      //nombreA es el nombre del autor
+      var output21 = textoAuthorDividido1[textoAuthorDividido1.length - 2];
+      var output22 = textoAuthorDividido1[textoAuthorDividido1.length - 1];
+      apellido1 = output21 + ' ' + output22;
+
+    }
+    else {
+      nameAuthor1 = autor1.split(/\s+/, 1);
+      //var output = autores.split(/\s+/).pop();
+      apellido1 = textoAuthorDividido1[textoAuthorDividido1.length - 1];
+
+    }
+    nombreA1 = (nameAuthor1.join(" "));
+    var authorbibliograpyIEEE1 = authorb1 + ' ' + apellido1;
+    var authorsb = authorbibliograpyIEEE + ' ' + 'y ' + ' ' + authorbibliograpyIEEE1;
+    var nombreAuthores=[nombreA,nombreA1];
+    var apellidoAuthores=[apellido,apellido1];
+    var apellidoAuthoresISO=apellido.toUpperCase()+', '+nombreA+' '+apellido1.toUpperCase()+', '+nombreA1;
+    var apellidoAuthoreshardvard=apellido+', '+nombreA.charAt(0)+'. '+apellido1+', '+nombreA1.charAt(0)+'.';
+
+  }
+
+  else {
+    var autor1 = '';
+    var authorb1 = '';
+    var output1 = '';
+    var authorbibliograpyIEEE1 = '';
+    var nombreA1 = '';
+    var apellido1 = '';
+
+
+  }
+
+  if (numeroPalabras >= 3) {
+
+    var autor2 = textoAuthorDividido[2];
+    var autores = autor + '; ' + autor1 + '; ' + autor2;
+    var authorb2 = autor2.charAt(0);
+    var textoAuthorDividido2 = autor2.split(" ");
+    var numeroPalabras2 = textoAuthorDividido2.length;
+
+
+    if (numeroPalabras2 >= 4) {
+      nameAuthor2 = autor2.split(/\s+/, 2);
+      //var output = autores.split(/\s+/).pop();
+      //apellido2 es el apellido del autor
+      //nombreA es el nombre del autor
+      var output31 = textoAuthorDividido2[textoAuthorDividido2.length - 2];
+      var output32 = textoAuthorDividido2[textoAuthorDividido2.length - 1];
+      apellido2 = output31 + ' ' + output32;
+
+    }
+    else {
+      nameAuthor2 = autor2.split(/\s+/, 1);
+      //var output = autores.split(/\s+/).pop();
+      apellido2 = textoAuthorDividido2[textoAuthorDividido2.length - 1];
+
+    }
+    nombreA2 = (nameAuthor2.join(" "));
+    var authorbibliograpyIEEE2 = authorb2 + ' ' + apellido2;
+    var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE2;
+    var nombreAuthores=[nombreA,nombreA1,nombreA2];
+    var apellidoAuthores=[apellido,apellido1,apellido2];
+    var apellidoAuthoresISO= apellido.toUpperCase()+' '+nombreA +'  '+apellido1.toUpperCase()+' '+nombreA1 +' '+apellido2.toUpperCase()+' '+nombreA2;
+    var apellidoAuthoreshardvard= apellido+', '+nombreA.charAt(0)+'.'+apellido1+', '+nombreA1.charAt(0)+'.'+apellido2+' '+nombreA2.charAt(0)+'.';
+  }
+  else {
+    var autor2 = ' ';
+    var authorb2 = '';
+    var output2 = '';
+    var authorbibliograpyIEEE2 = '';
+    var nombreA2 = '';
+    var apellido2 = '';
+  }
+
+  if (numeroPalabras >= 4) {
+    var autor3 = textoAuthorDividido[3];
+    var autores = autor + '; ' + autor1 + '; ' + autor2 + '; ' + autor3;
+    var authorb3 = autor3.charAt(0);
+    var textoAuthorDividido3 = autor3.split(" ");
+    var numeroPalabras3 = textoAuthorDividido3.length;
+
+    if (numeroPalabras3 >= 4) {
+      nameAuthor3 = autor3.split(/\s+/, 2);
+      //var output = autores.split(/\s+/).pop();
+      //apellido2 es el apellido del autor
+      //nombreA es el nombre del autor
+      var output41 = textoAuthorDividido3[textoAuthorDividido3.length - 2];
+      var output42 = textoAuthorDividido3[textoAuthorDividido3.length - 1];
+      apellido3 = output41 + ' ' + output42;
+
+    }
+    else {
+      nameAuthor3 = autor3.split(/\s+/, 1);
+      //var output = autores.split(/\s+/).pop();
+      apellido3 = textoAuthorDividido3[textoAuthorDividido3.length - 1];
+
+    }
+    nombreA3 = (nameAuthor3.join(" "));
+    var authorbibliograpyIEEE3 = authorb3 + ' ' + apellido3;
+    var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ', ' + ' ' + authorbibliograpyIEEE2 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE3;
+    var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3];
+    var apellidoAuthores=[apellido,apellido1,apellido2,apellido3];
+    var apellidoAuthoresISO= apellido.toUpperCase()+', '+nombreA +' et al';
+    var apellidoAuthoreshardvard= apellido+', '+authorb+'., et al.';
+  }
+  else {
+    var autor3 = ' ';
+    var authorb3 = '';
+    var output3 = '';
+    var authorbibliograpyIEEE3 = '';
+    var nombreA3 = '';
+    var apellido3 = '';
+  }
+
+  if (numeroPalabras >= 5) {
+
+    var autor4 = textoAuthorDividido[4];
+    var autores = autor + '; ' + autor1 + '; ' + autor2 + '; ' + autor3 + '; ' + autor4;
+    var authorb4 = autor4.charAt(0);
+    var textoAuthorDividido4 = autor4.split(" ");
+    var numeroPalabras4 = textoAuthorDividido4.length;
+
+    if (numeroPalabras4 >= 4) {
+      nameAuthor4 = autor4.split(/\s+/, 2);
+      //var output = autores.split(/\s+/).pop();
+      //apellido2 es el apellido del autor
+      //nombreA es el nombre del autor
+      var output51 = textoAuthorDividido4[textoAuthorDividido4.length - 2];
+      var output52 = textoAuthorDividido4[textoAuthorDividido4.length - 1];
+      apellido4 = output51 + ' ' + output52;
+
+    }
+    else {
+      nameAuthor4 = autor4.split(/\s+/, 1);
+      //var output = autores.split(/\s+/).pop();
+      apellido4 = textoAuthorDividido4[textoAuthorDividido4.length - 1];
+
+    }
+    nombreA4 = (nameAuthor4.join(" "));
+    var authorbibliograpyIEEE4 = authorb4 + ' ' + apellido4;
+    var authorsb = authorbibliograpyIEEE + ' ' + ',' + ' ' + authorbibliograpyIEEE1 + ',' + ' ' + authorbibliograpyIEEE2 + ',' + ' ' + authorbibliograpyIEEE3 + ' ' + 'y ' + ' ' + authorbibliograpyIEEE4;
+    var nombreAuthores=[nombreA,nombreA1,nombreA2,nombreA3,nombreA4];
+    var apellidoAuthores=[apellido,apellido1,apellido2,apellido3,apellido4];
+    var apellidoAuthoresISO= apellido.toUpperCase()+' '+nombreA +' et al.';
+    var apellidoAuthoreshardvard= apellido+' '+authorb+'., et al';
+  }
+  else {
+    var autor4 = ' ';
+    var authorb4 = '';
+    var output4 = '';
+    var authorbibliograpyIEEE4 = '';
+    var nombreA4 = '';
+    var apellido4 = '';
+  }
+
+
+  console.log("autoreswkd:",authorsb);
+
+</script>
+
+
+
+<hr>
+
 <div class="container">
   <h2>Generar Bibliografia</h2>
   <!-- Trigger the modal with a button -->
@@ -344,31 +569,35 @@
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
 
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Bibliografia</h4>
+          <h4 class="modal-title">Bibliografía</h4>
         </div>
         <div class="modal-body">
           <label for="apa" class="col-2 col-form-label"><h5>APA</h5></label>
+          <div class='col-12'>
           <p ALIGN='justify'> <%= articulos.authores %>. (<%= articulos.year %>).<%= articulos.title %>.<i> <%= articulos.journal %> </i>,<i> <%= articulos.volume %> </i>( <%= articulos.number %> ),<%= articulos.pages %></p>
+          </div>
 
           <label for="ieee" class="col-2 col-form-label"><h5>IEEE</h5></label>
-          <div class="col-10">
-            <p ALIGN='justify' ><%= articulos.authores %>,"<%= articulos.title %>",<i> <%= articulos.journal %> </i>, vol.<%= articulos.volume %>, no. <%= articulos.number %>, pp.<%= articulos.pages %>pp.<%= articulos.pages %>,<%= articulos.year %> </p>
+          <div class="col-12">
+
+            <p ALIGN='justify' ><script>document.write(authorsb+ ', "' + title + '," ' + "<i>" + journal + "</i>" + '., vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year)</script>  </p>
 
           </div>
           <label for="harvard" class="col-2 col-form-label"><h5>ISO</h5></label>
-          <div class="col-10">
-            <p ALIGN='justify'><%= articulos.authores %>,<%= articulos.year %>,<%= articulos.title %>.<i><u> <%= articulos.journal %> </u></i>,[Fecha de consulta: <script>
-                var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-                var f=new Date();
-                document.write(f.getDate() + " " + meses[f.getMonth()] + " " + f.getFullYear());
-              </script> ],pp.<%= articulos.pages %>.Disponible en:  <a href="<%= articulos.link %>"><%= articulos.link %></a></p>
+          <div class="col-12">
+            <p ALIGN='justify'><script>document.write(apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '". En: '+"<i>" + journal + "</i> [en línea]. " +editorial+ '. V.' + volume + ', no.' + number + ', pp.' + pages + " [consulta:"+hoy+"].Disponible en: "+'<a href="'+ link +'">'+link+'</a>')</script></p>
           </div>
+          <label for="harvard" class="col-2 col-form-label"><h5>Harvard</h5></label>
+          <div class="col-12">
+            <p ALIGN='justify'><script>document.write(apellidoAuthoreshardvard + '(' + year.substr(-20,4) + ') "' + title  +' "'+", <i>" +journal + " </i>,"+volume+ "("+number+"), pp."+pages+ ". Disponible en: "+'<a href="'+ link +'">'+link+'</a>'+"<br>[Consultado:"+hoy+"]")</script> </p>
+          </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>

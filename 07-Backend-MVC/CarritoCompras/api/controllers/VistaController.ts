@@ -14,8 +14,6 @@ module.exports = {
  biblioteca:(req,res)=>{
    let parametros = req.allParams();
 
-
-
    if(!parametros.biblioteca){
      parametros.biblioteca ='';
    }

@@ -71,9 +71,13 @@ module.exports.routes = {
     'ArticuloController.VerArticulo',
   'get /VerMisArticulo':
     'SaludoController.VerMiArticulo',
+
   'get /filedownloader': 'FileController.download',
-  'get /VerFile':
-    'FileController.BusquedaFile',
+  'get /VerFile': 'FileController.BusquedaFile',
+
+
+  'get /Mifiledownloader': 'MiFileController.download',
+  'get /ViewMiFile': 'MiFileController.BusquedaFile',
 
   //login
   'get /login': { view: 'UsuarioGestion/login' },

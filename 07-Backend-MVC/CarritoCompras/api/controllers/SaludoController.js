@@ -96,22 +96,37 @@ module.exports = {
                 id: parametros.id
             })
                 .exec(function (err, articuloEditado) {
-                if (err)
+                if (err) {
                     return res.serverError(err);
+                }
                 if (articuloEditado) {
                     //Si encontro
-                    return res.view('verMisArticulos', {
-                        Miarticulo: articuloEditado
+                    MiFile.find()
+                        .where({
+                        fkIdMiArticulo: parametros.id
+                    }).exec(function (err, MiFile) {
+                        if (err) {
+                            return res.serverError(err);
+                        }
+                        if (!MiFile) {
+                            return res.view('verMisArticulos', {
+                                Miarticulo: articuloEditado
+                            });
+                        }
+                        return res.view('verMisArticulos', {
+                            Miarticulo: articuloEditado,
+                            MiFile: MiFile
+                        });
                     });
                 }
                 else {
                     //No encontro
-                    return res.redirect('/');
+                    return res.view('MisArticulos');
                 }
             });
         }
         else {
-            return res.redirect('/');
+            return res.view('MisArticulos');
         }
-    }
+    },
 };

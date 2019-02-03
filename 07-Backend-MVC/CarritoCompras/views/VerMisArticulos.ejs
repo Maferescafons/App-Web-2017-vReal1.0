@@ -8,8 +8,8 @@
   <input hidden
          class="form-control"
          type="text"
-         id="id"
-         name="id"
+         id="idMiArticulo"
+         name="idMiArticulo"
          value="<%= Miarticulo.id %>">
 
   <div class="form-group row">
@@ -245,35 +245,84 @@
       >"<%= Miarticulo.notas %>"</textarea>
     </div>
   </div>
-
-
   <button
-    class="btn btn-outline-success">Guardar </button>
+    class="btn btn-outline-success my-2">Guardar </button>
 </form>
+<br>
+<br>
+<br>
+  <% for(var i=0;i<MiFile.length;i++){ %>
 
-<br>
-<br>
+  <div class="form-group row" >
+    <label for="pages" class="col-2 col-form-label"><h5><b>File</b></h5></label>
+    <div class="col-5">
+      <div class="card" style="width: 50rem;">
+        <div class="card-block">
+          <h6 class="card-title"><b><%=MiFile[i].filename%></b></h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+        <div class="card-block">
+          <form action="/MiFile/eliminarMiFile" method="post">
+            <input hidden
+                   class="form-control"
+                   type="text"
+                   id="idMiArticulo"
+                   name="idMiArticulo"
+                   value="<%= Miarticulo.id %>">
+
+            <input hidden
+                   type="text"
+                   value="<%=MiFile[i].id%>"
+                   name="id">
+            <button  type="submit"
+                     class="btn btn-outline-danger ">Delete</button>
+          </form>
+        </div>
+    </div>
+    <div class="col-2">
+      <div class="card-block">
+          <form action="Mifiledownloader" method="get">
+            <input hidden
+                   type="text"
+                   value="<%=MiFile[i].id%>"
+                   name="id">
+            <button  type="submit"
+                     class="btn btn-outline-success">download</button>
+
+          </form>
+        </div>
+    </div>
+  </div>
+  <%}%>
+
+
 <hr>
-<div class="container">
+<div class="container ">
   <form action="http://localhost:1337/mifile/upload" enctype="multipart/form-data" method="post">
     <input hidden
            class="form-control"
            type="text"
-           id="id"
-           name="id"
+           id="idMiArticulo"
+           name="idMiArticulo"
            value="<%= Miarticulo.id %>">
 
 
 
     <!--<input type="text" name="title"><br>-->
-    <label for="avatar"><b>Choose attachments to upload</b></label><br>
+    <hr>
+    <label for="avatar"> <font color="#01549b"> <h3>Añadir archivo</h3></font></label><br>
+
     <input type="file" id="avatar" name="avatar" multiple="multiple"><br>
 
     <input type="submit" value="Upload" class="btn btn-primary">
   </form>
+
+  <hr>
 </div>
-<br>
-<br>
+
+
 <div class="container">
   <h3>Generar Bibliografia</h3>
   <!-- Trigger the modal with a button -->

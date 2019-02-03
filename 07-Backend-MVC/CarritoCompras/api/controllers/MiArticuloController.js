@@ -60,5 +60,52 @@ module.exports = {
         else {
             return res.badRequest();
         }
-    }
+    },
+    viewMiFile: function (req, res) {
+        MiFile.find().exec(function (err, MiFile) {
+            if (err)
+                return res.negotiate(err);
+            sails.log.info("file", MiFile);
+            return res.view('VerMisArticulos', {
+                MiFile: MiFile
+            });
+        });
+    },
+    ///parece no ser necesario///
+    VerMiFile: function (req, res) {
+        var parametros = req.allParams();
+        if (parametros.id) {
+            MiArticulo.findOne({
+                id: parametros.id
+            })
+                .exec(function (err, articuloEditado) {
+                if (err)
+                    return res.serverError(err);
+                if (articuloEditado) {
+                    //Si encontro
+                    MiFile.findOne({ fkIdMiArticulo: parametros.id }).exec(function (error, MiFile) {
+                        if (error) {
+                            return res.serverError(error);
+                        }
+                        if (!MiFile) {
+                            return res.view('VerMisArticulos', {
+                                MiFile: articuloEditado
+                            });
+                        }
+                        return res.view('VerMisArticulos', {
+                            MiArticulo: articuloEditado,
+                            MiFile: MiFile
+                        });
+                    });
+                }
+                else {
+                    //No encontro
+                    return res.view('MisArticulos');
+                }
+            });
+        }
+        else {
+            return res.view('MisArticulos');
+        }
+    },
 };

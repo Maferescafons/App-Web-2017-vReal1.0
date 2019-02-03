@@ -319,7 +319,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
                 var apellidoAuthores=[apellido,apellido1];
                 var apellidoAuthoresISO= apellido.toUpperCase()+', '+nombreA +';  '+apellido1.toUpperCase()+', '+nombreA1;
                 var apellidoAuthoreshardvard= apellido+', '+nombreA.charAt(0)+'.'+apellido1+', '+nombreA1.charAt(0)+'.';
-                var nombres= nombre +' ,'+nombre1;
+                var nombres= nombre +'; '+nombre1;
                 console.log("autor2", nombres);
               }
               else {
@@ -342,7 +342,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
 
                 author2 = libro.getElementsByTagName("author")[2];
                 nombre2 = author2.getElementsByTagName("name")[0].firstChild.nodeValue;
-                var nombres= nombre +' ,'+nombre1+' ,'+nombre2;
+                var nombres= nombre +'; '+nombre1+'; '+nombre2;
 
                 var authorb2 = nombre2.charAt(0);
                 var textoAuthorDividido2 = nombre2.split(" ");
@@ -392,7 +392,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
 
                 author3 = libro.getElementsByTagName("author")[3];
                 nombre3 = author3.getElementsByTagName("name")[0].firstChild.nodeValue;
-                var nombres= nombre +' ,'+nombre1+' ,'+nombre2+' ,'+nombre3;
+                var nombres= nombre +'; '+nombre1+'; '+nombre2+'; '+nombre3;
 
                 var authorb3 = nombre3.charAt(0);
                 var textoAuthorDividido3 = nombre3.split(" ");
@@ -650,7 +650,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
         for (var j = 0; j < 10; j++) {
           if (typeof data.data[i].authors[1] !== 'undefined') {
             var autor1 = data.data[i].authors[1];
-            var autores = autorHtml + ' ' + 'y ' + ' ' + autor1;
+            var autores = autorHtml + '; '+autor1;
             var authorb1 = autor1.charAt(0);
             var textoAuthorDividido1 = autor1.split(" ");
             var numeroPalabras1 = textoAuthorDividido1.length;
@@ -698,7 +698,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
         for (var j = 0; j < 10; j++) {
           if (typeof data.data[i].authors[2] !== 'undefined') {
             var autor2 = data.data[i].authors[2];
-            var autores = autorHtml + ', ' + autor1 + ' ' + 'y ' + ' ' + autor2;
+            var autores = autorHtml + '; ' + autor1 + '; '+ autor2;
             var authorb2 = autor2.charAt(0);
             var textoAuthorDividido2 = autor2.split(" ");
             var numeroPalabras2 = textoAuthorDividido2.length;
@@ -742,7 +742,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
         for (var j = 0; j < 10; j++) {
           if (typeof data.data[i].authors[3] !== 'undefined') {
             var autor3 = data.data[i].authors[1];
-            var autores = autorHtml + ', ' + autor1 + ', ' + autor2 + ' ' + 'y ' + ' ' + autor3;
+            var autores = autorHtml + '; ' + autor1 + '; ' + autor2 + '; ' + autor3;
             var authorb3 = autor3.charAt(0);
             var textoAuthorDividido3 = autor3.split(" ");
             var numeroPalabras3 = textoAuthorDividido3.length;
