@@ -70,9 +70,9 @@ module.exports = {
             parametros.language &&
             parametros.category &&
             parametros.pages &&
-            parametros.id) {
+            parametros.idArticulo) {
             Articulo.update({
-                id: parametros.id
+                id: parametros.idArticulo
             }, {
                 title: parametros.title,
                 country: parametros.country,
@@ -93,7 +93,7 @@ module.exports = {
                     return res.serverError(err);
                 if (Editado) {
                     //Si encontro
-                    return res.redirect('/VerArticulo?id=' + parametros.id);
+                    return res.redirect('/VerArticulo?id=' + parametros.idArticulo);
                 }
                 else {
                     //No encontro
@@ -105,4 +105,54 @@ module.exports = {
             return res.badRequest();
         }
     },
+    editarArticulo: function (req, res) {
+        var parametros = req.allParams();
+        if (parametros.idArticulo &&
+            parametros.title &&
+            parametros.country &&
+            parametros.number &&
+            parametros.volume &&
+            parametros.year &&
+            parametros.journal &&
+            parametros.editorial &&
+            parametros.abstract &&
+            parametros.issns &&
+            parametros.language &&
+            parametros.keywords &&
+            parametros.category &&
+            parametros.pages) {
+            Articulo.update({
+                id: parametros.idArticulo
+            }, {
+                title: parametros.title,
+                country: parametros.country,
+                number: parametros.number,
+                volume: parametros.volume,
+                year: parametros.year,
+                journal: parametros.journal,
+                editorial: parametros.editorial,
+                abstract: parametros.abstract,
+                issns: parametros.issns,
+                language: parametros.language,
+                keywords: parametros.keywords,
+                category: parametros.category,
+                pages: parametros.pages,
+            })
+                .exec(function (err, Editado) {
+                if (err)
+                    return res.serverError(err);
+                if (Editado) {
+                    //Si encontro
+                    return res.redirect('/VerArticulo?id=' + parametros.idArticulo);
+                }
+                else {
+                    //No encontro
+                    return res.notFound();
+                }
+            });
+        }
+        else {
+            return res.badRequest();
+        }
+    }
 };

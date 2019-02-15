@@ -25,11 +25,12 @@ declare var numero_authors;
 declare var CreatorSurname1;
 declare var PublisherId;
 declare var ResourceId;
+declare var User;
 // /Saludo/crearMiArticulo
 
 module.exports = {
   crearArticuloQuemado: (req, res) => {
-
+    req.cookies.User
     let parametros = req.allParams(); //obtenemos todos los datos del artículo
 
     let nuevaCategoria = {
@@ -133,6 +134,7 @@ module.exports = {
     };
 
     let nuevoArticulo = {
+
       country: parametros.country,
       number: parametros.number,
       title: parametros.title,
@@ -148,7 +150,9 @@ module.exports = {
       authores:parametros.authores,
       category:parametros.category,
       pages: parametros. pages,
-      notas:parametros.notas
+      notas:parametros.fkIdUser,
+      fkIdUser:parametros.fkIdUser,
+
     };
 
     Articulo.create(nuevoArticulo)
@@ -472,16 +476,52 @@ module.exports = {
       })
     })
   },
-  biblioteca:(req,res)=>{
+  bibliotecaUser:(req,res)=>{
+   req.cookies.User;
+    sails.log.info("idUser",req.cookies.User);
+   // res.send('Cookie seteada',req.cookies.User)
+    var parametros = req.allParams();
+      User
+        .findOne()
+        .where({
+          id: req.cookies.User
+        })
+        .exec(function (err,User) {
+          if (err){
+            return res.negotiate(err);}
+          if (User) {
+            //Si encontro
+            // User:User
+            if(!parametros.biblioteca){
+              parametros.biblioteca ='';
+              parametros.idUsuario =req.cookies.User;
+            }
+            Articulo.find()
+              .where({
+                fkIdUser:req.cookies.User,
+                title:{
+                  contains:parametros.biblioteca
+                }
+              }).exec(function (err, articulos) {
+              if (err) {
+                return res.serverError(err);
+              }
+              if (!articulos) {
+                return res.view('/busqueda');
+              }
+              return res.view('biblioteca',{
+                articulos:articulos,
+                User:User
+              });
 
-    Articulo.find().exec((err,articulos)=>{
-      if(err) return res.negotiate(err);
-      sails.log.info("articulo",articulos);
+            });
+          }
+          else {
+            //No encontro
+            return res.redirect('/');
+          }
+        });
 
-      return res.view('busqueda',{
-        articulos:articulos
-      })
-    })
   },
   crearUsuario:(req,res)=>{
     return res.view('busqueda')

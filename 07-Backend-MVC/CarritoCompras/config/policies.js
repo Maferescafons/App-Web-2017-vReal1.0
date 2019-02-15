@@ -42,12 +42,13 @@ module.exports.policies = {
     'welcome': 'flash',
     'crearMiArticulo': 'flash'
   },
-  '*': true,
+ // '*': true,
 
   UserController: {
     '*': 'isAuthenticated',
     login: true,
-    signup: true
+    signup: true,
+    '*': true
   },
   newPolitica:['Metodos']
 };

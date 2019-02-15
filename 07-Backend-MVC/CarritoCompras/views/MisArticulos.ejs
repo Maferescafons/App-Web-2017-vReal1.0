@@ -1,5 +1,16 @@
+<input
+  id="idUsuario"
+  name="idUsuario"
+  value="<%=req.session.me%>">
+
 <form action="/mibiblioteca">
   <div class="form-group row">
+    <input
+      class="form-control"
+      type="text"
+      id="idUsuario"
+      name="idUsuario"
+      value="<%=User.id%>">
     <label for="mibusqueda" class="col-4 col-form-label">
       Search by Keywords or press search to see all
     </label>

@@ -33,44 +33,65 @@ module.exports = {
             link: parametros.link,
             authors: parametros.authors,
             category: parametros.category,
-            pages: parametros.pages,
-            notas: parametros.notas
+            pages: parametros.starpage + "-" + parametros.endpage,
+            notas: parametros.notas,
+            fkIdUser: parametros.idUsuario
         };
         MiArticulo.create(nuevoArticulo)
             .exec(function (error, articuloCreado) {
-            function aticuloCreated(err, articulo) {
-                if (err) {
-                    req.flash = {
-                        err: err
-                    };
-                    return res.redirect('/crearMisArticulos');
-                }
-                else {
-                    res.redirect('/VerMisArticulo');
-                }
+            if (error) {
+                return res.serverError(error);
+            }
+            else {
+                MiArticuloId = articuloCreado.id;
+                res.redirect('/VerMisArticulo?id=' + MiArticuloId);
             }
         });
     },
     VerMisArticulos: function (req, res) {
+        req.cookies.User;
+        sails.log.info("idUser", req.cookies.User);
+        // res.send('Cookie seteada',req.cookies.User)
         var parametros = req.allParams();
-        sails.log.info("Parametros", parametros);
-        if (!parametros.mibiblioteca) {
-            parametros.mibiblioteca = '';
-        }
-        MiArticulo
-            .find()
+        User
+            .findOne()
             .where({
-            title: {
-                contains: parametros.mibiblioteca
-            }
+            id: req.cookies.User
         })
-            .exec(function (err, Miarticulo) {
-            if (err)
+            .exec(function (err, User) {
+            if (err) {
                 return res.negotiate(err);
-            sails.log.info("Miarticulo", Miarticulo);
-            return res.view('MisArticulos', {
-                MiArticulo: Miarticulo
-            });
+            }
+            if (User) {
+                //Si encontro
+                // User:User
+                if (!parametros.mibiblioteca) {
+                    parametros.mibiblioteca = '';
+                    parametros.idUsuario = req.cookies.User;
+                }
+                MiArticulo.find()
+                    .where({
+                    fkIdUser: req.cookies.User,
+                    title: {
+                        contains: parametros.mibiblioteca
+                    }
+                }).exec(function (err, Miarticulo) {
+                    if (err) {
+                        return res.serverError(err);
+                    }
+                    if (!Miarticulo) {
+                        return res.view('/homepage');
+                    }
+                    return res.view('MisArticulos', {
+                        MiArticulo: Miarticulo,
+                        User: User
+                    });
+                });
+            }
+            else {
+                //No encontro
+                return res.redirect('/');
+            }
         });
     },
     eliminarmiArticulo: function (req, res) {
@@ -91,9 +112,9 @@ module.exports = {
     },
     VerMiArticulo: function (req, res) {
         var parametros = req.allParams();
-        if (parametros.id) {
+        if (parametros) {
             MiArticulo.findOne({
-                id: parametros.id
+                id: parametros.id,
             })
                 .exec(function (err, articuloEditado) {
                 if (err) {

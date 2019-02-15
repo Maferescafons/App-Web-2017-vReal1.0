@@ -1,9 +1,20 @@
+<input
+  id="idUsuario"
+  name="idUsuario"
+  value="<%=req.session.me%>">
+
 <form action="/biblioteca">
   <div class="form-group row">
     <label for="busqueda" class="col-4 col-form-label">
       Search by Keywords or Title
     </label>
     <div class="col-8">
+      <input
+        class="form-control"
+        type="text"
+        id="idUsuario"
+        name="idUsuario"
+        value="<%=User.id%>">
       <input class="form-control" type="text" placeholder="Search in my library" id="biblioteca"
              name="biblioteca">
     </div>
@@ -13,6 +24,7 @@
 
 <br>
 <br>
+
 
 <div class="row">
 <% for(var i=0;i<articulos.length;i++){ %>
@@ -50,7 +62,7 @@
 
 
 
-<a href="/MisArticulos">
+<a href="/mibiblioteca">
   <button type="button" class="btn btn-primary btn-lg btn-block">
     View my posts
   </button>

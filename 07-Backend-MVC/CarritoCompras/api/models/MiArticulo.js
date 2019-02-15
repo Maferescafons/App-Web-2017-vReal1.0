@@ -52,6 +52,9 @@ module.exports = {
         Mifile: {
             collection: 'MiFile',
             via: 'fkIdMiArticulo'
+        },
+        fkIdUser: {
+            model: 'User'
         }
     }
 };

@@ -8,6 +8,7 @@ declare var Usuario;
 declare var Articulo;
 declare var MiArticulo;
 declare var MiFile;
+declare var MiArticuloId;
 // /Saludo/crearMiArticulo
 
 module.exports = {
@@ -36,10 +37,6 @@ module.exports = {
 
     let parametros = req.allParams();
 
-
-
-
-
     let nuevoArticulo = {
       title:parametros.title,
       country:parametros.country,
@@ -55,58 +52,71 @@ module.exports = {
       link:parametros.link,
       authors:parametros.authors,
       category:parametros.category,
-      pages:parametros.pages,
-      notas:parametros.notas
+      pages:parametros.starpage + "-" + parametros.endpage,
+      notas:parametros.notas,
+      fkIdUser:parametros.idUsuario
 
     };
-
-
 
     MiArticulo.create(nuevoArticulo)
       .exec(
         (error,articuloCreado)=> {
-          function aticuloCreated(err, articulo) {
-            if (err) {
-              req.flash = {
-                err: err
-
-              }
-             return res.redirect('/crearMisArticulos');
-            }
-else
-            {
-              res.redirect('/VerMisArticulo');
-            }
-
-
-
+          if (error) {
+            return res.serverError(error);
           }
+               else
+            {
+              MiArticuloId=articuloCreado.id
+              res.redirect('/VerMisArticulo?id=' + MiArticuloId);
+            }
         }
       )},
+
   VerMisArticulos:(req,res)=>{
-
-    let parametros = req.allParams();
-
-    sails.log.info("Parametros",parametros);
-
-    if(!parametros.mibiblioteca){
-      parametros.mibiblioteca ='';
-    }
-    MiArticulo
-      .find()
+    req.cookies.User;
+    sails.log.info("idUser",req.cookies.User);
+    // res.send('Cookie seteada',req.cookies.User)
+    var parametros = req.allParams();
+    User
+      .findOne()
       .where({
-        title:{
-          contains:parametros.mibiblioteca
-        }
+        id: req.cookies.User
       })
-      .exec((err,Miarticulo)=>{
-        if(err) return res.negotiate(err);
-        sails.log.info("Miarticulo",Miarticulo);
+      .exec(function (err,User) {
+        if (err){
+          return res.negotiate(err);}
+        if (User) {
+          //Si encontro
+          // User:User
+          if(!parametros.mibiblioteca){
+            parametros.mibiblioteca ='';
+            parametros.idUsuario =req.cookies.User;
+          }
+          MiArticulo.find()
+            .where({
+              fkIdUser:req.cookies.User,
+              title:{
+                contains:parametros.mibiblioteca
+              }
+            }).exec(function (err, Miarticulo) {
+            if (err) {
+              return res.serverError(err);
+            }
+            if (!Miarticulo) {
+              return res.view('/homepage');
+            }
+            return res.view('MisArticulos',{
+              MiArticulo:Miarticulo,
+              User:User
+            });
 
-        return res.view('MisArticulos',{
-          MiArticulo:Miarticulo
-        })
-      })
+          });
+        }
+        else {
+          //No encontro
+          return res.redirect('/');
+        }
+      });
   },
   eliminarmiArticulo: (req, res) => {
 
@@ -131,9 +141,9 @@ else
   VerMiArticulo:(req,res)=>{
     let parametros = req.allParams();
 
-    if(parametros.id){
+    if(parametros){
       MiArticulo.findOne({
-        id:parametros.id
+        id:parametros.id,
       })
 
         .exec((err,articuloEditado)=>{

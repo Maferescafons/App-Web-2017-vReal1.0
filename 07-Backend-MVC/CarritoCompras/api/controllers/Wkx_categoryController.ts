@@ -147,8 +147,8 @@ module.exports = {
       authores:parametros.authores,
       category:parametros.category,
       pages: parametros. pages,
-      notas:parametros.notas
-
+      notas:parametros.notas,
+      fkIdUser:parametros.fkIdUser,
 
     };
 

@@ -53,12 +53,11 @@ module.exports.routes = {
   '/busquedaDoaj':{
     view:'busquedaDoaj'
   },
-  '/MisArticulos':{
-    view:'MisArticulos'
-  },
+
  // '/misArticulos': 'VistaController.misArticuloView',
   '/mibiblioteca': 'SaludoController.VerMisArticulos',
   '/biblioteca': 'VistaController.biblioteca',
+  '/bibliotecaUser':'GuardarArticuloController.bibliotecaUser',
   'get /crearMisArticulos':
     'VistaController.crearMisArticulos',
   'get /ArticuloSpringer':
@@ -75,9 +74,12 @@ module.exports.routes = {
   'get /filedownloader': 'FileController.download',
   'get /VerFile': 'FileController.BusquedaFile',
 
+  'get /VerUsuario': 'UserController.VerUsuario',
+
 
   'get /Mifiledownloader': 'MiFileController.download',
   'get /ViewMiFile': 'MiFileController.BusquedaFile',
+  'post /editarArticulo':'ArticuloController.editarArticulo',
 
   //login
   'get /login': { view: 'UsuarioGestion/login' },

@@ -3,7 +3,7 @@
 
 
 
-<form action="/Articulo/editanota" method="post">
+<form action="/editarArticulo" method="post">
 
 
   <input hidden
@@ -233,11 +233,15 @@
         rows="5" cols="110"
         value="<%= articulos.notas %>"
 
-      >"<%= articulos.notas %>"</textarea>
+      ><%= articulos.notas %></textarea>
     </div>
   </div>
   <button class="btn btn-outline-success">Guardar </button>
 </form>
+
+
+
+
 <br>
 <br>
   <% for(var i=0;i<File.length;i++){ %>
@@ -342,7 +346,7 @@
 
 
 
-  var Archivo = document.getElementById('file').value;
+ // var Archivo = document.getElementById('file').value;
   var author= document.getElementById('author').value;
   var textoAuthorDividido = author.split("; ");
   var numeroPalabras = textoAuthorDividido.length;

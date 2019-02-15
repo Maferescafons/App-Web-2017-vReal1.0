@@ -1,6 +1,7 @@
 // /Saludo/crearMiArticulo
 module.exports = {
     crearArticuloQuemado: function (req, res) {
+        req.cookies.User;
         var parametros = req.allParams(); //obtenemos todos los datos del artículo
         var nuevaCategoria = {
             categoryCategory: parametros.category
@@ -101,7 +102,8 @@ module.exports = {
             authores: parametros.authores,
             category: parametros.category,
             pages: parametros.pages,
-            notas: parametros.notas
+            notas: parametros.fkIdUser,
+            fkIdUser: parametros.fkIdUser,
         };
         Articulo.create(nuevoArticulo)
             .exec(function (error, articuloCreado) {
@@ -387,14 +389,50 @@ module.exports = {
             });
         });
     },
-    biblioteca: function (req, res) {
-        Articulo.find().exec(function (err, articulos) {
-            if (err)
+    bibliotecaUser: function (req, res) {
+        req.cookies.User;
+        sails.log.info("idUser", req.cookies.User);
+        // res.send('Cookie seteada',req.cookies.User)
+        var parametros = req.allParams();
+        User
+            .findOne()
+            .where({
+            id: req.cookies.User
+        })
+            .exec(function (err, User) {
+            if (err) {
                 return res.negotiate(err);
-            sails.log.info("articulo", articulos);
-            return res.view('busqueda', {
-                articulos: articulos
-            });
+            }
+            if (User) {
+                //Si encontro
+                // User:User
+                if (!parametros.biblioteca) {
+                    parametros.biblioteca = '';
+                    parametros.idUsuario = req.cookies.User;
+                }
+                Articulo.find()
+                    .where({
+                    fkIdUser: req.cookies.User,
+                    title: {
+                        contains: parametros.biblioteca
+                    }
+                }).exec(function (err, articulos) {
+                    if (err) {
+                        return res.serverError(err);
+                    }
+                    if (!articulos) {
+                        return res.view('/busqueda');
+                    }
+                    return res.view('biblioteca', {
+                        articulos: articulos,
+                        User: User
+                    });
+                });
+            }
+            else {
+                //No encontro
+                return res.redirect('/');
+            }
         });
     },
     crearUsuario: function (req, res) {

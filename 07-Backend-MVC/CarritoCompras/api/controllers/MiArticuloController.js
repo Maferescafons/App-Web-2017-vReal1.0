@@ -9,7 +9,8 @@ module.exports = {
     },
     editanota: function (req, res) {
         var parametros = req.allParams();
-        if (parametros.title &&
+        if (parametros.idMiArticulo &&
+            parametros.title &&
             parametros.country &&
             parametros.number &&
             parametros.volume &&
@@ -20,14 +21,12 @@ module.exports = {
             parametros.issns &&
             parametros.language &&
             parametros.keywords &&
-            parametros.link &&
-            parametros.authors &&
+            parametros.author &&
             parametros.category &&
             parametros.pages &&
-            parametros.notas &&
-            parametros.id) {
+            parametros.notas) {
             MiArticulo.update({
-                id: parametros.id
+                id: parametros.idMiArticulo
             }, {
                 title: parametros.title,
                 country: parametros.country,
@@ -38,9 +37,10 @@ module.exports = {
                 editorial: parametros.editorial,
                 abstract: parametros.abstract,
                 issns: parametros.issns,
+                language: parametros.language,
                 keywords: parametros.keywords,
-                link: parametros.link,
-                authors: parametros.authors,
+                authors: parametros.author,
+                category: parametros.category,
                 pages: parametros.pages,
                 notas: parametros.notas
             })
@@ -49,7 +49,7 @@ module.exports = {
                     return res.serverError(err);
                 if (Editado) {
                     //Si encontro
-                    return res.redirect("/");
+                    return res.redirect('/VerMisArticulo?id=' + parametros.idMiArticulo);
                 }
                 else {
                     //No encontro

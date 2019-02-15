@@ -1,4 +1,9 @@
-
+<input
+  class="form-control"
+  type="text"
+  id="idUsuario"
+  name="idUsuario"
+  value="<%=req.cookies.User%>">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +63,7 @@
       language = 'EN/ES';
       country = '';
       var url = data.data[i].downloadUrl;
-
+      fkIdUser=parseInt(document.getElementById("idUsuario").value);
 
       for (var j = 0; j < 10; j++) {
         if (typeof data.data[i].authors[0] !== 'undefined') {
@@ -333,6 +338,7 @@
         "<input hidden type='text' name='apellidoAuthores2' value='" + apellido2 + "'>" +
         "<input hidden type='text' name='nombreAuthores3' value='" + nombreA3 + "'>" +
         "<input hidden type='text' name='apellidoAuthores3' value='" + apellido3 + "'>" +
+        "<input hidden type='text' name='fkIdUser' value='" + parseInt(fkIdUser) + "'>" +
         "<input hidden type='number' name='numero_autores' value='" + tamAut + "'>" +
         "<input hidden type='text' name='category' value='" + cate + "'>" +
         "<input hidden type='text' name='pages' value='" + pages + "'>" +

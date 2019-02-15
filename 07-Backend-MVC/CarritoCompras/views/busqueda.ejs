@@ -1,4 +1,9 @@
-
+<input
+  class="form-control"
+  type="text"
+  id="idUsuario"
+  name="idUsuario"
+  value="<%=req.cookies.User%>">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,7 +160,9 @@
     document.getElementById('oculto').style.display = 'none';
     document.getElementById('catego').style.display = 'block';
   }
+
 </script>
+
 <script type="text/javascript">
   // Procesar resultados del webservice
 
@@ -171,6 +178,7 @@
   var abstract;
   var keywords;
   var pages;
+  var fkIdUser;
 
   function utoa(str) {
     return window.btoa(unescape(encodeURIComponent(str)));
@@ -229,7 +237,8 @@
       editorial = data.results[i].bibjson.journal.publisher;
       starpage = data.results[i].bibjson.start_page;
       endpage = data.results[i].bibjson.end_page;
-
+      fkIdUser=parseInt(document.getElementById("idUsuario").value);
+      console.log("fkIdUser", fkIdUser);
       var busqueda = document.getElementById("homepage-search-input").value;
       for (var j = 0; j < 10; j++) {
         if (typeof data.results[i].bibjson.start_page == 'undefined' && isNaN(data.results[i].bibjson.start_page)== true) {
@@ -255,8 +264,9 @@
       year = bibl.year;
       abstract = bibl.abstract;
       keywords = bibl.keywords;
+      //fkIdUser= req.cookies.User;
       //  var Autor =data.results[i].bibjson.author[j].name
-      // console.log("Autor ya devuelto ", Autor)z
+      // console.log("cookie ", fkIdUser);
       for (var j = 0; j < 10; j++) {
         if (typeof bibl.identifier[0] !== 'undefined') {
 
@@ -722,8 +732,8 @@
         "<input hidden type='text' name='apellidoAuthores4' value='" + apellido4 + "'>" +
         "<input hidden type='text' name='nombreAuthores5' value='" + nombreA5 + "'>" +
         "<input hidden type='text' name='apellidoAuthores5' value='" + apellido5 + "'>" +
+        "<input hidden type='text' name='fkIdUser' value='" + parseInt(fkIdUser) + "'>" +
         "<input hidden type='number' name='numero_autores' value='" + tamAut + "'>" +
-
         "<input hidden type='text' name='starpage' value='" + starpage + "'>" +
         "<input hidden type='text' name='endpage' value='" + endpage + "'>" +
 
