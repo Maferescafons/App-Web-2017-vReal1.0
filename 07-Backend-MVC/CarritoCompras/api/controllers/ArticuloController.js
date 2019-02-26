@@ -67,6 +67,7 @@ module.exports = {
             parametros.editorial &&
             parametros.abstract &&
             parametros.issns &&
+            parametros.doi &&
             parametros.language &&
             parametros.category &&
             parametros.pages &&
@@ -84,6 +85,7 @@ module.exports = {
                 editorial: parametros.editorial,
                 abstract: parametros.abstract,
                 issns: parametros.issns,
+                doi: parametros.doi,
                 language: parametros.language,
                 category: parametros.category,
                 pages: parametros.pages,

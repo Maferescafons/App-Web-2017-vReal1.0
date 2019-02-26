@@ -40,34 +40,45 @@ module.exports = {
   },
 
   signup: function (req, res) {
-
     // Attempt to signup a user using the provided parameters
-    User.signup({
-      name: req.param('name'),
-      email: req.param('email'),
-      password: req.param('password')
-    }, function (err, user) {
-      // res.negotiate() will determine if this is a validation error
-      // or some kind of unexpected server error, then call `res.badRequest()`
-      // or `res.serverError()` accordingly.
-      if (err) return res.negotiate(err);
 
-      // Go ahead and log this user in as well.
-      // We do this by "remembering" the user in the session.
-      // Subsequent requests from this user agent will have `req.session.me` set.
-      req.session.me = user.id;
-      res.send(user.id);
-      // If this is not an HTML-wanting browser, e.g. AJAX/sockets/cURL/etc.,
-      // send a 200 response letting the user agent know the signup was successful.
-      if (req.wantsJSON) {
-        return res.ok('Signup successful!');
-      }
+    var parametros = req.allParams();
+    var nuevoUsuario = {
+      name: parametros.name,
+      email: parametros.email,
+      password: parametros.password
+    };
+    if(parametros.email) {
+      User
+        .findOne()
+        .where({
+          email: parametros.email
+        })
+        .exec(function (err,user) {
+          if (err){
+            return res.negotiate(err);}
+          if (user) {
+            //Si encontro:
+            return res.send('Ya existe un usuario registrado con ese correo');
+            //res.redirect('/');
+          }
+          else {
+            //No encontro
+            User.create(nuevoUsuario)
+              .exec(function (error, usuarioCreado) {
+                if (error) {
+                  return res.serverError(error);
+                }
+                else {
+                  //res.cookie('User',usuarioCreado.id)
+                  res.redirect('/');
+                  //VerUsuario?email=nuevo2%40hotmail.com&password=1234
+                }
+              });
+          }
+        });
+    }
 
-      // Otherwise if this is an HTML-wanting browser, redirect to /welcome.
-      return res.redirect('/');
-      sails.log.info("Parametros", user.id);
-
-    });
   },
   VerUsuario: function (req, res) {
     var parametros = req.allParams();
@@ -83,10 +94,7 @@ module.exports = {
           if (err){
             return res.negotiate(err);}
           if (User) {
-            //Si encontro
-
-           // User:User
-
+            //Si encontro:
             Articulo.find()
               .where({
                 fkIdUser:User.id,
@@ -97,11 +105,6 @@ module.exports = {
               if (!articulos) {
                 return res.view('/busqueda');
               }
-              /*return res.view('biblioteca',{
-                articulos:articulos,
-                User:User,
-
-              });*/
               res.cookie('User',User.id)
               //res.send('Cookie seteada')
               res.view('biblioteca',{
@@ -111,7 +114,6 @@ module.exports = {
               })
 
             });
-            //res.cookie('user',User.id);
           }
           else {
             //No encontro

@@ -1,4 +1,4 @@
-<input
+<input hidden
   class="form-control"
   type="text"
   id="idUsuario"
@@ -13,6 +13,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
   <title>Obtener lista XML de autores con Ajax</title>
   <link rel="stylesheet" href="Bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <style>
     /* Ocultar botón radio */
@@ -102,9 +103,9 @@ xhtml1/DTD/xhtml1-transitional.dtd">
 
 </i>
 
-<button type="button" class="btn btn-primary" onclick="descargaArchivo();limpiar()">Busqueda Arxiv</button>
+<button type="button" class="btn btn-primary" onclick="limpiar();spiner();descargaArchivo()">Busqueda Arxiv</button>
 
-<button type="button" class="btn btn-success" onclick="javascript:limpiar();callWebService1()">Ver recomendaciones</button>
+<button type="button" class="btn btn-success" onclick="javascript:limpiar();spiner();callWebService1()">Ver recomendaciones</button>
 
 <br>
 <br>
@@ -124,6 +125,9 @@ xhtml1/DTD/xhtml1-transitional.dtd">
   function ocultar(){
     document.getElementById('oculto').style.display = 'none';
     document.getElementById('catego').style.display = 'block';
+  }
+  function spiner(){
+    $("#resultado_json").append("<i class='fa fa-spinner fa-spin' style='font-size:24px'></i>");
   }
 </script>
 
@@ -203,7 +207,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
             language = 'EN/ES';
             country = '';
             fkIdUser=parseInt(document.getElementById("idUsuario").value);
-
+            var busqueda = document.getElementById("homepage-search-input").value;
             for (var j = 0; j < 10; j++) {
               if (typeof libro.getElementsByTagName("arxiv:comment")[0]!== 'undefined') {
                 coment = libro.getElementsByTagName("arxiv:comment")[0].firstChild.nodeValue;
@@ -457,15 +461,15 @@ xhtml1/DTD/xhtml1-transitional.dtd">
               "<font color='#01549b'><h4><b><u> Coments: </u></b></h4></font><h4><b>" + coment+' '+coment2 + "</h4></b><br>" +
               "<button type='button' class='btn btn-outline-info' data-toggle='collapse' data-target='#demo"+i+"'>Leer más...</button>"+
               "<div id='demo"+i+"' class='collapse in'>"+
-              "<font color='#01549b'><h4><b><u>Abstract: </u> </b></h4></font><h4><b>" + "<p ><b><h4><p align='justify'>" + abstract + "</p></p></h4></b></p>" + "</h4></b><br>" +
+              "<font color='#01549b'><h4><b><u>Resumen: </u> </b></h4></font><h4><b>" + "<p ><b><h4><p align='justify'>" + abstract + "</p></p></h4></b></p>" + "</h4></b><br>" +
               "<font color='#01549b'><h4><b><u>Referencia del journal: </u> </b></h4></font><h4><b>" + "<p ><b><h4><p align='justify'>" + coment2 + "</p></p></h4></b></p>" + "</h4></b><br>" +
-              "<font color='#01549b'><h4><b><u> Authors: </u></b></h4></font><h4><b>" +nombres+"</h4></b> <br>"+
+              "<font color='#01549b'><h4><b><u> Autores: </u></b></h4></font><h4><b>" +nombres+"</h4></b> <br>"+
               "<font color='#01549b'><h4><b><u> DOI: </u></b></h4></font><h4><b>" +doi+"</h4></b> <br>"+
               "<font color='#01549b'><h4><b><u> Fecha de publicación: </u></b></h4></font><h4><b>" +published.substr(-20,10)+"</h4></b> <br>"+
               // "<div align='left'>"+"<input type='checkbox' id='spoiler2' align='left'></input> <label for='spoiler2' align='left'><p id='spoiler2' align='left'><h4><u>Abstract</p></h4></u></label> <div class='spoiler'>"+"<p ><b><h4><p align='justify'>" + abstract + "</p></p></h4></b></p>" +"</div>"+"</div>"+
 
               <!-- Button trigger modal -->
-              "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal"+i+"'> Bibliografía </button>"+
+              "<button type='button' class='btn btn-primary mb-2' data-toggle='modal' data-target='#exampleModal"+i+"'> Bibliografía </button>"+
 
               <!-- Modal -->
               "<div class='modal fade' id='exampleModal"+i+"' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel"+i+"' aria-hidden='true'>"+
@@ -481,12 +485,12 @@ xhtml1/DTD/xhtml1-transitional.dtd">
 
               "<label for='apa' class='col-2 col-form-label'><h5>APA</h5></label>"+
               "<div class='col-10'>"+
-              "<p ALIGN='justify'>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</p>"+
+              "<p ALIGN='justify'>"+ apellidoAuthoreshardvard + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages + ". Recuperado de "+'<a href="'+ url +'">'+url+'</a>'+"</p>"+
               "</div> " +
 
               "<label for='ieee' class='col-2 col-form-label'><h5>IEEE</h5></label>"+
               "<div class='col-10'>"+
-              "<p ALIGN='justify'>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</p>" +
+              "<p ALIGN='justify'>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year +"</p>" +
 
               "</div>" +
               "<label for='iso' class='col-2 col-form-label'><h5>ISO</h5></label>"+
@@ -532,6 +536,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
               "<input hidden type='text' name='nombreAuthores3' value='" + nombreA3 + "'>" +
               "<input hidden type='text' name='apellidoAuthores3' value='" + apellido3 + "'>" +
               "<input hidden type='text' name='fkIdUser' value='" + parseInt(fkIdUser) + "'>" +
+              "<input hidden type='text' name='busqueda' value='" + busqueda + "'>" +
               "<input hidden type='number' name='numero_autores' value='" + tamAut + "'>" +
               "<input hidden type='text' name='category' value='" + cate + "'>" +
               "<input hidden type='text' name='pages' value='" + pages + "'>" +
@@ -561,6 +566,8 @@ xhtml1/DTD/xhtml1-transitional.dtd">
   function limpiar(){
     var resultados = document.getElementById("pRespuesta");
     resultados.innerHTML='';
+      $("#resultado_json").empty();
+
   }
   window.onload = descargaArchivo;
 </script>
@@ -611,7 +618,8 @@ xhtml1/DTD/xhtml1-transitional.dtd">
         language = 'EN/ES';
         country = '';
         var url = data.data[i].downloadUrl;
-
+        fkIdUser=parseInt(document.getElementById("idUsuario").value);
+        var busqueda = document.getElementById("homepage-search-input").value;
 
         for (var j = 0; j < 10; j++) {
           if (typeof data.data[i].authors[0] !== 'undefined') {
@@ -809,13 +817,13 @@ xhtml1/DTD/xhtml1-transitional.dtd">
           "<div style='width: 1000px;' class='card my-2'>" +
           "<div >" +
           "<b></b><br>" +"<a href=" +url+"><h4><b>" + title  +"</b></h4></a>"+
-          "<font color='#01549b'><h4><b> Publisher:</b></h4></font><h4><b>" + publisher + "</b></h4><br>" +
+          "<font color='#01549b'><h4><b> Editor:</b></h4></font><h4><b>" + publisher + "</b></h4><br>" +
           "<button type='button' class='btn btn-outline-info' data-toggle='collapse' data-target='#demo"+i+"'>Leer más...</button>"+
           "<div id='demo"+i+"' class='collapse in'>"+
-          "<font color='#01549b'><h4><b> Abstract:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
+          "<font color='#01549b'><h4><b> Resumen:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
           // "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
           //"<font color='#01549b'><h4><b> Category:</b></h4></font><h4><b>"+cate + "</h4></b><br>" +
-          "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>" + autorHtml + "</h4><br><h4><b>" +
+          "<font color='#01549b'><h4><b> Autores: </b></h4></font><h4><b>" + autorHtml + "</h4><br><h4><b>" +
           autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" +
           // "<div class='row'></b>" +
 
@@ -837,7 +845,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
 
           "<label for='apa' class='col-2 col-form-label'><h4>APA</h4></label>"+
           "<div class='col-10'>"+
-          "<p ALIGN='justify'><h5>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</h5></p>"+
+          "<p ALIGN='justify'><h5>"+ apellidoAuthoreshardvard + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +". Recuperado de "+'<a href="'+ url +'">'+url+'</a>'+"</h5></p>"+
           "</div> " +
 
           "<label for='ieee' class='col-2 col-form-label'><h4>IEEE</h4></label>"+
@@ -877,6 +885,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
           "<input hidden type='text' name='keywords' value='" + keywords + "'>" +
           "<input hidden type='text' name='doi' value='" + doi + "'>" +
           "<input hidden type='text' name='link' value='" + url + "'>" +
+          "<input hidden type='text' name='busqueda' value='" + busqueda + "'>" +
           "<input hidden type='text' name='authores' value='" + autores + "'>" +
           "<input hidden type='text' name='nombreAuthores' value='" + nombreA + "'>" +
           "<input hidden type='text' name='apellidoAuthores' value='" + apellido + "'>" +
@@ -886,6 +895,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
           "<input hidden type='text' name='apellidoAuthores2' value='" + apellido2 + "'>" +
           "<input hidden type='text' name='nombreAuthores3' value='" + nombreA3 + "'>" +
           "<input hidden type='text' name='apellidoAuthores3' value='" + apellido3 + "'>" +
+          "<input hidden type='text' name='fkIdUser' value='" + parseInt(fkIdUser) + "'>" +
           "<input hidden type='number' name='numero_autores' value='" + tamAut + "'>" +
           "<input hidden type='text' name='category' value='" + cate + "'>" +
           "<input hidden type='text' name='pages' value='" + pages + "'>" +

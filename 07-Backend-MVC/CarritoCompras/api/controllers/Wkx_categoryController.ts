@@ -20,6 +20,7 @@ declare var Wkx_resource_text;
 declare var Wkx_resource_year;
 declare var numero_authors;
 declare var CreatorSurname1;
+declare var busqueda;
 
 // /Saludo/crearUsuarioQuemado
 
@@ -96,7 +97,7 @@ module.exports = {
     numero_authors=parametros.numero_autores;
     sails.log.info("Parametros",numero_authors);
     let nuevoKeyword = {
-      keywordKeyword:parametros.keywords,
+      keywordKeyword:parametros.busqueda,
     };
     let nuevoPublisher = {
       publisherLocation:parametros.country,
@@ -149,6 +150,8 @@ module.exports = {
       pages: parametros. pages,
       notas:parametros.notas,
       fkIdUser:parametros.fkIdUser,
+      busqueda:parametros.busqueda,
+      doi:parametros.doi
 
     };
 
@@ -157,6 +160,8 @@ module.exports = {
         (error,articuloCreado)=>{
           if(error){
             return res.serverError(error);
+          }else{
+            busqueda=articuloCreado.busqueda
           }
         }
       ),
@@ -424,7 +429,8 @@ module.exports = {
                                                                       if(error){
                                                                         return res.serverError(error);
                                                                       }else{
-                                                                        return res.view('busquedaArxiv');
+                                                                        res.cookie('busqueda',busqueda)
+                                                                        return res.redirect('/bibliotecaUser');
                                                                         //return res.created('Nuevo articulo creado.');
                                                                         //  return res.view('Biblioteca')
 

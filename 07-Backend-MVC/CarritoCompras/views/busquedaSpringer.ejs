@@ -1,4 +1,4 @@
-<input
+<input hidden
   class="form-control"
   type="text"
   id="idUsuario"
@@ -16,6 +16,7 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="Bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div id='oculto' style='display:none;'>
       <form id="formRadio" name="categoria">
@@ -70,13 +71,14 @@
     <br>
     <br>
 
-    <button type="button" class="btn btn-primary" onclick="javascript:limpiar();callWebService2()">Busqueda SPRINGER</button>
-    <button type="button"  class="btn btn-success"  onclick="javascript:limpiar();callWebService1()">VER RECOMENDACIONES</button>
+    <button type="button" class="btn btn-primary" onclick="javascript:limpiar();spiner();callWebService2()">Busqueda SPRINGER</button>
+    <button type="button"  class="btn btn-success"  onclick="javascript:limpiar();spiner();callWebService1()">VER RECOMENDACIONES</button>
 
     <br>
     <br>
     <hr>
     <hr>
+
   </div>
 </div>
     <script type="text/javascript">
@@ -88,6 +90,9 @@
       function viewMoreData(){
         document.getElementById('oculto2').style.display = 'block';
         document.getElementById('vewMore').style.display = 'none';
+      }
+      function spiner(){
+        $("#resultado_json").append("<i class='fa fa-spinner fa-spin' style='font-size:24px'></i>");
       }
     </script>
     <script type="text/javascript">
@@ -113,13 +118,19 @@
     function limpiar(){
       var imprimir = '';
       imprimir.innerHTML='';
+      $("#resultado_json").empty();
 
     }
     // Procesar resultados del webservice
 
     function webServiceResult1(data) {
-
+      $("#resultado_json").append("<i class='fa fa-spinner fa-spin' style='font-size:24px'></i>");
       var busqueda = document.getElementById("homepage-search-input").value;
+      tamanodeDatos= data.records.length;
+      console.log("tamanodeDatos", tamanodeDatos);
+      if (tamanodeDatos == 0) {
+        alert('No existen articulos relacionados con esa palabra!');
+      }
       $("#resultado_json").empty();
       var hoy = new Date();
       var dd = hoy.getDate();
@@ -136,8 +147,7 @@
 
       hoy = dd+'/'+mm+'/'+yyyy;
 
-      for (var i = 0; i < 500000; i++) {
-
+      for (var i = 0; i < data.records.length; i++) {
         title = data.records[i].title;
         number = data.records[i].number;
         volume = data.records[i].volume;
@@ -155,6 +165,7 @@
         language = 'EN';
         country = 'EU';
         fkIdUser=parseInt(document.getElementById("idUsuario").value);
+        var busqueda = document.getElementById("homepage-search-input").value;
         for (var j = 0; j < 10; j++) {
           if (typeof data.records[i].creators[0] !== 'undefined') {
 
@@ -191,9 +202,6 @@
             var apellidoAuthoresISO=apellido.toUpperCase()+', '+nombreA;
             var apellidoAuthoreshardvard=apellido+', '+nombreA.charAt(0)+'.';
           }
-          console.log("author1", nombreA + apellido);
-
-
         }
 
         for (var j = 0; j < 10; j++) {
@@ -438,21 +446,21 @@
 
           "<button type='button' class='btn btn-outline-info' data-toggle='collapse' data-target='#demo"+i+"'>Leer más...</button>"+
           "<div id='demo"+i+"' class='collapse in'>"+
-          "<font color='#01549b'><h4><b> Abstract:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
+          "<font color='#01549b'><h4><b> Resumen:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
            "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
           "<font color='#01549b'><h4><b> Editorial:</b></h4></font><h4><b>" + editorial + "</h4></b><br>" +
           //"<font color='#01549b'><h4><b> Category:</b></h4></font><h4><b>"+cate + "</h4></b><br>" +
-          "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>" + autorHtml + "</h4><br><h4><b>" +
+          "<font color='#01549b'><h4><b> Autores: </b></h4></font><h4><b>" + autorHtml + "</h4><br><h4><b>" +
           autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" + autor4 + "</h4></b><br><h4><b>" + autor5 + "</h4></b><br>" +
           // "<div class='row'></b>" +
 
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Number: </b></h4></font> </div>" +
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Número: </b></h4></font> </div>" +
           "<div class='col-md-3'><h4><b>" + number + "</h4></b></div>" +
           "<div class='col-md-3'> </div>" +
           "<div class='col-md-3'> </div>" +
 
 
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Volume: </b></h4></font> </div>" +
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Volumen: </b></h4></font> </div>" +
           "<div class='col-md-3'><h4><b>" + volume + "</h4></b></div>" +
           "<div class='col-md-3'> </div>" +
           "<div class='col-md-3'> </div>" +
@@ -464,19 +472,19 @@
           "<div class='col-md-3'> </div>" +
 
 
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Year: </b></h4></font> </div>" +
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Año de publicación: </b></h4></font> </div>" +
           "<div class='col-md-3'><h4><b>" + year + "</h4></b></div>" +
           "<div class='col-md-3'> </div>" +
           "<div class='col-md-3'> </div>" +
 
 
-          "<div class='col-md-3'><font color='#01549b'><h4><b> Pages: </b></h4></font> </div>" +
+          "<div class='col-md-3'><font color='#01549b'><h4><b> Páginas: </b></h4></font> </div>" +
           "<div class='col-md-3'><h4><b>" + pages + "</h4></b></div>" +
           "<div class='col-md-3'> </div>" +
           "<div class='col-md-3'> </div>" +
 
           <!-- Button trigger modal -->
-          "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal"+i+"'> Bibliografía </button>"+
+          "<button type='button' class='btn btn-primary mb-2' data-toggle='modal' data-target='#exampleModal"+i+"'> Bibliografía </button>"+
 
           <!-- Modal -->
           "<div class='modal fade' id='exampleModal"+i+"' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel"+i+"' aria-hidden='true'>"+
@@ -492,7 +500,7 @@
 
           "<label for='apa' class='col-2 col-form-label'><h5>APA</h5></label>"+
           "<div class='col-10'>"+
-          "<p ALIGN='justify'>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</p>"+
+          "<p ALIGN='justify'>"+ apellidoAuthoreshardvard + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +". Recuperado de "+'<a href="'+ url +'">'+url+'</a>'+"</p>"+
           "</div> " +
 
           "<label for='ieee' class='col-2 col-form-label'><h5>IEEE</h5></label>"+
@@ -533,6 +541,7 @@
           "<input hidden type='text' name='doi' value='" + doi + "'>" +
           "<input hidden type='text' name='link' value='" + url + "'>" +
           "<input hidden type='text' name='authores' value='" + autores + "'>" +
+          "<input hidden type='text' name='busqueda' value='" + busqueda + "'>" +
           "<input hidden type='text' name='nombreAuthores' value='" + nombreA + "'>" +
           "<input hidden type='text' name='apellidoAuthores' value='" + apellido + "'>" +
           "<input hidden type='text' name='nombreAuthores1' value='" + nombreA1 + "'>" +
@@ -559,23 +568,6 @@
         $("#resultado_json2").append()
         $("#resultado_json").append($(imprimir));
 
-        /* title = $("#resultado_json").append("Titulo: " + data.records[i].title + "<br>");
-         number= $("#resultado_json").append("Numero: " + data.records[i].number + "<br>");
-         volume= $("#resultado_json").append("Volumen: " + data.records[i].volume + "<br>");
-         issns = $("#resultado_json").append("issns: " + data.records[i].issn + "<br>");
-         doi= $("#resultado_json").append("DOI: " + data.records[i].doi + "<br>");
-         journal = $("#resultado_json").append("Journal: " + data.records[i].publicationName+ "<br>");
-         editorial= $("#resultado_json").append("Editorial: " + data.records[i].publisher+ "<br>");
-         starpage= $("#resultado_json").append("startingPage: " + data.records[i].startingPage+ "<br>");
-         endpage= $("#resultado_json").append("endpage: " + data.records[i].endingPage+ "<br>");
-         year= $("#resultado_json").append("fecha de publicacion: " + data.records[i].publicationDate+ "<br>");
-         url = $("#resultado_json").append(" url: " + data.records[i].url+ "<br>");*/
-
-
-
-
-
-
       }
 
     }
@@ -593,33 +585,37 @@
     function callWebService2()
     {
       var busquedaspring = document.getElementById("homepage-search-input").value;//Obtenemos la palabra o frace a buscar
-      var par1= "http://api.springer.com/openaccess/json?api_key=1658039d51219dac5ea8a55ca7058953&q=";//link del API RestFull
-      var par2= "&s=1&p=30";//definimos cuantos resultados queremos obtener
-      mm= busquedaspring;
-      console.log("Este es el valor del cookie:",mm);
-      var concatenacion1= par1+busquedaspring+par2;// concatenamos para obtener la ruta completa del APiRestFull
-      console.log("la url es:"+concatenacion1);
+      if(busquedaspring==''){
+        alert('Debes ingresar una plabra !');
+      }else {
+        var par1 = "http://api.springer.com/openaccess/json?api_key=1658039d51219dac5ea8a55ca7058953&q=";//link del API RestFull
+        var par2 = "&s=1&p=30";//definimos cuantos resultados queremos obtener
+        mm = busquedaspring;
+        console.log("Este es el valor del cookie:", mm);
+        var concatenacion1 = par1 + busquedaspring + par2;// concatenamos para obtener la ruta completa del APiRestFull
+        console.log("la url es:" + concatenacion1);
 
-      try {
+        try {
 
-        $.ajax({
-          url: concatenacion1, // url de la ruta del APiRestFull
-          type: "get", // es una solicitud de tipo GET
-          async: true,
-          contentType: "text/json; charset=utf-8",
-          dataType: "json", //especificamos que vamos a utilizar un archivo JSON
-          success: function(msg) { webServiceResult1(msg) },
-          error: function(jqXmlHttpRequest, textStatus, errorThrown) {
-            alert("Error leyendo datos.");
-          }
-        });
+          $.ajax({
+            url: concatenacion1, // url de la ruta del APiRestFull
+            type: "get", // es una solicitud de tipo GET
+            async: true,
+            contentType: "text/json; charset=utf-8",
+            dataType: "json", //especificamos que vamos a utilizar un archivo JSON
+            success: function (msg) {
+              webServiceResult1(msg)
+            },
+            error: function (jqXmlHttpRequest, textStatus, errorThrown) {
+              alert("Error leyendo datos.");
+            }
+          });
+        }
+
+        catch (err) {
+          alert(err);
+        }
       }
-
-      catch (err)
-      {
-        alert(err);
-      }
-
 
     }
   </script>
@@ -670,7 +666,8 @@
         language = 'EN/ES';
         country = '';
         var url = data.data[i].downloadUrl;
-
+        fkIdUser=parseInt(document.getElementById("idUsuario").value);
+        var busqueda = document.getElementById("homepage-search-input").value;
 
         for (var j = 0; j < 10; j++) {
           if (typeof data.data[i].authors[0] !== 'undefined') {
@@ -868,13 +865,13 @@
           "<div style='width: 1000px;' class='card my-2'>" +
           "<div >" +
           "<b></b><br>" +"<a href=" +url+"><h4><b>" + title  +"</b></h4></a>"+
-          "<font color='#01549b'><h4><b> Publisher:</b></h4></font><h4><b>" + publisher + "</b></h4><br>" +
+          "<font color='#01549b'><h4><b> Editor:</b></h4></font><h4><b>" + publisher + "</b></h4><br>" +
           "<button type='button' class='btn btn-outline-info' data-toggle='collapse' data-target='#demo"+i+"'>Leer más...</button>"+
           "<div id='demo"+i+"' class='collapse in'>"+
-          "<font color='#01549b'><h4><b> Abstract:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
+          "<font color='#01549b'><h4><b> Resumen:</b></h4></font>" + "<h4><b><p align='justify'>" + abstract + "</h4></b></p>" +
           // "<font color='#01549b'><h4><b> Keywords:</b></h4></font><h4><b>" + keywords + "</h4></b><br>" +
           //"<font color='#01549b'><h4><b> Category:</b></h4></font><h4><b>"+cate + "</h4></b><br>" +
-          "<font color='#01549b'><h4><b> Authors: </b></h4></font><h4><b>" + autorHtml + "</h4><br><h4><b>" +
+          "<font color='#01549b'><h4><b> Autores: </b></h4></font><h4><b>" + autorHtml + "</h4><br><h4><b>" +
           autor1 + "</h4></b><br><h4><b>" + autor2 + "</h4></b><br><h4><b>" + autor3 + "</h4></b><br><h4><b>" +
           // "<div class='row'></b>" +
 
@@ -896,7 +893,7 @@
 
           "<label for='apa' class='col-2 col-form-label'><h4>APA</h4></label>"+
           "<div class='col-10'>"+
-          "<p ALIGN='justify'><h5>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</h5></p>"+
+          "<p ALIGN='justify'><h5>"+ apellidoAuthoreshardvard + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +". Recuperado de "+'<a href="'+ url +'">'+url+'</a>'+"</h5></p>"+
           "</div> " +
 
           "<label for='ieee' class='col-2 col-form-label'><h4>IEEE</h4></label>"+
@@ -936,6 +933,7 @@
           "<input hidden type='text' name='keywords' value='" + keywords + "'>" +
           "<input hidden type='text' name='doi' value='" + doi + "'>" +
           "<input hidden type='text' name='link' value='" + url + "'>" +
+          "<input hidden type='text' name='busqueda' value='" + busqueda + "'>" +
           "<input hidden type='text' name='authores' value='" + autores + "'>" +
           "<input hidden type='text' name='nombreAuthores' value='" + nombreA + "'>" +
           "<input hidden type='text' name='apellidoAuthores' value='" + apellido + "'>" +
@@ -945,6 +943,7 @@
           "<input hidden type='text' name='apellidoAuthores2' value='" + apellido2 + "'>" +
           "<input hidden type='text' name='nombreAuthores3' value='" + nombreA3 + "'>" +
           "<input hidden type='text' name='apellidoAuthores3' value='" + apellido3 + "'>" +
+          "<input hidden type='text' name='fkIdUser' value='" + parseInt(fkIdUser) + "'>" +
           "<input hidden type='number' name='numero_autores' value='" + tamAut + "'>" +
           "<input hidden type='text' name='category' value='" + cate + "'>" +
           "<input hidden type='text' name='pages' value='" + pages + "'>" +

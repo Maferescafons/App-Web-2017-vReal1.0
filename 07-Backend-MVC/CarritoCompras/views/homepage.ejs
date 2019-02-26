@@ -2,8 +2,8 @@
 <font color="#01549b"><h3>Create a new article for my library</h3></font>
 <br>
 <br>
-<form action="/Saludo/crearMiArticulo" method="post">
-  <input
+<form action="/crearMisArticulos" method="post">
+  <input hidden
     class="form-control"
     type="number"
     id="idUsuario"
@@ -83,6 +83,13 @@
     </div>
   </div>
 
+  <input hidden
+    class="form-control"
+    type="text"
+    id="typejournal"
+    name="typejournal"
+    value="journal">
+
   <div class="form-group row">
     <label for="editorial" class="col-2 col-form-label"><h5><b>Editorial</b></h5></label>
     <div class="col-10">
@@ -114,6 +121,15 @@
       <input class="form-control" type="text" placeholder="Enter the issns"
              name="issns"
              id="issns">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="DOI" class="col-2 col-form-label"><h5><b>DOI</b></h5></label>
+    <div class="col-10">
+      <input class="form-control" type="text" placeholder="Enter the doi"
+             name="doi"
+             id="doi">
     </div>
   </div>
 
@@ -245,6 +261,7 @@
   <input type="button" style='display:none;'class="btn btn-info" id="catego" value="+" onclick="mostrar()" disabled=true>
   <br>
   <br>
+  <input hidden type='number'  id="numero_autores" name='numero_autores'>
 
   <script type="text/javascript">
 
@@ -391,7 +408,7 @@
       tamAutap=autores.length;
       console.log("tamaño:",tamAutap);
       console.log("autores", autor1+' '+autor2+' '+autor3+' '+autor4);
-
+      document.getElementById("numero_autores").value = tamAutap;
     }
 
 
@@ -410,6 +427,7 @@
     }
 
   </script>
+
 
 
 

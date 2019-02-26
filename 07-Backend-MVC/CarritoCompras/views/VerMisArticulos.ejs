@@ -13,7 +13,7 @@
          value="<%= Miarticulo.id %>">
 
   <div class="form-group row">
-    <label for="title" class="col-2 col-form-label"><h5>Titulo</h5></label>
+    <label for="title" class="col-2 col-form-label"><h5>Título</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -28,7 +28,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="country" class="col-2 col-form-label"><h5>Pais de publicacion</h5></label>
+    <label for="country" class="col-2 col-form-label"><h5>País de publicación</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -60,7 +60,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="volume" class="col-2 col-form-label"><h5>volumen</h5></label>
+    <label for="volume" class="col-2 col-form-label"><h5>Volumen</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -90,7 +90,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="journal" class="col-2 col-form-label"><h5>journal</h5></label>
+    <label for="journal" class="col-2 col-form-label"><h5>Journal</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -105,7 +105,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="editorial" class="col-2 col-form-label"><h5>editorial</h5></label>
+    <label for="editorial" class="col-2 col-form-label"><h5>Editorial</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -122,7 +122,7 @@
 
 
   <div class="form-group row">
-    <label for="abstract" class="col-2 col-form-label"><h5>Abstract</h5></label>
+    <label for="abstract" class="col-2 col-form-label"><h5>Resumen</h5></label>
     <div class="col-10">
       <textarea
 
@@ -136,7 +136,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="issns" class="col-2 col-form-label"><h5>issns</h5></label>
+    <label for="issns" class="col-2 col-form-label"><h5>ISSN</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -149,8 +149,23 @@
       >
     </div>
   </div>
+
   <div class="form-group row">
-    <label for="language" class="col-2 col-form-label"><h5>language</h5></label>
+    <label for="doi" class="col-2 col-form-label"><h5>DOI</h5></label>
+    <div class="col-10">
+      <input class="form-control"
+             type="text"
+             placeholder="Ingrese sus nombres"
+             id="doi"
+             name="doi"
+             value="<%= Miarticulo.doi %>"
+
+      >
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="language" class="col-2 col-form-label"><h5>Lenguaje</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -165,7 +180,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="keywords" class="col-2 col-form-label"><h5>keywords</h5></label>
+    <label for="keywords" class="col-2 col-form-label"><h5>Keywords</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -190,7 +205,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="author" class="col-2 col-form-label"><h5>author</h5></label>
+    <label for="author" class="col-2 col-form-label"><h5>Autores</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -204,7 +219,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="category" class="col-2 col-form-label"><h5>category</h5></label>
+    <label for="category" class="col-2 col-form-label"><h5>Categoría</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -219,7 +234,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="pages" class="col-2 col-form-label"><h5>pages</h5></label>
+    <label for="pages" class="col-2 col-form-label"><h5>Páginas</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -255,7 +270,7 @@
   <% for(var i=0;i<MiFile.length;i++){ %>
 
   <div class="form-group row" >
-    <label for="pages" class="col-2 col-form-label"><h5><b>File</b></h5></label>
+    <label for="pages" class="col-2 col-form-label"><h5><b>Archivo</b></h5></label>
     <div class="col-5">
       <div class="card" style="width: 50rem;">
         <div class="card-block">
@@ -278,7 +293,7 @@
                    value="<%=MiFile[i].id%>"
                    name="id">
             <button  type="submit"
-                     class="btn btn-outline-danger ">Delete</button>
+                     class="btn btn-outline-danger ">Borrar</button>
           </form>
         </div>
     </div>

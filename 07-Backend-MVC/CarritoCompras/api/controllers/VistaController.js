@@ -1,34 +1,56 @@
 module.exports = {
-    vistaOculta: function (req, res) {
-        return res.view('Oculto/sorpresa');
+    AnadirArticulos: function (req, res) {
+        if (req.cookies.User) {
+            res.view('homepage');
+        }
+        else {
+            return res.redirect('/login'); //Redirigirle al login
+        }
     },
-    /* biblioteca:(req,res)=>{
-    
-       sails.log.info("Parametros", req.signedCookies.user);
-       let parametros = req.allParams();
-    
-       if(!parametros.biblioteca){
-         parametros.biblioteca ='';
-    
-       }
-      Articulo
-          .find()
-          .where({
-            fkIdUser:parametros.idUsuario,
-            title:{
-              contains:parametros.biblioteca
-            }
-          })
-          .exec((err,articulos)=>{
-            if(err) return res.negotiate(err);
-    
-    
-            return res.view('biblioteca',{
-              articulos:articulos,
-    
-            })
-          })
-      },*/
+    busqueda: function (req, res) {
+        if (req.cookies.User) {
+            return res.clearCookie("busqueda"),
+                res.view('busqueda');
+        }
+        else {
+            return res.redirect('/login'); //Redirigirle al login
+        }
+    },
+    busquedaArxiv: function (req, res) {
+        if (req.cookies.User) {
+            return res.clearCookie("busqueda"),
+                res.view('busquedaArxiv');
+        }
+        else {
+            return res.redirect('/login'); //Redirigirle al login
+        }
+    },
+    busquedaSpringer: function (req, res) {
+        if (req.cookies.User) {
+            return res.clearCookie("busqueda"),
+                res.view('busquedaSpringer');
+        }
+        else {
+            return res.redirect('/login'); //Redirigirle al login
+        }
+    },
+    busquedaScopus: function (req, res) {
+        if (req.cookies.User) {
+            return res.clearCookie("busqueda"),
+                res.view('busquedaScopus');
+        }
+        else {
+            return res.redirect('/login'); //Redirigirle al login
+        }
+    },
+    busquedaMrDlib: function (req, res) {
+        if (req.cookies.User) {
+            return res.view('busquedaMrDlib');
+        }
+        else {
+            return res.redirect('/login'); //Redirigirle al login
+        }
+    },
     biblioteca: function (req, res) {
         var parametros = req.allParams();
         if (parametros.idUsuario) {
@@ -79,8 +101,5 @@ module.exports = {
     },
     crearArticulo: function (req, res) {
         return res.view('busqueda');
-    },
-    crearMisArticulos: function (req, res) {
-        return res.view('homepage');
     },
 };

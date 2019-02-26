@@ -26,6 +26,7 @@ declare var CreatorSurname1;
 declare var PublisherId;
 declare var ResourceId;
 declare var User;
+declare var busqueda;
 // /Saludo/crearMiArticulo
 
 module.exports = {
@@ -150,8 +151,10 @@ module.exports = {
       authores:parametros.authores,
       category:parametros.category,
       pages: parametros. pages,
-      notas:parametros.fkIdUser,
+      notas:parametros.notas,
       fkIdUser:parametros.fkIdUser,
+      busqueda:parametros.busqueda,
+       doi:parametros.doi
 
     };
 
@@ -160,6 +163,9 @@ module.exports = {
         (error,articuloCreado)=>{
           if(error){
             return res.serverError(error);
+          }
+          else{
+            busqueda=articuloCreado.busqueda
           }
         }
       )
@@ -427,7 +433,8 @@ module.exports = {
                                                                         if(error){
                                                                           return res.serverError(error);
                                                                         }else{
-                                                                          return res.view('busquedaArxiv');
+                                                                          res.cookie('busqueda',busqueda);
+                                                                          return res.redirect('/bibliotecaUser');
                                                                           //return res.created('Nuevo articulo creado.');
                                                                           //  return res.view('Biblioteca')
 
@@ -469,7 +476,6 @@ module.exports = {
 
     Articulo.find().exec((err,articulos)=>{
       if(err) return res.negotiate(err);
-      sails.log.info("Articulo",articulos);
 
       return res.view('bilioteca',{
         articulos:articulos
@@ -478,7 +484,7 @@ module.exports = {
   },
   bibliotecaUser:(req,res)=>{
    req.cookies.User;
-    sails.log.info("idUser",req.cookies.User);
+    req.cookies.busqueda;
    // res.send('Cookie seteada',req.cookies.User)
     var parametros = req.allParams();
       User
@@ -527,23 +533,4 @@ module.exports = {
     return res.view('busqueda')
   },
 
-  VerArticuloSpringer:(req,res)=>{
-    if(Articulo.authores==''){
-      return res.view('busqueda');
-    }else{
-      //return res.ok(articuloCreado);
-      return res.created('Nuevo articulo creado.');
-    }
-  },
-  viewFile:(req,res)=>{
-
-    file.find().exec((err,file)=>{
-      if(err) return res.negotiate(err);
-      sails.log.info("file",file);
-
-      return res.view('editarArticulo',{
-        file:file
-      })
-    })
-  },
 }

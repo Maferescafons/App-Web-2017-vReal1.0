@@ -112,12 +112,5 @@ module.exports = {
       return res.badRequest();
     }
   },
-  /* verArchivo:function  (req, res) {
-   File.find().exec(function (err, articulos) {
-   if (err)
-   return res.negotiate(err);
-   sails.log.info("Articulo", articulos);
-   res.attachment('tmp/uploads/15c26377-1310-4778-9926-322b1c8a34f7.pdf');
-   });
-   }*/
+
 };

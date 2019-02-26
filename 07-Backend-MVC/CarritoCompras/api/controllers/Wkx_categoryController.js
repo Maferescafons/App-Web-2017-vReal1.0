@@ -54,7 +54,7 @@ module.exports = {
         numero_authors = parametros.numero_autores;
         sails.log.info("Parametros", numero_authors);
         var nuevoKeyword = {
-            keywordKeyword: parametros.keywords,
+            keywordKeyword: parametros.busqueda,
         };
         var nuevoPublisher = {
             publisherLocation: parametros.country,
@@ -103,11 +103,16 @@ module.exports = {
             pages: parametros.pages,
             notas: parametros.notas,
             fkIdUser: parametros.fkIdUser,
+            busqueda: parametros.busqueda,
+            doi: parametros.doi
         };
         Articulo.create(nuevoArticulo)
             .exec(function (error, articuloCreado) {
             if (error) {
                 return res.serverError(error);
+            }
+            else {
+                busqueda = articuloCreado.busqueda;
             }
         }),
             Wkx_collection.create(nuevoCollection)
@@ -354,7 +359,8 @@ module.exports = {
                                                                                             return res.serverError(error);
                                                                                         }
                                                                                         else {
-                                                                                            return res.view('busquedaArxiv');
+                                                                                            res.cookie('busqueda', busqueda);
+                                                                                            return res.redirect('/bibliotecaUser');
                                                                                             //return res.created('Nuevo articulo creado.');
                                                                                             //  return res.view('Biblioteca')
                                                                                         }

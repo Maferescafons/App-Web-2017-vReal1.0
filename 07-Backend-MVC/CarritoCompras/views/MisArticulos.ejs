@@ -1,25 +1,25 @@
-<input
+<input hidden
   id="idUsuario"
   name="idUsuario"
   value="<%=req.session.me%>">
 
 <form action="/mibiblioteca">
   <div class="form-group row">
-    <input
+    <input hidden
       class="form-control"
       type="text"
       id="idUsuario"
       name="idUsuario"
       value="<%=User.id%>">
     <label for="mibusqueda" class="col-4 col-form-label">
-      Search by Keywords or press search to see all
+      Buscar artículos dentro de mi biblioteca
     </label>
     <div class="col-8">
       <input class="form-control" type="text" placeholder="Seach" id="mibiblioteca"
              name="mibiblioteca">
     </div>
   </div>
-  <button class="btn btn-success btn-block">Search</button>
+  <button class="btn btn-success btn-block">Buscar</button>
 </form>
 
 <br>
@@ -30,12 +30,12 @@
   <div class="card" style="width: 20rem;">
     <div class="card-block">
       <h4 class="card-title"><%=MiArticulo[i].title%></h4>
-      <p class="card-text"><h10><b>Autors:</b></h10><%=MiArticulo[i].authors%></p>
+      <p class="card-text"><h10><b>Autores:</b></h10><%=MiArticulo[i].authors%></p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><h10><b>Category:</b></h10><%=MiArticulo[i].category%></li>
-      <li class="list-group-item"><h10><b>Languajescd :</b></h10><%=MiArticulo[i].language%></li>
-      <li class="list-group-item"><h10><b>Year of Publication:</b></h10><%=MiArticulo[i].year%></li>
+      <li class="list-group-item"><h10><b>Categoría:</b></h10><%=MiArticulo[i].category%></li>
+      <li class="list-group-item"><h10><b>Lenguajes :</b></h10><%=MiArticulo[i].language%></li>
+      <li class="list-group-item"><h10><b>Año de publicación:</b></h10><%=MiArticulo[i].year%></li>
     </ul>
     <div class="card-block">
       <form action="/Saludo/eliminarmiArticulo" method="post">
@@ -44,11 +44,11 @@
                value="<%=MiArticulo[i].id%>"
                name="id">
         <button  type="submit"
-                 class="btn btn-outline-danger">Delete</button>
+                 class="btn btn-outline-danger">Borrar</button>
 
         <a href="/VerMisArticulo?id=<%=MiArticulo[i].id%>">
           <button type="button" class="btn btn-primary">
-            See
+            Ver
           </button>
         </a>
       </form>

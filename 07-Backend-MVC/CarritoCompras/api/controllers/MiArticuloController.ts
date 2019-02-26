@@ -34,6 +34,7 @@ module.exports = {
       parametros.editorial&&
       parametros.abstract&&
       parametros.issns&&
+      parametros.doi&&
       parametros.language&&
       parametros.keywords&&
       parametros.author&&
@@ -54,6 +55,7 @@ module.exports = {
         editorial:parametros.editorial,
         abstract:parametros.abstract,
         issns:parametros.issns,
+        doi:parametros.doi,
         language:parametros.language,
         keywords:parametros.keywords,
         authors:parametros.author,

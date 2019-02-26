@@ -1,4 +1,4 @@
-<input
+<input hidden
   class="form-control"
   type="text"
   id="idUsuario"
@@ -13,12 +13,29 @@
 </head>
 <body>
 
-<input type="text" name="q" placeholder="Search DOAJ" id="homepage-search-input">
+<div class="card">
+  <div class="card-header">
+    El artículo ha sido guardado en tu biblioteca!!!
+  </div>
+  <div class="card-body">
+    <input
+      class="form-control"
+      type="text"
+      id="homepage-search-input"
+      name="homepage-search-input"
+      value="<%=req.cookies.busqueda%>">
+    <button type="button" onclick="javascript:callWebService1();">Ver artículos relacionados</button>
+
+    <a href="/bibliotecaUser" class="btn btn-primary">Ir a biblioteca</a>
+  </div>
+</div>
+
+
+
 <i class="icon-search orange">
 
 </i>
 
-<button type="button" onclick="javascript:callWebService1();">Llamar a WS</button>
 
 <div id="resultado_json"></div>
 <script type="text/javascript">
@@ -64,6 +81,7 @@
       country = '';
       var url = data.data[i].downloadUrl;
       fkIdUser=parseInt(document.getElementById("idUsuario").value);
+      var busqueda = document.getElementById("homepage-search-input").value;
 
       for (var j = 0; j < 10; j++) {
         if (typeof data.data[i].authors[0] !== 'undefined') {
@@ -329,6 +347,7 @@
         "<input hidden type='text' name='keywords' value='" + keywords + "'>" +
         "<input hidden type='text' name='doi' value='" + doi + "'>" +
         "<input hidden type='text' name='link' value='" + url + "'>" +
+        "<input hidden type='text' name='busqueda' value='" + busqueda + "'>" +
         "<input hidden type='text' name='authores' value='" + autores + "'>" +
         "<input hidden type='text' name='nombreAuthores' value='" + nombreA + "'>" +
         "<input hidden type='text' name='apellidoAuthores' value='" + apellido + "'>" +

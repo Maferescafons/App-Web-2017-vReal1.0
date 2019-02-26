@@ -36,6 +36,9 @@ module.exports = {
     issns:{
       type:"string"
     },
+    doi:{
+      type:"string"
+    },
     language:{
       type:"string"
     },

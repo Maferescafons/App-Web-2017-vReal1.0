@@ -35,20 +35,14 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 	//policies.js
-  VistaController: {
-		vistaOculta : ['validarAno2016']
-	 },
-  'Saludo': {
-    'welcome': 'flash',
-    'crearMiArticulo': 'flash'
-  },
- // '*': true,
-
+  '*': true,
   UserController: {
-    '*': 'isAuthenticated',
+   /// '*': 'isAuthenticated',
     login: true,
     signup: true,
+    VerUsuario:true,
+    logout: true,
     '*': true
   },
-  newPolitica:['Metodos']
+
 };

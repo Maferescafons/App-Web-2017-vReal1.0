@@ -17,11 +17,13 @@ module.exports = {
       },
       name: {
         type: 'string',
-        required: true
+        required: true,
+        unique: true,
       },
       email: {
         type: 'email',
-        required: true
+        required: true,
+        unique: true,
       },
       password: {
         type: 'string',

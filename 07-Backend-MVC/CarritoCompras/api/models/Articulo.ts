@@ -39,6 +39,9 @@ module.exports = {
     issns:{
       type:"string"
     },
+    doi:{
+      type:"string"
+    },
     language:{
       type:"string"
     },
@@ -67,6 +70,10 @@ module.exports = {
     notas:
       {
         type: "longtext"
+      },
+    busqueda:
+      {
+        type: "string"
       },
     files: {
       collection: 'File',

@@ -1,7 +1,9 @@
-<input
+<input hidden
   id="idUsuario"
   name="idUsuario"
   value="<%=req.session.me%>">
+
+<font color="#449d44"> <h3> Bienvenido <%= User.name %></h3></font>
 
 <form action="/biblioteca">
   <div class="form-group row">
@@ -9,7 +11,7 @@
       Search by Keywords or Title
     </label>
     <div class="col-8">
-      <input
+      <input hidden
         class="form-control"
         type="text"
         id="idUsuario"

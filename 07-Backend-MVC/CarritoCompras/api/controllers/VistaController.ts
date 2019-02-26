@@ -8,37 +8,57 @@ declare var MiArticulo;
 declare var User;
 module.exports = {
 
-  vistaOculta:(req,res)=>{
-    return res.view('Oculto/sorpresa')
+
+  AnadirArticulos:(req,res)=>{
+    if (req.cookies.User)
+    {
+
+      res.view('homepage')
+    }else{
+      return res.redirect('/login'); //Redirigirle al login
+    }
+
   },
-
-/* biblioteca:(req,res)=>{
-
-   sails.log.info("Parametros", req.signedCookies.user);
-   let parametros = req.allParams();
-
-   if(!parametros.biblioteca){
-     parametros.biblioteca ='';
-
-   }
-  Articulo
-      .find()
-      .where({
-        fkIdUser:parametros.idUsuario,
-        title:{
-          contains:parametros.biblioteca
-        }
-      })
-      .exec((err,articulos)=>{
-        if(err) return res.negotiate(err);
-
-
-        return res.view('biblioteca',{
-          articulos:articulos,
-
-        })
-      })
-  },*/
+  busqueda:(req,res)=>{
+    if (req.cookies.User)
+    {
+      return res.clearCookie("busqueda"),
+       res.view('busqueda')
+    }else{
+      return res.redirect('/login'); //Redirigirle al login
+    }
+  },
+  busquedaArxiv:(req,res)=> {
+    if (req.cookies.User) {
+      return res.clearCookie("busqueda"),
+       res.view('busquedaArxiv')
+    } else {
+      return res.redirect('/login'); //Redirigirle al login
+    }
+  },
+  busquedaSpringer:(req,res)=> {
+    if (req.cookies.User) {
+      return res.clearCookie("busqueda"),
+       res.view('busquedaSpringer')
+    } else {
+      return res.redirect('/login'); //Redirigirle al login
+    }
+  },
+  busquedaScopus:(req,res)=> {
+    if (req.cookies.User) {
+      return res.clearCookie("busqueda"),
+      res.view('busquedaScopus')
+    } else {
+      return res.redirect('/login'); //Redirigirle al login
+    }
+  },
+  busquedaMrDlib:(req,res)=> {
+    if (req.cookies.User) {
+      return res.view('busquedaMrDlib')
+    } else {
+      return res.redirect('/login'); //Redirigirle al login
+    }
+  },
 
   biblioteca: function (req, res) {
     var parametros = req.allParams();
@@ -93,9 +113,4 @@ module.exports = {
   crearArticulo:(req,res)=>{
     return res.view('busqueda')
   },
-  crearMisArticulos:(req,res)=>{
-    return res.view('homepage')
-  },
-
-
 };

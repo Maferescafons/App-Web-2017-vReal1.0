@@ -14,12 +14,12 @@
          value="<%= articulos.id %>">
 
   <div class="form-group row">
-    <label for="title" class="col-2 col-form-label"><h5><b>Title</b></h5></label>
+    <label for="title" class="col-2 col-form-label"><h5><b>Título</b></h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
              readonly
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el título del artículo"
              id="title"
              name="title"
              value="<%= articulos.title %>"
@@ -29,11 +29,11 @@
   </div>
 
   <div class="form-group row">
-    <label for="country" class="col-2 col-form-label"><h5><b>Country</b></h5></label>
+    <label for="country" class="col-2 col-form-label"><h5><b>País</b></h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el país proveniente del artículo"
              id="country"
              name="country"
              value="<%= articulos.country %>"
@@ -45,11 +45,11 @@
   </div>
 
   <div class="form-group row">
-    <label for="number" class="col-2 col-form-label"><h5><b>Number</b></h5></label>
+    <label for="number" class="col-2 col-form-label"><h5><b>Número</b></h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el volumen del artículo"
              id="number"
              name="number"
              value="<%= articulos.number %>"
@@ -59,11 +59,11 @@
   </div>
 
   <div class="form-group row">
-    <label for="volume" class="col-2 col-form-label"><h5><b>Volume</b></h5></label>
+    <label for="volume" class="col-2 col-form-label"><h5><b>Volumen</b></h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el volumen del artículo"
              id="volume"
              name="volume"
              value="<%= articulos.volume %>"
@@ -73,11 +73,11 @@
   </div>
 
   <div class="form-group row">
-    <label for="year" class="col-2 col-form-label"><h5><b>Year</b></h5></label>
+    <label for="year" class="col-2 col-form-label"><h5><b>Año de publicación</b></h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el año de publicación del artículo"
              id="year"
              name="year"
              value="<%= articulos.year %>"
@@ -91,7 +91,7 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el nombre del journal al que pertenece el artículo"
              id="journal"
              name="journal"
              value="<%= articulos.journal %>"
@@ -105,7 +105,7 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el nombre del editorial al que pertenece el artículo"
              id="editorial"
              name="editorial"
              value="<%= articulos.editorial %>"
@@ -117,7 +117,7 @@
 
 
   <div class="form-group row">
-    <label for="abstract" class="col-2 col-form-label"><h5><b>Abstract</b></h5></label>
+    <label for="abstract" class="col-2 col-form-label"><h5><b>Resumen</b></h5></label>
     <div class="col-10">
       <textarea
         id="abstract"
@@ -134,20 +134,34 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el doi del artículo"
              id="issns"
              name="issns"
              value="<%= articulos.issns %>"
+      >
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="doi" class="col-2 col-form-label"><h5><b>Doi</b></h5></label>
+    <div class="col-10">
+      <input class="form-control"
+             type="text"
+             placeholder="Ingrese el issns del artículo"
+             id="doi"
+             name="doi"
+             value="<%= articulos.doi %>"
 
       >
     </div>
   </div>
+
   <div class="form-group row">
-    <label for="language" class="col-2 col-form-label"><h5><b>Language</b></h5></label>
+    <label for="language" class="col-2 col-form-label"><h5><b>Lenguage</b></h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el lenguaje en que esta escrito el artículo"
              id="language"
              name="language"
              value="<%= articulos.language %>"
@@ -162,7 +176,7 @@
       <input class="form-control"
              type="text"
              readonly
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese las palabras clave del artículo"
              id="keywords"
              name="keywords"
              value="<%= articulos.keywords %>"
@@ -187,7 +201,7 @@
       <input class="form-control"
              type="text"
              readonly
-             placeholder="Ingrese sus nombres"
+             placeholder="Nombre de los autores"
              id="author"
              name="author"
              value="<%= articulos.authores %>"
@@ -200,7 +214,7 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese la categoria a la que pertenece el artículo"
              id="category"
              name="category"
              value="<%= articulos.category %>"
@@ -214,7 +228,7 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese las páginas donde se encuentra el artículo"
              id="pages"
              name="pages"
              value="<%= articulos.pages %>"

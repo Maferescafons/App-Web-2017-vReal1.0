@@ -1,17 +1,75 @@
-<h1>Signup</h1>
+
+<font color="#01549b"><h1>Regístrate</h1></font>
+<br>
 <form action="/signup" method="post">
 
-  <label for="name">What's your name?</label>
-  <input name="name" type="text"/>
-  <br/>
+  <div class="form-group row">
+    <label for="name" class="col-2 col-form-label"><h5><b>Username:</b></h5></label>
+    <div class="col-10">
+      <input class="form-control" type="text" placeholder="Escoge un username"
+             name="name"
+             id="name"
+             required>
+    </div>
+  </div>
 
-  <label for="email">What's your email?</label>
-  <input name="email" type="text"/>
-  <br/>
+  <div class="form-group row">
+    <label for="email" class="col-2 col-form-label"><h5><b>Email:</b></h5></label>
+    <div class="col-10">
+      <input class="form-control" type="text" placeholder="Ingresa tu correro electrónico"
+             name="email"
+             id="email"
+             required>
+    </div>
+  </div>
 
-  <label for="password">Choose a Password</label>
-  <input name="password" type="password"/>
-  <br/>
+  <div class="form-group row">
+    <label for="password" class="col-2 col-form-label"><h5><b>Contraseña:</b></h5></label>
+    <div class="col-10">
+      <input class="form-control" type="password" placeholder="Escoje una cona contraseña"
+             name="password"
+             id="password"
+             required>
+    </div>
+  </div>
 
-  <input type="submit"/>
+  <div class="form-group row">
+    <label for="passwordConfirm" class="col-2 col-form-label"><h5><b>Confirmar Contraseña:</b></h5></label>
+    <div class="col-10">
+      <input class="form-control" type="password" placeholder="Ingresa nuevamente tu contraseña"
+             name="passwordConfirm"
+             id="passwordConfirm"
+
+             required>
+    </div>
+  </div>
+
+  <button id= "validar"
+          type="button"
+          onclick="validarContrasena()"
+          class="btn btn-info">Validar información</button>
+
+  <input id= "guardar" class="btn btn-outline-success" type="submit" style='display:none;'/>
 </form>
+
+<script type="text/javascript">
+
+  function validarContrasena(){
+    var text7 = document.getElementById("password");
+    var text8 = document.getElementById("passwordConfirm");
+
+    var contrasena = text7.value;
+    var confirmarContrasena = text8.value;
+
+    if(contrasena!=confirmarContrasena){
+      alert('Las contraseñas no son iguales!');
+    }
+    if(contrasena==confirmarContrasena){
+      alert('Tus datos son correctos, pulsa enviar para terminar con tu registro!');
+      document.getElementById("guardar").style.display = 'block';
+      document.getElementById("validar").style.display = 'none';
+    }
+  }
+</script>
+
+

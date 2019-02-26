@@ -38,48 +38,30 @@ module.exports.routes = {
   '/perfil':{
     view:'UsuarioGestion/perfil'
   },
-  '/busqueda':{
-    view:'busqueda'
-  },
-  '/busquedaSpringer':{
-    view:'busquedaSpringer'
-  },
-  '/busquedaArxiv':{
-    view:'busquedaArxiv'
-  },
-  '/busquedaScopus':{
-    view:'busquedaScopus'
-  },
-  '/busquedaDoaj':{
-    view:'busquedaDoaj'
-  },
+  '/AnadirArticulos': 'VistaController.AnadirArticulos',
+  '/busqueda':'VistaController.busqueda',
+  '/busquedaSpringer': 'VistaController.busquedaSpringer',
+  '/busquedaArxiv':'VistaController.busquedaArxiv',
+  '/busquedaMrDlib':'VistaController.busquedaMrDlib',
+  '/busquedaScopus': 'VistaController.busquedaScopus',
 
- // '/misArticulos': 'VistaController.misArticuloView',
+
   '/mibiblioteca': 'SaludoController.VerMisArticulos',
   '/biblioteca': 'VistaController.biblioteca',
   '/bibliotecaUser':'GuardarArticuloController.bibliotecaUser',
-  'get /crearMisArticulos':
-    'VistaController.crearMisArticulos',
-  'get /ArticuloSpringer':
-    'GuardarArticuloController.VerArticuloSpringer',
 
 
-  'get /ContenidoOculto':
-    'VistaController.vistaOculta',
-  'get /VerArticulo':
-    'ArticuloController.VerArticulo',
-  'get /VerMisArticulo':
-    'SaludoController.VerMiArticulo',
-
+  'get /VerArticulo': 'ArticuloController.VerArticulo',
+  'post /editarArticulo':'ArticuloController.editarArticulo',
   'get /filedownloader': 'FileController.download',
   'get /VerFile': 'FileController.BusquedaFile',
 
-  'get /VerUsuario': 'UserController.VerUsuario',
 
-
+  '/crearMisArticulos':'SaludoController.crearMiArticulo',
+  'get /VerMisArticulo': 'SaludoController.VerMiArticulo',
   'get /Mifiledownloader': 'MiFileController.download',
   'get /ViewMiFile': 'MiFileController.BusquedaFile',
-  'post /editarArticulo':'ArticuloController.editarArticulo',
+
 
   //login
   'get /login': { view: 'UsuarioGestion/login' },
@@ -90,6 +72,7 @@ module.exports.routes = {
   'post /login': 'UserController.login',
   'post /signup': 'UserController.signup',
   '/logout': 'UserController.logout',
+  'get /VerUsuario': 'UserController.VerUsuario',
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
