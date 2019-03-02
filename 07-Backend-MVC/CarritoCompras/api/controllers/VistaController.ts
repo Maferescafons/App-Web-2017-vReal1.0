@@ -16,6 +16,7 @@ module.exports = {
       res.view('homepage')
     }else{
       return res.redirect('/login'); //Redirigirle al login
+
     }
 
   },

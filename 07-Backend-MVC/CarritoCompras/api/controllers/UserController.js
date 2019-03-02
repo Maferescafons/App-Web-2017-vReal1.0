@@ -4,7 +4,7 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-
+var bcrypt = require("bcrypt");
 module.exports = {
   login: function (req, res) {
     res.clearCookie("User"),
@@ -81,39 +81,51 @@ module.exports = {
 
   },
   VerUsuario: function (req, res) {
+
     var parametros = req.allParams();
     if(parametros.email&&
       parametros.password) {
+
       User
         .findOne()
         .where({
-          email: parametros.email,
-          password: parametros.password
+          email: parametros.email
         })
         .exec(function (err,User) {
           if (err){
             return res.negotiate(err);}
           if (User) {
             //Si encontro:
-            Articulo.find()
-              .where({
-                fkIdUser:User.id,
-              }).exec(function (err, articulos) {
-              if (err) {
-                return res.serverError(err);
-              }
-              if (!articulos) {
-                return res.view('/busqueda');
-              }
-              res.cookie('User',User.id)
-              //res.send('Cookie seteada')
-              res.view('biblioteca',{
-                articulos:articulos,
-                User:User,
+            bcrypt.compare(parametros.password, User.password, function (err, valid) {
+              console.log(err);
+              if (err) return next(err);
 
-              })
+              if(!valid) {
+                res.redirect('/');
+                return;
+              }
+              Articulo.find()
+                .where({
+                  fkIdUser:User.id,
+                }).exec(function (err, articulos) {
+                if (err) {
+                  return res.serverError(err);
+                }
+                if (!articulos) {
+                  return res.view('/busqueda');
+                }
+                res.cookie('User',User.id)
+                //res.send('Cookie seteada')
+                res.view('biblioteca',{
+                  articulos:articulos,
+                  User:User,
 
-            });
+                })
+
+              });
+
+            }); //end bcrypt.compare
+
           }
           else {
             //No encontro

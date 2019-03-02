@@ -9,7 +9,7 @@ module.exports = {
             }).exec(function (err, articuloBorrado) {
                 if (err)
                     return res.serverError(err);
-                return res.redirect("/biblioteca");
+                return res.redirect("/bibliotecaUser");
             });
         }
         else {

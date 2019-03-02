@@ -188,7 +188,7 @@
   <div class="form-group row">
     <label for="link" class="col-2 col-form-label"><h5><b>Link</b></h5></label>
     <div class="col-10">
-      <a href="<%= articulos.link %>">Full text</a>
+      <a target="_blank" href="<%= articulos.link %>">Full text</a>
       <input hidden type='text' id="link" name='link' value="<%= articulos.link %>">
 
 
@@ -224,7 +224,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="pages" class="col-2 col-form-label"><h5><p>Pages</p></h5></label>
+    <label for="pages" class="col-2 col-form-label"><h5><p><b>Pages</b></p></h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
@@ -261,7 +261,7 @@
   <% for(var i=0;i<File.length;i++){ %>
 
   <div class="form-group row" >
-    <label for="pages" class="col-2 col-form-label"><h5><b>File</b></h5></label>
+    <label for="pages" class="col-2 col-form-label"><h5><b>Archivos:</b></h5></label>
     <div class="col-5">
       <div class="card" style="width: 50rem;">
         <div class="card-block">
@@ -283,7 +283,7 @@
                  value="<%=File[i].id%>"
                  name="id">
           <button  type="submit"
-                   class="btn btn-outline-danger ">Delete</button>
+                   class="btn btn-outline-danger ">Borrar</button>
         </form>
       </div>
     </div>
@@ -295,7 +295,7 @@
                  value="<%=File[i].id%>"
                  name="id">
           <button  type="submit"
-                   class="btn btn-outline-success">download</button>
+                   class="btn btn-outline-success">Bajar</button>
 
         </form>
       </div>
@@ -321,10 +321,10 @@
 
 
     <!--<input type="text" name="title"><br>-->
-    <label for="avatar"><font color='#01549b'><h4><b>Choose attachments to upload</b></h4></font></label><br>
+    <label for="avatar"><font color='#01549b'><h4><b>Escoger artículos para subir</b></h4></font></label><br>
 
-    <input type="file" id="avatar" name="avatar" multiple="multiple"><br>
-    <button type="submit" class="btn btn-primary my-2">Submit</button>
+    <input type="file" id="avatar" name="avatar" multiple="multiple" required><br>
+    <button type="submit" class="btn btn-primary my-2">Subir</button>
   </form>
 </div>
 

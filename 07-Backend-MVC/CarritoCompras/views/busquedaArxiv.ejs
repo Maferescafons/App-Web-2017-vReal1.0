@@ -153,7 +153,8 @@ xhtml1/DTD/xhtml1-transitional.dtd">
     // Preparar la funcion de respuesta
     peticionHttp.onreadystatechange = muestraContenido;
     // Realizar peticion HTTP
-    var busquedarxiv = document.getElementById("homepage-search-input").value;
+    var busquedarxiv1 = document.getElementById("homepage-search-input").value;
+    var busquedarxiv = busquedarxiv1.replace(/\s/g,"%20");
     var par1= 'http://export.arxiv.org/api/query?search_query=all:';
     mm= busquedarxiv;
     console.log("Este es el valor del cookie:",mm);
@@ -541,7 +542,7 @@ xhtml1/DTD/xhtml1-transitional.dtd">
               "<input hidden type='text' name='category' value='" + cate + "'>" +
               "<input hidden type='text' name='pages' value='" + pages + "'>" +
 
-              "<button class='btn btn-outline-success'>Guardar en biblioteca</button>" +
+              "<button class='btn btn-outline-success'>Guardar en mi biblioteca</button>" +
 
               "</div> " +
               "</form>"+

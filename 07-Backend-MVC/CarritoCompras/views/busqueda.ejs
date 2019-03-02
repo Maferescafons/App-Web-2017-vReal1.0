@@ -73,27 +73,27 @@
         <div class="col-md-4"><input type="radio" name="category" value="Engineering (General). Civil engineering (General)">Ingenieria en general<hr></div>
         <div class="col-md-4"> <input type="radio" name="category" value="Education"> Educacion<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="Fine Arts"> Artes<hr></div>
-        <div class="col-lg-4"> <input type="radio" name="category" value="General Works"> publicaciones en general<hr></div>
+        <div class="col-lg-4"><input type="radio" name="category" value="Fine%20Arts"> Artes<hr></div>
+        <div class="col-lg-4"> <input type="radio" name="category" value="General%20Works"> publicaciones en general<hr></div>
         <div class="col-lg-4"> <input type="radio" name="category" value="Geography"> Geografia<hr></div>
 
         <div class="col-lg-4"><input type="radio" name="category" value="History (General) and history of Europe"> Historia general e historia de Europa<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="History America"> Historia de america<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="Language and Literature"> Lenguaje y literatura<hr></div>
+        <div class="col-lg-4"><input type="radio" name="category" value="History%20America"> Historia de america<hr></div>
+        <div class="col-lg-4"><input type="radio" name="category" value="Language%20and%20Literature"> Lenguaje y literatura<hr></div>
 
         <div class="col-lg-4"><input type="radio" name="category" value="Law"> leyes<hr></div>
         <div class="col-lg-4"> <input type="radio" name="category" value="Medicine"> Medicina<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="Military Science">Ciencias militares<hr></div>
+        <div class="col-lg-4"><input type="radio" name="category" value="Military%20Science">Ciencias militares<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="Music and books on Music"> MÃºsica y libros sobre mÃºsica<hr></div>
-        <div class="col-lg-4"> <input type="radio" name="category" value="Naval Science"> Ciencia Naval<hr></div>
+        <div class="col-lg-4"><input type="radio" name="category" value="Music%20and%20books%20on%20Music"> Música y libros sobre música<hr></div>
+        <div class="col-lg-4"> <input type="radio" name="category" value="Naval%20Science"> Ciencia Naval<hr></div>
         <div class="col-lg-4"><input type="radio" name="category" value="Philosophy"> Filosofia<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="Political science"> Ciencias Politicas<hr></div>
+        <div class="col-lg-4"><input type="radio" name="category" value="Political%20science"> Ciencias Politicas<hr></div>
         <div class="col-lg-4"> <input type="radio" name="category" value="Science"> Ciencia<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="Social Sciences"> Ciencias sociales<hr></div>
+        <div class="col-lg-4"><input type="radio" name="category" value="Social%20Sciences"> Ciencias sociales<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="Systems engineering">Ingenieria en sistemas<hr></div>
+        <div class="col-lg-4"><input type="radio" name="category" value="Systems%20engineering">Ingenieria en sistemas<hr></div>
         <div class="col-lg-4"><input type="radio" name="category" value="Technology (General)">Tecnologia en general<hr></div>
 
       </div>
@@ -119,10 +119,10 @@
 
 
       <button type="button" class="btn btn-primary" onclick="javascript:limpiardoaj(); spiner();callWebService()">Busqueda DOAJ</button>
-      <button type="button" class="btn btn-success" onclick="javascript:limpiardoaj();spiner();callWebService1()">Recomendaciones</button>
+      <!--  <button type="button" class="btn btn-success" onclick="javascript:limpiardoaj();spiner();callWebService1()">Recomendaciones</button>-->
 
 
-      <!--  <button type="button" onclick="limpiar();">limpiar</button>-->
+       <!--  <button type="button" onclick="limpiar();">limpiar</button>-->
 
 
 
@@ -598,60 +598,44 @@
 
 
         "<div class='col-md-2'><font color='#01549b'><h4><b> País: </b></h4></font> </div>" +
-        "<div class='col-md-2'><h4><b>" + country + "</h4></b></div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
+        "<div class='col-md-6'><h4><b>" + country + "</h4></b></div>" +
+        "<div class='col-md-4'> </div>" +
+
 
         "<div class='col-md-2'><font color='#01549b'><h4><b> Número: </b></h4></font> </div>" +
-        "<div class='col-md-2'><h4><b>" + number + "</h4></b></div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
+        "<div class='col-md-6'><h4><b>" + number + "</h4></b></div>" +
+        "<div class='col-md-4'> </div>" +
+
 
         "<div class='col-md-2'><font color='#01549b'><h4><b> Volumen: </b></h4></font> </div>" +
-        "<div class='col-md-2'><h4><b>" + volume + "</h4></b></div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
+        "<div class='col-md-6'><h4><b>" + volume + "</h4></b></div>" +
+        "<div class='col-md-4'> </div>" +
+
 
         "<div class='col-md-2'><font color='#01549b'><h4><b> Issns: </b></h4></font> </div>" +
-        "<div class='col-md-2'><h4><b>" + issns + "</h4></b></div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
+        "<div class='col-md-6'><h4><b>" + issns + "</h4></b></div>" +
+        "<div class='col-md-4'> </div>" +
+
 
         "<div class='col-md-2'><font color='#01549b'><h4><b> Lenguaje: </b></h4></font> </div>" +
-        "<div class='col-md-2'><h4><b>" + language + "</h4></b></div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
+        "<div class='col-md-6'><h4><b>" + language + "</h4></b></div>" +
+        "<div class='col-md-4'> </div>" +
+
 
         "<div class='col-md-2'><font color='#01549b'><h4><b> Año de publicacíon: </b></h4></font> </div>" +
-        "<div class='col-md-2'><h4><b>" + year + "</h4></b></div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
+        "<div class='col-md-6'><h4><b>" + year + "</h4></b></div>" +
+        "<div class='col-md-4'> </div>" +
+
 
         "<div class='col-md-2'><font color='#01549b'><h4><b> Páginas: </b></h4></font> </div>" +
-        "<div class='col-md-2'><h4><b>" + pages + "</h4></b></div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
+        "<div class='col-md-6'><h4><b>" + pages + "</h4></b></div>" +
+        "<div class='col-md-4'> </div>" +
+
 
         "<div class='col-md-2'><font color='#01549b'><h4><b> Link: </b></h4></font> </div>" +
-        "<div class='col-md-2'>" + urlHtml + "</div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
-        "<div class='col-md-2'> </div>" +
+        "<div class='col-md-6'>" + urlHtml + "</div>" +
+        "<div class='col-md-4'> </div>" +
+
         "</div>" +
 
         <!-- Button trigger modal -->
@@ -732,7 +716,7 @@
         "<input hidden type='text' name='category' value='" + cate + "'>" +
         "<input hidden type='text' name='pages' value='" + pages + "'>" +
 
-        "<button class='btn btn-outline-primary my-2'>Save</button>" +
+        "<button class='btn btn-outline-primary my-2'>Guardar en mi biblioteca</button>" +
         "<br>" +
         "<br>" +
         " </div>" +
@@ -783,7 +767,8 @@
   // Llamada al webservice
   function callWebService() {
     $("#resultado_json").append("<i class='fa fa-spinner fa-spin' style='font-size:24px'></i>");
-    var busqueda = document.getElementById("homepage-search-input").value;
+    var busqueda1 = document.getElementById("homepage-search-input").value;
+    var busqueda = busqueda1.replace(/\s/g,"%20");
     if(busqueda==''){
       alert('Debes ingresar una plabra !');
     }else{
@@ -1164,7 +1149,7 @@
           "<input hidden type='text' name='category' value='" + cate + "'>" +
           "<input hidden type='text' name='pages' value='" + pages + "'>" +
 
-          "<button class='btn btn-outline-success'>Guardar en biblioteca</button>" +
+          "<button class='btn btn-outline-success'>Guardar en mi biblioteca</button>" +
 
           "</div> " +
           "</form>"+ "<br><br>"+
@@ -1194,7 +1179,8 @@
     // Llamada al webservice
     function callWebService1()
     {
-      var busqueda = document.getElementById("homepage-search-input").value;
+      var busqueda1 = document.getElementById("homepage-search-input").value;
+      var busqueda = busqueda1.replace(/\s/g,"%20");
       if(busqueda==''){
         alert('Debes ingresar una plabra !');
       }else{

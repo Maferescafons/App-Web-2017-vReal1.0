@@ -8,7 +8,7 @@
 <form action="/biblioteca">
   <div class="form-group row">
     <label for="busqueda" class="col-4 col-form-label">
-      Search by Keywords or Title
+      Buscar artículos que tengan esta palabra
     </label>
     <div class="col-8">
       <input hidden
@@ -17,11 +17,11 @@
         id="idUsuario"
         name="idUsuario"
         value="<%=User.id%>">
-      <input class="form-control" type="text" placeholder="Search in my library" id="biblioteca"
+      <input class="form-control" type="text" placeholder="Buscar en mi biblioteca" id="biblioteca"
              name="biblioteca">
     </div>
   </div>
-  <button class="btn btn-success btn-block">Search</button>
+  <button class="btn btn-success btn-block">Buscar</button>
 </form>
 
 <br>
@@ -29,7 +29,13 @@
 
 
 <div class="row">
+  <% if(articulos.length ==0){ %>
+  <div class='col-10'>
+    <p ALIGN='justify'> <font color="#CEE3F6"> <h4> Aún no haz guardado artículos en tu biblioteca ve a  <a href="/busqueda">Búsqueda </a> y comienza a hacerlo</h4></font></p>
+    </div>
+  <%}%>
 <% for(var i=0;i<articulos.length;i++){ %>
+
   <div class="card" style="width: 20rem;">
     <div class="card-block">
       <h6 class="card-title"><b><%=articulos[i].title%></b></h6>
@@ -64,15 +70,15 @@
 
 
 
-<a href="/mibiblioteca">
+<a target="_blank" href="/mibiblioteca">
   <button type="button" class="btn btn-primary btn-lg btn-block">
-    View my posts
+    Ver artículos añadidos por mi
   </button>
 </a>
 <br>
 <a target="_blank" href="http://localhost/wikindx5.3.1/index.php?action=list_LISTRESOURCES_CORE&method=processGeneral&list_Order=title">
   <button type="button" class="btn btn-primary btn-lg btn-block">
-    View in WIKINDX
+    Ver en WIKINDX
   </button>
 </a>
 <br>
