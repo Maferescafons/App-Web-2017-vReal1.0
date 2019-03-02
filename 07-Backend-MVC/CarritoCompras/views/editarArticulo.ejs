@@ -323,12 +323,22 @@
     <!--<input type="text" name="title"><br>-->
     <label for="avatar"><font color='#01549b'><h4><b>Escoger artículos para subir</b></h4></font></label><br>
 
-    <input type="file" id="avatar" name="avatar" multiple="multiple" required><br>
-    <button type="submit" class="btn btn-primary my-2">Subir</button>
+    <input onchange="ValidateSize(this)" type="file" id="avatar" name="avatar" multiple="multiple" required><br>
+    <button style='display:none;' type="submit" id="upload" class="btn btn-primary my-2">Subir</button>
   </form>
 </div>
 
 <script type="text/javascript">
+
+  function ValidateSize(file) {
+    var FileSize = file.files[0].size / 1024 / 1024; // in MB
+    if (FileSize > 2) {
+      alert('El archivo excede 2 MB escoge otro');
+      // $(file).val(''); //for clearing with Jquery
+    } else {
+      document.getElementById('upload').style.display = 'block';
+    }
+  }
 
   var hoy = new Date();
   var dd = hoy.getDate();

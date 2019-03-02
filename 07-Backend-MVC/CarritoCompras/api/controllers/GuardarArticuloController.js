@@ -83,7 +83,7 @@ module.exports = {
             resourceNoSort: parametros.tit,
             resourceTransNoSort: parametros.tit,
             resourceIsbn: parametros.tit,
-            resourceBibtexKey: parametros.apellido + parametros.year,
+            resourceBibtexKey: parametros.apellidoAuthores + parametros.year,
             resourceDoi: parametros.doi
         };
         var nuevoArticulo = {
