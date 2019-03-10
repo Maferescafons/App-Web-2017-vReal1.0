@@ -360,7 +360,8 @@ module.exports = {
                                                                                         }
                                                                                         else {
                                                                                             res.cookie('busqueda', busqueda);
-                                                                                            return res.redirect('/bibliotecaUser');
+                                                                                            //return res.redirect('/bibliotecaUser');
+                                                                                            return res.redirect('/busquedaMrDlib');
                                                                                             //return res.created('Nuevo articulo creado.');
                                                                                             //  return res.view('Biblioteca')
                                                                                         }

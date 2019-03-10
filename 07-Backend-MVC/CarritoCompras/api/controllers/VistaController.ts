@@ -54,8 +54,12 @@ module.exports = {
     }
   },
   busquedaMrDlib:(req,res)=> {
-    if (req.cookies.User) {
-      return res.view('busquedaMrDlib')
+    if (req.cookies.User ) {
+      if (req.cookies.busqueda ) {
+        return res.view('busquedaRecomendador')
+      }else {
+        return res.redirect('/busqueda'); //Redirigirle al login
+      }
     } else {
       return res.redirect('/login'); //Redirigirle al login
     }

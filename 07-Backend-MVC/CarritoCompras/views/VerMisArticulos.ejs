@@ -1,4 +1,4 @@
-<font color="#01549b"><h3>You are editing:</h3></font>
+<font color="#01549b"><h3>Estas editando:</h3></font>
 <font color="#449d44"> <h3> <%= Miarticulo.title %></h3></font>
 <br>
 <br>
@@ -18,7 +18,7 @@
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el título del artículo"
              id="title"
              name="title"
              value="<%= Miarticulo.title %>"
@@ -28,12 +28,12 @@
   </div>
 
   <div class="form-group row">
-    <label for="country" class="col-2 col-form-label"><h5>País de publicación</h5></label>
+    <label for="country" class="col-2 col-form-label"><h5>País</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el país origen del artículo"
              id="country"
              name="country"
              value="<%= Miarticulo.country %>"
@@ -50,7 +50,7 @@
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el número de la revista"
              id="number"
              name="number"
              value="<%= Miarticulo.number %>"
@@ -65,7 +65,7 @@
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el volumen de la revista"
              id="volume"
              name="volume"
              value="<%= Miarticulo.volume %>"
@@ -75,12 +75,12 @@
   </div>
 
   <div class="form-group row">
-    <label for="year" class="col-2 col-form-label"><h5>Año de publicación</h5></label>
+    <label for="year" class="col-2 col-form-label"><h5>Año</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el año de publicación"
              id="year"
              name="year"
              value="<%= Miarticulo.year %>"
@@ -90,12 +90,12 @@
   </div>
 
   <div class="form-group row">
-    <label for="journal" class="col-2 col-form-label"><h5>Journal</h5></label>
+    <label for="journal" class="col-2 col-form-label"><h5>Revista</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el nombre de la Revista"
              id="journal"
              name="journal"
              value="<%= Miarticulo.journal %>"
@@ -110,7 +110,7 @@
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el editorial de la revista"
              id="editorial"
              name="editorial"
              value="<%= Miarticulo.editorial %>"
@@ -141,7 +141,7 @@
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el issns del artículo"
              id="issns"
              name="issns"
              value="<%= Miarticulo.issns %>"
@@ -155,7 +155,7 @@
     <div class="col-10">
       <input class="form-control"
              type="text"
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el doi del artículo"
              id="doi"
              name="doi"
              value="<%= Miarticulo.doi %>"
@@ -165,12 +165,12 @@
   </div>
 
   <div class="form-group row">
-    <label for="language" class="col-2 col-form-label"><h5>Lenguaje</h5></label>
+    <label for="language" class="col-2 col-form-label"><h5>Idioma</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese el idioma en que esta escrito el artículo"
              id="language"
              name="language"
              value="<%= Miarticulo.language %>"
@@ -180,12 +180,12 @@
   </div>
 
   <div class="form-group row">
-    <label for="keywords" class="col-2 col-form-label"><h5>Keywords</h5></label>
+    <label for="keywords" class="col-2 col-form-label"><h5>Plabras clave</h5></label>
     <div class="col-10">
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingrese las palabras clave del artículo"
              id="keywords"
              name="keywords"
              value="<%= Miarticulo.keywords %>"
@@ -197,7 +197,7 @@
   <div class="form-group row">
     <label for="link" class="col-2 col-form-label"><h5>Link</h5></label>
     <div class="col-10">
-      <a href="<%= Miarticulo.link %>">Full text</a>
+      <a href="<%= Miarticulo.link %>">Ver Artículo</a>
       <input hidden type='text' id="link" name='link' value="<%= Miarticulo.link %>">
 
 
@@ -224,7 +224,7 @@
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Ingresa la categoría a la que pertenece tu articulo"
              id="category"
              name="category"
              value="<%= Miarticulo.category %>"
@@ -239,7 +239,7 @@
       <input class="form-control"
              type="text"
 
-             placeholder="Ingrese sus nombres"
+             placeholder="Num. página inicio-Num. página fin"
              id="pages"
              name="pages"
              value="<%= Miarticulo.pages %>"
@@ -305,7 +305,7 @@
                    value="<%=MiFile[i].id%>"
                    name="id">
             <button  type="submit"
-                     class="btn btn-outline-success">download</button>
+                     class="btn btn-outline-success">Descargar</button>
 
           </form>
         </div>
@@ -330,9 +330,9 @@
     <hr>
     <label for="avatar"> <font color="#01549b"> <h3>Añadir archivo</h3></font></label><br>
 
-    <input type="file" id="avatar" name="avatar" multiple="multiple"><br>
+    <input onchange="ValidateSize(this)" type="file" id="avatar" name="avatar" multiple="multiple" required><br>
 
-    <input type="submit" value="Upload" class="btn btn-primary">
+    <input style='display:none;' type="submit" id="upload" value="Upload" class="btn btn-primary my-2">
   </form>
 
   <hr>
@@ -340,6 +340,17 @@
 
 
 <script type="text/javascript">
+
+  function ValidateSize(file) {
+    var FileSize = file.files[0].size / 1024 / 1024; // in MB
+    if (FileSize > 2) {
+      alert('El archivo excede 2 MB escoge otro');
+      // $(file).val(''); //for clearing with Jquery
+    } else {
+      document.getElementById('upload').style.display = 'block';
+    }
+  }
+
 
   var hoy = new Date();
   var dd = hoy.getDate();

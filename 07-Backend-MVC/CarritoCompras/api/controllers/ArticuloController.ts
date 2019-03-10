@@ -137,19 +137,21 @@ module.exports = {
 
     if(parametros.idArticulo&&
       parametros.title&&
-      parametros.country&&
+     // parametros.country&&
       parametros.number&&
       parametros.volume&&
       parametros.year&&
       parametros.journal&&
-      parametros.editorial&&
-      parametros.abstract&&
-      parametros.issns&&
-      parametros.language&&
+     // parametros.editorial&&
+      //parametros.abstract&&
+      //parametros.issns&&
+     // parametros.language&&
       parametros.keywords&&
-      parametros.category&&
+      //parametros.category&&
       parametros.pages
-      ){
+      //parametros.notas
+
+    ){
 
       Articulo.update({
         id:parametros.idArticulo
@@ -162,11 +164,13 @@ module.exports = {
         journal: parametros. journal,
         editorial: parametros. editorial,
         abstract: parametros.abstract,
-        issns:parametros.issns,
+       issns:parametros.issns,
+        doi:parametros.doi,
         language:parametros.language,
         keywords:parametros.keywords,
         category:parametros.category,
         pages: parametros.pages,
+        notas: parametros.notas,
       })
         .exec((err,Editado)=>{
           if(err) return res.serverError(err);

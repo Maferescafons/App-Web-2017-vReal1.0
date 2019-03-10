@@ -24,7 +24,7 @@
              name="title"
              value="<%= articulos.title %>"
 
-      >
+             required>
     </div>
   </div>
 
@@ -37,7 +37,6 @@
              id="country"
              name="country"
              value="<%= articulos.country %>"
-
       >
 
 
@@ -53,7 +52,7 @@
              id="number"
              name="number"
              value="<%= articulos.number %>"
-
+             required
       >
     </div>
   </div>
@@ -67,7 +66,7 @@
              id="volume"
              name="volume"
              value="<%= articulos.volume %>"
-
+             required
       >
     </div>
   </div>
@@ -81,7 +80,7 @@
              id="year"
              name="year"
              value="<%= articulos.year %>"
-
+             required
       >
     </div>
   </div>
@@ -95,7 +94,7 @@
              id="journal"
              name="journal"
              value="<%= articulos.journal %>"
-
+             required
       >
     </div>
   </div>
@@ -138,6 +137,7 @@
              id="issns"
              name="issns"
              value="<%= articulos.issns %>"
+
       >
     </div>
   </div>
@@ -232,7 +232,7 @@
              id="pages"
              name="pages"
              value="<%= articulos.pages %>"
-
+             required
       >
     </div>
   </div>
@@ -295,7 +295,7 @@
                  value="<%=File[i].id%>"
                  name="id">
           <button  type="submit"
-                   class="btn btn-outline-success">Bajar</button>
+                   class="btn btn-outline-success">Descargar</button>
 
         </form>
       </div>
@@ -608,7 +608,7 @@
         <div class="modal-body">
           <label for="apa" class="col-2 col-form-label"><h5>APA</h5></label>
           <div class='col-12'>
-          <p ALIGN='justify'> <%= articulos.authores %>. (<%= articulos.year %>).<%= articulos.title %>.<i> <%= articulos.journal %> </i>,<i> <%= articulos.volume %> </i>( <%= articulos.number %> ),<%= articulos.pages %></p>
+          <p ALIGN='justify'> <script>document.write(apellidoAuthoreshardvard +"("+year.substr(-20,4)+")."+ title+".<i>"+ journal+"</i>,<i>" + volume +"</i>(" +number +"),"+pages +". Recuperado de "+'<a href="'+ link +'">'+link+'</a>') </script> </p>
           </div>
 
           <label for="ieee" class="col-2 col-form-label"><h5>IEEE</h5></label>
@@ -617,7 +617,7 @@
             <p ALIGN='justify' ><script>document.write(authorsb+ ', "' + title + '," ' + "<i>" + journal + "</i>" + '., vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year)</script>  </p>
 
           </div>
-          <label for="harvard" class="col-2 col-form-label"><h5>ISO</h5></label>
+          <label for="harvard" class="col-2 col-form-label"><h5>ISO 690</h5></label>
           <div class="col-12">
             <p ALIGN='justify'><script>document.write(apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '". En: '+"<i>" + journal + "</i> [en línea]. " +editorial+ '. V.' + volume + ', no.' + number + ', pp.' + pages + " [consulta:"+hoy+"].Disponible en: "+'<a href="'+ link +'">'+link+'</a>')</script></p>
           </div>

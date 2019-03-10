@@ -434,7 +434,8 @@ module.exports = {
                                                                           return res.serverError(error);
                                                                         }else{
                                                                           res.cookie('busqueda',busqueda);
-                                                                          return res.redirect('/bibliotecaUser');
+                                                                          //return res.redirect('/bibliotecaUser');
+                                                                          return res.redirect('/busquedaMrDlib');
                                                                           //return res.created('Nuevo articulo creado.');
                                                                           //  return res.view('Biblioteca')
 
@@ -484,7 +485,8 @@ module.exports = {
   },
   bibliotecaUser:(req,res)=>{
    req.cookies.User;
-    req.cookies.busqueda;
+   // req.cookies.busqueda;
+    res.clearCookie("busqueda");
    // res.send('Cookie seteada',req.cookies.User)
     var parametros = req.allParams();
       User

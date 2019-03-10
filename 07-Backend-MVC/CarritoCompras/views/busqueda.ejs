@@ -194,7 +194,7 @@
 
     if (typeof data.results[0] == 'undefined') {
 
-      alert('No existen articulos relacionados con esa palabra!');
+      alert('No existen articulos relacionados con esa palabra, revisa que este bien escrita!');
     }
     var busqueda = document.getElementById("homepage-search-input").value;
 
@@ -416,7 +416,7 @@
           var nombreAuthores=[nombreA,nombreA1,nombreA2];
           var apellidoAuthores=[apellido,apellido1,apellido2];
           var apellidoAuthoresISO= apellido.toUpperCase()+' '+nombreA +', '+apellido1.toUpperCase()+', '+nombreA1 +';'+apellido2.toUpperCase()+','+nombreA2;
-          var apellidoAuthoreshardvard= apellido+', '+nombreA.charAt(0)+'.'+apellido1+', '+nombreA1.charAt(0)+'.'+apellido2+' '+nombreA2.charAt(0)+'.';
+          var apellidoAuthoreshardvard= apellido+', '+nombreA.charAt(0)+'. '+apellido1+', '+nombreA1.charAt(0)+'. '+apellido2+' '+nombreA2.charAt(0)+'';
         }
         else {
           var autor2 = ' ';
@@ -655,17 +655,16 @@
 
         "<label for='apa' class='col-2 col-form-label'><h5>APA</h5></label>"+
         "<div class='col-12'>"+
-        "<p ALIGN='justify'>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</p>"+
-
+        "<p ALIGN='justify'>"+ apellidoAuthoreshardvard + ". ("+year+ "). "+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +". Recuperado de "+'<a href="'+ url +'">'+url+'</a>'+"</p>"+
         "</div>" +
         "<label for='ieee' class='col-2 col-form-label'><h5>IEEE</h5></label>"+
         "<div class='col-12'>"+
         "<p ALIGN='justify'>" + authorsb + ',"' + title + '", ' + "<i>" + journal + "</i>" + '., vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</p>" +
 
         "</div>" +
-        "<label for='iso' class='col-2 col-form-label'><h5>ISO</h5></label>"+
+        "<label for='iso' class='col-2 col-form-label'><h5>ISO 690</h5></label>"+
         "<div class='col-12'>"+
-        "<p ALIGN='justify'>" + apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '".En: '+"<i>" + journal + "</i>[en lÃ­nea]." +editorial+ '. V.' + volume + ', no.' + number + ', pp.' + pages + "[consulta:"+hoy+"].Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+ "</p>" +
+        "<p ALIGN='justify'>" + apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '".En: '+"<i>" + journal + "</i>[en linea]." +editorial+ '. V.' + volume + ', no.' + number + ', pp.' + pages + "[consulta:"+hoy+"].Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+ "</p>" +
 
         "</div>" +
         "<label for='harvard' class='col-2 col-form-label'><h5>Harvard</h5></label>"+
@@ -849,7 +848,7 @@
       staus=data.status
       console.log("staus", staus);
       if (staus == "Not found") {
-        alert('No existen articulos relacionados con esa palabra!');
+        alert('No existen articulos relacionados con esa palabra, revisa que este bien escrita!');
       }else{
       for (i = 0; i <+data.data.length; i++) {
 
@@ -1095,22 +1094,22 @@
 
           "<label for='apa' class='col-2 col-form-label'><h4>APA</h4></label>"+
           "<div class='col-10'>"+
-          "<p ALIGN='justify'><h5>"+ authorsb + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +"</h5></p>"+
+          "<p ALIGN='justify'>"+ apellidoAuthoreshardvard + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +". Recuperado de "+'<a href="'+ url +'">'+url+'</a>'+"</p>"+
           "</div> " +
 
           "<label for='ieee' class='col-2 col-form-label'><h4>IEEE</h4></label>"+
           "<div class='col-10'>"+
-          "<p ALIGN='justify'><h5>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</h5></p>" +
+          "<p ALIGN='justify'>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</p>" +
 
           "</div>" +
           "<label for='iso' class='col-2 col-form-label'><h4>ISO</h4></label>"+
           "<div class='col-10'>"+
-          "<p ALIGN='justify'><h5>" + apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '".En: '+"<i>" + journal + "</i>[en lÃ­nea]." + '. V.' + volume + ', no.' + number + ', pp.' + pages + "[consulta:"+hoy+"].Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+ "</h5></p>" +
+          "<p ALIGN='justify'>" + apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '".En: '+"<i>" + journal + "</i>[en lÃ­nea]." + '. V.' + volume + ', no.' + number + ', pp.' + pages + "[consulta:"+hoy+"].Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+ "</p>" +
 
           "</div>" +
           "<label for='harvard' class='col-2 col-form-label'><h4>Harvard</h4></label>"+
           "<div class='col-10'>"+
-          "<p ALIGN='justify'><h5>" + apellidoAuthoreshardvard + '(' + year.substr(-20,4) + '), "' + title  +'"'+".<i>" +journal + "</i>,"+volume+ "("+number+"),pp."+pages+ ".Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+"[Consultado:"+hoy+"]</h5></p>"+
+          "<p ALIGN='justify'>" + apellidoAuthoreshardvard + '(' + year.substr(-20,4) + '), "' + title  +'"'+".<i>" +journal + "</i>,"+volume+ "("+number+"),pp."+pages+ ".Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+"[Consultado:"+hoy+"]</p>"+
           "</div>"+
           "<div class='modal-footer'>"+
           "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"+
@@ -1196,7 +1195,7 @@
           $.ajax({
               url: concatenacion,
               //url: "&jsoncallback=?",
-              type: 'GET',//tipo de peticiÃ³n
+              type: 'GET',//tipo de peticion
               dataType: 'json', //tipo de datos
               //jsonpCallback: 'envoltorio',  //nombre de la funcion que envuelve la respuesta
               error: function(xhr, status, error) {

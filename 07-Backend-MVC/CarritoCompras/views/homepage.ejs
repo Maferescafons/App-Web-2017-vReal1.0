@@ -1,5 +1,5 @@
 
-<font color="#01549b"><h3>Create a new article for my library</h3></font>
+<font color="#01549b"><h3>Añadir artículos a mi biblioteca</h3></font>
 <br>
 <br>
 <form action="/crearMisArticulos" method="post">
@@ -12,17 +12,16 @@
 
   <div class="form-group row">
 
-    <label for="title" class="col-2 col-form-label"><h5><b>Title</b></h5></label>
+    <label for="title" class="col-2 col-form-label"><h5><b>Título</b></h5></label>
 
     <div class="col-10">
 
       <input class="form-control"
              type="text"
-             placeholder="Enter the title"
+             placeholder="Ingrese el titulo del artículo"
              id="title"
              name="title"
              required
-
       >
 
     </div>
@@ -30,19 +29,19 @@
   </div>
 
   <div class="form-group row">
-    <label for="country" class="col-2 col-form-label"><h5><b>Country</b></h5></label>
+    <label for="country" class="col-2 col-form-label"><h5><b>País</b></h5></label>
     <div class="col-10">
       <input class="form-control" type="text"
-             placeholder="Enter the country"
+             placeholder="Ingrese el país origen del artículo"
              name="country"
              id="country">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="number" class="col-2 col-form-label"><h5><b>Number</b></h5></label>
+    <label for="number" class="col-2 col-form-label"><h5><b>Número</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Enter the number" id="number"
+      <input class="form-control" type="number" placeholder="Ingrese el número de la revista" id="number"
              name="number"
              required
       >
@@ -50,9 +49,9 @@
   </div>
 
   <div class="form-group row">
-    <label for="volume" class="col-2 col-form-label"><h5><b>Volume</b></h5></label>
+    <label for="volume" class="col-2 col-form-label"><h5><b>Volumen</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Enter the volume"
+      <input class="form-control" type="number" placeholder="Ingrese el volumen de la revista"
              name="volume"
              id="volume"
              required
@@ -62,9 +61,9 @@
 
 
   <div class="form-group row">
-    <label for="year" class="col-2 col-form-label"><h5><b>Date</b></h5></label>
+    <label for="year" class="col-2 col-form-label"><h5><b>Año</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Enter the date"
+      <input class="form-control" type="number" placeholder="Ingrese el año de publicación"
              name="year"
              id="year"
              required
@@ -73,9 +72,9 @@
   </div>
 
   <div class="form-group row">
-    <label for="journal" class="col-2 col-form-label"><h5><b>Journal</b></h5></label>
+    <label for="journal" class="col-2 col-form-label"><h5><b>Revista</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Ingrese el nombre de la revista"
+      <input class="form-control" type="text" placeholder="Ingrese el nombre de la Revista"
              name="journal"
              id="journal"
              required
@@ -93,7 +92,7 @@
   <div class="form-group row">
     <label for="editorial" class="col-2 col-form-label"><h5><b>Editorial</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Ingrese el nombre de la revista"
+      <input class="form-control" type="text" placeholder="Ingrese el editorial de la revista"
              name="editorial"
              id="editorial"
              required
@@ -103,7 +102,7 @@
 
 
   <div class="form-group row">
-    <label for="abstract" class="col-2 col-form-label"><h5><b>Abstract</b></h5></label>
+    <label for="abstract" class="col-2 col-form-label"><h5><b>Resumen</b></h5></label>
     <div class="col-10">
       <textarea
         id="abstract"
@@ -118,7 +117,7 @@
   <div class="form-group row">
     <label for="issns" class="col-2 col-form-label"><h5><b>issns</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Enter the issns"
+      <input class="form-control" type="text" placeholder="Ingrese el issns del artículo"
              name="issns"
              id="issns">
     </div>
@@ -127,16 +126,16 @@
   <div class="form-group row">
     <label for="DOI" class="col-2 col-form-label"><h5><b>DOI</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Enter the doi"
+      <input class="form-control" type="text" placeholder="Ingrese el doi del artículo"
              name="doi"
              id="doi">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="language" class="col-2 col-form-label"><h5><b>Language</b></h5></label>
+    <label for="language" class="col-2 col-form-label"><h5><b>Idioma</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Enter the language in which your article is written"
+      <input class="form-control" type="text" placeholder="Ingrese el idioma en que esta escrito el artículo"
              name="language"
              id="language"
              required>
@@ -144,9 +143,9 @@
   </div>
 
   <div class="form-group row">
-    <label for="keywords" class="col-2 col-form-label"><h5><b>Keywords</b></h5></label>
+    <label for="keywords" class="col-2 col-form-label"><h5><b>Palabras clave</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Enter the keywords of your article"
+      <input class="form-control" type="text" placeholder="Ingrese las palabras clave del artículo"
              name="keywords"
              id="keywords"
 
@@ -157,7 +156,7 @@
   <div class="form-group row">
     <label for="link" class="col-2 col-form-label"><h5><b>Link</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="Enter a url where your file is located"
+      <input class="form-control" type="text" placeholder="Introduzca la url donde se encuentra el artículo"
              name="link"
              id="link">
     </div>
@@ -432,9 +431,9 @@
 
 
   <div class="form-group row">
-    <label for="category" class="col-2 col-form-label"><h5><b>Category</b></h5></label>
+    <label for="category" class="col-2 col-form-label"><h5><b>Categoría</b></h5></label>
     <div class="col-10">
-      <input class="form-control" type="text" placeholder="What category does your article belong to"
+      <input class="form-control" type="text" placeholder="Ingresa la categoría a la que pertenece tu articulo"
              name="category"
              id="category"
              required
@@ -443,11 +442,11 @@
   </div>
 
   <div class="form-group row">
-    <label for="author" class="col-2 col-form-label"><h5><b>Página inicio</b></h5></label>
+    <label for="starpage" class="col-2 col-form-label"><h5><b>Página inicio</b></h5></label>
     <div class="col-4">
       <input class="form-control" type="text" placeholder="Ingrese el Num. página de inicio" name="starpage" id="starpage" required>
     </div>
-    <label for="author" class="col-2 col-form-label"><h5><b>Página final</b></h5></label>
+    <label for="endpage" class="col-2 col-form-label"><h5><b>Página final</b></h5></label>
     <div class="col-4">
       <input class="form-control" type="text" placeholder="Ingrese el Num. página de fi" name="endpage" id="endpage" required>
 
@@ -455,7 +454,7 @@
   </div>
 
   <div class="form-group row">
-    <label for="notas" class="col-2 col-form-label"><h5><b>Notes</b></h5></label>
+    <label for="notas" class="col-2 col-form-label"><h5><b>Notas</b></h5></label>
     <div class="col-10">
      <textarea
 
@@ -467,13 +466,12 @@
     </div>
   </div>
 
-  <input type="button" class="btn btn-info"  value="Guardar información">
 
   <button
-    onclick="Autores()" class="btn btn-outline-success">Save</button>
+    onclick="Autores()" class="btn btn-outline-success">Guardar</button>
 
   <button type="reset"
-          class="btn btn-outline-warning">Reset</button>
+          class="btn btn-outline-warning">Limpiar</button>
 
 </form>
 <br>

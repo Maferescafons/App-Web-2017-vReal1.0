@@ -111,17 +111,17 @@ module.exports = {
         var parametros = req.allParams();
         if (parametros.idArticulo &&
             parametros.title &&
-            parametros.country &&
+            // parametros.country&&
             parametros.number &&
             parametros.volume &&
             parametros.year &&
             parametros.journal &&
-            parametros.editorial &&
-            parametros.abstract &&
-            parametros.issns &&
-            parametros.language &&
+            // parametros.editorial&&
+            //parametros.abstract&&
+            //parametros.issns&&
+            // parametros.language&&
             parametros.keywords &&
-            parametros.category &&
+            //parametros.category&&
             parametros.pages) {
             Articulo.update({
                 id: parametros.idArticulo
@@ -135,10 +135,12 @@ module.exports = {
                 editorial: parametros.editorial,
                 abstract: parametros.abstract,
                 issns: parametros.issns,
+                doi: parametros.doi,
                 language: parametros.language,
                 keywords: parametros.keywords,
                 category: parametros.category,
                 pages: parametros.pages,
+                notas: parametros.notas,
             })
                 .exec(function (err, Editado) {
                 if (err)
