@@ -197,7 +197,7 @@
   <div class="form-group row">
     <label for="link" class="col-2 col-form-label"><h5>Link</h5></label>
     <div class="col-10">
-      <a href="<%= Miarticulo.link %>">Ver Artículo</a>
+      <a target="_blank" href="<%= Miarticulo.link %>">Ver Artículo</a>
       <input hidden type='text' id="link" name='link' value="<%= Miarticulo.link %>">
 
 
@@ -629,11 +629,11 @@
           </div>
           <label for="harvard" class="col-2 col-form-label"><h5>ISO</h5></label>
           <div class="col-12">
-            <p ALIGN='justify'><script>document.write(apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '". En: '+"<i>" + journal + "</i> [en línea]. " +editorial+ '. V.' + volume + ', no.' + number + ', pp.' + pages + " [consulta:"+hoy+"].Disponible en: "+'<a href="'+ link +'">'+link+'</a>')</script></p>
+            <p ALIGN='justify'><script>document.write(apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '". En: '+"<i>" + journal + "</i> [en línea]. " +editorial+ '. V.' + volume + ', no.' + number + ', pp.' + pages + " [consulta:"+hoy+"].Disponible en: "+'<a target="_blank" href="'+ link +'">'+link+'</a>')</script></p>
           </div>
           <label for="harvard" class="col-2 col-form-label"><h5>Harvard</h5></label>
           <div class="col-12">
-            <p ALIGN='justify'><script>document.write(apellidoAuthoreshardvard + '(' + year.substr(-20,4) + ') "' + title  +' "'+", <i>" +journal + " </i>,"+volume+ "("+number+"), pp."+pages+ ". Disponible en: "+'<a href="'+ link +'">'+link+'</a>'+"<br>[Consultado:"+hoy+"]")</script> </p>
+            <p ALIGN='justify'><script>document.write(apellidoAuthoreshardvard + '(' + year.substr(-20,4) + ') "' + title  +' "'+", <i>" +journal + " </i>,"+volume+ "("+number+"), pp."+pages+ ". Disponible en: "+'<a target="_blank" href="'+ link +'">'+link+'</a>'+"<br>[Consultado:"+hoy+"]")</script> </p>
           </div>
 
           <div class="modal-footer">

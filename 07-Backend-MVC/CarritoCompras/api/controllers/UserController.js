@@ -70,8 +70,11 @@ module.exports = {
                   return res.serverError(error);
                 }
                 else {
+                  if (usuarioCreado) {
+                    Mailer.sendWelcomeMail(usuarioCreado);  // <= Here we using
+                    res.redirect('/');
+                  }
                   //res.cookie('User',usuarioCreado.id)
-                  res.redirect('/');
                   //VerUsuario?email=nuevo2%40hotmail.com&password=1234
                 }
               });

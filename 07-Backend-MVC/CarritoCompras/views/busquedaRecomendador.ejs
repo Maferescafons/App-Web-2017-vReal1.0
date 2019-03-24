@@ -314,23 +314,23 @@
           "<div class='modal-body'>"+
 
           "<label for='apa' class='col-2 col-form-label'><h4>APA</h4></label>"+
-          "<div class='col-10'>"+
-          "<p ALIGN='justify'>"+ apellidoAuthoreshardvard + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +". Recuperado de "+'<a href="'+ url +'">'+url+'</a>'+"</p>"+
+          "<div class='col-12'>"+
+          "<p ALIGN='justify'>"+ apellidoAuthoreshardvard + ".("+year+ ")."+title +".<i> "+journal+" </i>,<i>"+ volume+ "</i>( "+number+" ),"+pages +". Recuperado de "+'<a target="_blank" href="'+ url +'">'+url+'</a>'+"</p>"+
           "</div> " +
 
           "<label for='ieee' class='col-2 col-form-label'><h4>IEEE</h4></label>"+
-          "<div class='col-10'>"+
+          "<div class='col-12'>"+
           "<p ALIGN='justify'>" + authorsb + ',' + title + ', ' + "<i>" + journal + "</i>" + ', vol.' + volume + ', no.' + number + ', pp.' + pages + ',' + ' ' +  year + "</p>" +
 
           "</div>" +
-          "<label for='iso' class='col-2 col-form-label'><h4>ISO</h4></label>"+
-          "<div class='col-10'>"+
-          "<p ALIGN='justify'>" + apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '".En: '+"<i>" + journal + "</i>[en línea]." + '. V.' + volume + ', no.' + number + ', pp.' + pages + "[consulta:"+hoy+"].Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+ "</p>" +
+          "<label for='iso' class='col-2 col-form-label'><h4>ISO 690</h4></label>"+
+          "<div class='col-12'>"+
+          "<p ALIGN='justify'>" + apellidoAuthoresISO + '(' + year.substr(-20,4) + '), "' + title + '".En: '+"<i>" + journal + "</i>[en línea]." + '. V.' + volume + ', no.' + number + ', pp.' + pages + "[consulta:"+hoy+"].Disponible en: "+'<a target="_blank" href="'+ url +'">'+url+'</a>'+ "</p>" +
 
           "</div>" +
           "<label for='harvard' class='col-2 col-form-label'><h4>Harvard</h4></label>"+
-          "<div class='col-10'>"+
-          "<p ALIGN='justify'>" + apellidoAuthoreshardvard + '(' + year.substr(-20,4) + '), "' + title  +'"'+".<i>" +journal + "</i>,"+volume+ "("+number+"),pp."+pages+ ".Disponible en: "+'<a href="'+ url +'">'+url+'</a>'+"[Consultado:"+hoy+"]</p>"+
+          "<div class='col-12'>"+
+          "<p ALIGN='justify'>" + apellidoAuthoreshardvard + '(' + year.substr(-20,4) + '), "' + title  +'"'+".<i>" +journal + "</i>,"+volume+ "("+number+"),pp."+pages+ ".Disponible en: "+'<a target="_blank" href="'+ url +'">'+url+'</a>'+"[Consultado:"+hoy+"]</p>"+
           "</div>"+
           "<div class='modal-footer'>"+
           "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"+
