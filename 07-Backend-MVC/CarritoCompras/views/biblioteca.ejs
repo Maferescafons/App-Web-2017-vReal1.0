@@ -8,7 +8,7 @@
 <form action="/biblioteca">
   <div class="form-group row">
     <label for="busqueda" class="col-4 col-form-label">
-      Buscar artículos dentro de mi biblioteca
+      <h5> Buscar dentro de mi biblioteca</h5>
     </label>
     <div class="col-8">
       <input hidden
@@ -36,17 +36,13 @@
   <%}%>
 <% for(var i=0;i<articulos.length;i++){ %>
 
-  <div class="card" style="width: 20rem;">
+  <div class="card" style="width: 80rem;">
     <div class="card-block">
-      <h6 class="card-title"><b><%=articulos[i].title%></b></h6>
-      <p class="card-text"><h10><b>Authors:</b></h10><%=articulos[i].authores%></p>
-    </div>
-    <ul class="list-group list-group-flush" >
-      <li class="list-group-item" ><h10><b>Category:</b></h10><%=articulos[i].category%></li>
-      <li class="list-group-item"><h10><b>Languajes:</b></h10><%=articulos[i].language%></li>
-      <li class="list-group-item"><h10><b>Year of publication:</b></h10><%=articulos[i].year%></li>
 
-    </ul>
+      <h5 class="card-title"><b><a href="<%=articulos[i].link%>"><%=articulos[i].title%></a></b></h5>
+      <p class="card-text"><h6><%=articulos[i].authores%>, "<%=articulos[i].title%>", <i><%=articulos[i].journal%></i>, vol.<%=articulos[i].volume%>, no.<%=articulos[i].number%>, pp.<%=articulos[i].pages%>, <%=articulos[i].year%></h6></p>
+    </div>
+
     <div class="card-block">
       <form action="/Articulo/eliminarArticulo" method="post">
         <input hidden

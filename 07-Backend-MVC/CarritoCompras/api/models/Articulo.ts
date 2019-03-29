@@ -75,6 +75,7 @@ module.exports = {
       {
         type: "string"
       },
+
     files: {
       collection: 'File',
       via: 'fkIdArticulo'

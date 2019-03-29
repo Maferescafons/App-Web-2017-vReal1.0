@@ -12,7 +12,7 @@
       name="idUsuario"
       value="<%=User.id%>">
     <label for="mibusqueda" class="col-4 col-form-label">
-      Buscar artículos dentro de mi biblioteca
+     <h5>Buscar dentro de mi biblioteca</h5>
     </label>
     <div class="col-8">
       <input class="form-control" type="text" placeholder="Buscar en mi biblioteca" id="mibiblioteca"
@@ -27,16 +27,12 @@
 
 <div class="row">
   <% for(var i=0;i<MiArticulo.length;i++){ %>
-  <div class="card" style="width: 20rem;">
+  <div class="card" style="width: 80rem ;">
     <div class="card-block">
-      <h4 class="card-title"><%=MiArticulo[i].title%></h4>
-      <p class="card-text"><h10><b>Autores:</b></h10><%=MiArticulo[i].authors%></p>
+      <h5 class="card-title"><b><a href="<%=MiArticulo[i].link%>"><%=MiArticulo[i].title%></a></b></h5>
+      <p class="card-text"><h6><%=MiArticulo[i].authors%>, "<%=MiArticulo[i].title%>", <i><%=MiArticulo[i].journal%></i>, vol.<%=MiArticulo[i].volume%>, no.<%=MiArticulo[i].number%>, pp.<%=MiArticulo[i].pages%>, <%=MiArticulo[i].year%></h6></p>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"><h10><b>Categoría:</b></h10><%=MiArticulo[i].category%></li>
-      <li class="list-group-item"><h10><b>Lenguajes :</b></h10><%=MiArticulo[i].language%></li>
-      <li class="list-group-item"><h10><b>Año de publicación:</b></h10><%=MiArticulo[i].year%></li>
-    </ul>
+
     <div class="card-block">
       <form action="/Saludo/eliminarmiArticulo" method="post">
         <input hidden
