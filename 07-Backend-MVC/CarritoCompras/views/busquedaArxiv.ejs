@@ -102,6 +102,14 @@ xhtml1/DTD/xhtml1-transitional.dtd">
 <input type="text" class="form-control"  name="q" placeholder="Buscar en Arxiv" id="homepage-search-input">
 
 </i>
+<Select id = "DropDown1">
+
+  <Option value ="all:"> Todo </Option>
+  <Option value = "ti:"> Título </Option>
+  <Option value = "abs:"> Resumen </Option>
+  <Option value = "co:"> Journal </Option>
+
+</Select>
 
 <button type="button" class="btn btn-primary" onclick="limpiar();spiner();descargaArchivo()">Busqueda Arxiv</button>
 
@@ -154,11 +162,13 @@ function descargaArchivo() {
   peticionHttp.onreadystatechange = muestraContenido;
   // Realizar peticion HTTP
   var busquedarxiv1 = document.getElementById("homepage-search-input").value;
-  var busquedarxiv = busquedarxiv1.replace(/\s/g,"%20");
-  var par1= 'http://export.arxiv.org/api/query?search_query=all:';
+  var busquedarxiv = busquedarxiv1.replace(/\s/g,"+AND+");
+  var par1= 'http://export.arxiv.org/api/query?search_query=';
+  var selected = document.getElementById ("DropDown1").value;
   mm= busquedarxiv;
   console.log("Este es el valor del cookie:",mm);
-  var concatenacion1= par1+busquedarxiv;
+  var concatenacion1= par1+selected+busquedarxiv;
+  console.log("Este es el valor de la url:",concatenacion1);
   peticionHttp.open('GET',concatenacion1, true);
   peticionHttp.send(null);
   function muestraContenido() {

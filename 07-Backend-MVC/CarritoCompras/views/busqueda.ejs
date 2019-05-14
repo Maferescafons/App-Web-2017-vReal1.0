@@ -63,6 +63,7 @@
   <link rel="stylesheet" href="Bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
   <div id='oculto' style='display:none;'>
     <form id="formRadio" name="categoria">
       <input type="button" class="btn btn-info" value="-" onclick="ocultar()">
@@ -73,28 +74,27 @@
         <div class="col-md-4"><input type="radio" name="category" value="Engineering (General). Civil engineering (General)">Ingenieria en general<hr></div>
         <div class="col-md-4"> <input type="radio" name="category" value="Education"> Educacion<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="Fine%20Arts"> Artes<hr></div>
-        <div class="col-lg-4"> <input type="radio" name="category" value="General%20Works"> publicaciones en general<hr></div>
-        <div class="col-lg-4"> <input type="radio" name="category" value="Geography"> Geografia<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="Fine%20Arts"> Artes<hr></div>
+        <div class="col-md-4"> <input type="radio" name="category" value="General%20Works"> publicaciones en general<hr></div>
+        <div class="col-md-4"> <input type="radio" name="category" value="Geography"> Geografia<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="History (General) and history of Europe"> Historia general e historia de Europa<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="History%20America"> Historia de america<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="Language%20and%20Literature"> Lenguaje y literatura<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="History (General) and history of Europe"> Historia general e historia de Europa<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="History%20America"> Historia de america<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="Language%20and%20Literature"> Lenguaje y literatura<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="Law"> leyes<hr></div>
-        <div class="col-lg-4"> <input type="radio" name="category" value="Medicine"> Medicina<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="Military%20Science">Ciencias militares<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="Law"> leyes<hr></div>
+        <div class="col-md-4"> <input type="radio" name="category" value="Medicine"> Medicina<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="Military%20Science">Ciencias militares<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="Music%20and%20books%20on%20Music"> Música y libros sobre música<hr></div>
-        <div class="col-lg-4"> <input type="radio" name="category" value="Naval%20Science"> Ciencia Naval<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="Philosophy"> Filosofia<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="Music%20and%20books%20on%20Music"> Música y libros sobre música<hr></div>
+        <div class="col-md-4"> <input type="radio" name="category" value="Naval%20Science"> Ciencia Naval<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="Philosophy"> Filosofia<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="Political%20science"> Ciencias Politicas<hr></div>
-        <div class="col-lg-4"> <input type="radio" name="category" value="Science"> Ciencia<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="Social%20Sciences"> Ciencias sociales<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="Political%20science"> Ciencias Politicas<hr></div>
+        <div class="col-md-4"> <input type="radio" name="category" value="Science"> Ciencia<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="Social%20Sciences"> Ciencias sociales<hr></div>
 
-        <div class="col-lg-4"><input type="radio" name="category" value="Systems%20engineering">Ingenieria en sistemas<hr></div>
-        <div class="col-lg-4"><input type="radio" name="category" value="Technology (General)">Tecnologia en general<hr></div>
+        <div class="col-md-4"><input type="radio" name="category" value="Technology (General)">Tecnologia en general<hr></div>
 
       </div>
 
@@ -113,13 +113,22 @@
 
     <div class="row" id="articulos">
       <input type="text" class="form-control my-2" name="q" placeholder="Buscar en DOAJ" id="homepage-search-input" required>
+      <Select id = "DropDown1">
 
+        <Option value =""> Todo </Option>
+        <Option value = "bibjson.title:"> Título </Option>
+        <Option value = "bibjson.keywords:"> Keywords </Option>
+        <Option value = "bibjson.abstract:"> Abstract </Option>
+
+      </Select>
       <br>
       <br>
 
 
       <button type="button" class="btn btn-primary" onclick="javascript:limpiardoaj(); spiner();callWebService()">Busqueda DOAJ</button>
       <!--  <button type="button" class="btn btn-success" onclick="javascript:limpiardoaj();spiner();callWebService1()">Recomendaciones</button>-->
+
+
 
 
        <!--  <button type="button" onclick="limpiar();">limpiar</button>-->
@@ -159,6 +168,12 @@
   function ocultar(){
     document.getElementById('oculto').style.display = 'none';
     document.getElementById('catego').style.display = 'block';
+    var arRadioBtn = document.getElementsByName('category');
+
+    for (var ii = 0; ii < arRadioBtn.length; ii++) {
+      var radButton = arRadioBtn[ii];
+      radButton.checked = false;
+    }
   }
 
 </script>
@@ -761,16 +776,17 @@
   // Llamada al webservice
   function callWebService() {
     $("#resultado_json").append("<i class='fa fa-spinner fa-spin' style='font-size:24px'></i>");
-    var busqueda1 = document.getElementById("homepage-search-input").value;
-    var busqueda = busqueda1.replace(/\s/g,"%20");
-    if(busqueda==''){
+    var busqueda1 = document.getElementById("homepage-search-input").value;//recuperamos la palabra(s) que el usuario dijitó
+    var busqueda = busqueda1.replace(/\s/g,"+AND+");// Eliminamos espacios en blacho y los remplasamos con %20 para una mejor búsqueda
+    if(busqueda==''){ // Controlamos que el usuario ingrese una palabra para ejecutar la búsqueda
       alert('Debes ingresar una plabra !');
     }else{
-      var var1 = "https://doaj.org/api/v1/search/articles/";
-      var var2 = "%2C%20index.classification.exact%3A";
-      //var var3= "?page=2&pageSize=20";
+      var var1 = "https://doaj.org/api/v1/search/articles/"; //formamos la url para buscar los artículos
+      var selected = document.getElementById ("DropDown1").value;
+
+      var var2 = "%2C%20index.classification.exact%3A";//si el usuario escoge una categoria la url deber estas dos variables
       var ca = ($('input[name=category]:checked', '#formRadio').val());
-      console.log("categoria", ca);
+      console.log("categoria", selected);
       if (!$("input[name='category']:checked").val()) {
         // alert('Debes escoger una categoria!');
         var var2 = '';
@@ -778,9 +794,9 @@
       }
       mm = busqueda;
       console.log("Este es el valor del cookie:", mm);
-      var concatenacion = var1 + busqueda + var2 + ca;
+      var concatenacion = var1 +selected+ busqueda + var2 + ca;
       console.log("la url es:" + concatenacion);
-      // https://doaj.org/api/v1/search/articles/monta%C3%B1as?page=24&pageSize=10
+      // https://doaj.org/api/v1/search/articles/Internet%20de%20/las%20cosas?page=24&pageSize=10
       try {
 
         $.ajax({

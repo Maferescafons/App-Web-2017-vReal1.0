@@ -16,16 +16,15 @@ module.exports = {
             parametros.volume &&
             parametros.year &&
             parametros.journal &&
-            parametros.editorial &&
-            parametros.abstract &&
-            parametros.issns &&
-            parametros.doi &&
-            parametros.language &&
+            //  parametros.editorial&&
+            // parametros.abstract&&
+            // parametros.issns&&
+            //parametros.doi&&
+            //parametros.language&&
             parametros.keywords &&
             parametros.author &&
-            parametros.category &&
-            parametros.pages &&
-            parametros.notas) {
+            //  parametros.category&&
+            parametros.pages) {
             MiArticulo.update({
                 id: parametros.idMiArticulo
             }, {

@@ -68,6 +68,16 @@
   <div class="row" id="articulos">
     <input type="text" class="form-control my-2" name="q" placeholder="Buscar en Springer" id="homepage-search-input">
 
+    <Select class="custom-select" id = "DropDown1">
+
+      <Option value =""> Todo </Option>
+
+      <Option value = "title:"> Título </Option>
+
+      <Option value = "keyword:"> Keywords </Option>
+
+    </Select>
+
     <br>
     <br>
 
@@ -585,15 +595,16 @@
     function callWebService2()
     {
       var busquedaspring1 = document.getElementById("homepage-search-input").value;//Obtenemos la palabra o frace a buscar
-      var busquedaspring = busquedaspring1.replace(/\s/g,"%20");
+      var busquedaspring = busquedaspring1.replace(/\s/g,"+AND+");
       if(busquedaspring==''){
         alert('Debes ingresar una plabra !');
       }else {
         var par1 = "http://api.springer.com/openaccess/json?api_key=1658039d51219dac5ea8a55ca7058953&q=";//link del API RestFull
+        var selected = document.getElementById ("DropDown1").value;
         var par2 = "&s=1&p=30";//definimos cuantos resultados queremos obtener
         mm = busquedaspring;
         console.log("Este es el valor del cookie:", mm);
-        var concatenacion1 = par1 + busquedaspring + par2;// concatenamos para obtener la ruta completa del APiRestFull
+        var concatenacion1 = par1 +selected+ busquedaspring + par2;// concatenamos para obtener la ruta completa del APiRestFull
         console.log("la url es:" + concatenacion1);
 
         try {

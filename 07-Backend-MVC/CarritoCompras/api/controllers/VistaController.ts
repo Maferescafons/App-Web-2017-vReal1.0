@@ -10,15 +10,12 @@ module.exports = {
 
 
   AnadirArticulos:(req,res)=>{
-    if (req.cookies.User)
+    if (req.cookies.User)            //Si el usuario aún no se autentica
     {
-
       res.view('homepage')
     }else{
       return res.redirect('/login'); //Redirigirle al login
-
     }
-
   },
   busqueda:(req,res)=>{
     if (req.cookies.User)

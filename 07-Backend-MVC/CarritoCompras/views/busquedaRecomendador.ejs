@@ -407,7 +407,7 @@
       alert('Debes ingresar una plabra !');
     }else{
       var var1= "https://core.ac.uk/api-v2/articles/search/";
-      var var2= "?page=1&pageSize=10&metadata=true&fulltext=false&citations=false&similar=false&duplicate=false&urls=false&faithfulMetadata=false&apiKey=7scnV9e3mTBKqirNjPlUO8whkZC1bxaA";
+      var var2= "?page=1&pageSize=20&metadata=true&fulltext=false&citations=false&similar=false&duplicate=false&urls=false&faithfulMetadata=false&apiKey=7scnV9e3mTBKqirNjPlUO8whkZC1bxaA";
       mm= busqueda;
       console.log("Este es el valor del cookie:",mm);
       var concatenacion= var1+busqueda+var2;
@@ -417,11 +417,9 @@
 
         $.ajax({
             url: concatenacion,
-            //url: "&jsoncallback=?",
             type: 'GET',//tipo de peticion
             dataType: 'json', //tipo de datos
-            //jsonpCallback: 'envoltorio',  //nombre de la funcion que envuelve la respuesta
-            error: function(xhr, status, error) {
+            error: function(xhr, status, error) {       //nombre de la funcion que envuelve la respuesta
               alert("error");
             },
             success: function(msg) { webServiceResult1(msg) }

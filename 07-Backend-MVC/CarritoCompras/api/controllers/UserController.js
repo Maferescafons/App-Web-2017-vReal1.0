@@ -7,48 +7,42 @@
 var bcrypt = require("bcrypt");
 module.exports = {
   login: function (req, res) {
-    res.clearCookie("User"),
+    res.clearCookie("User"),        // Borra la Cookie con información del usuario anterior.
       res.clearCookie("user")
     // See `api/responses/login.js`
-    return res.login({
+    return res.login({                        // Se obtiene los datos proporcionados por el usuario
       email: req.param('email'),
       password: req.param('password'),
 
-      successRedirect:'/VerUsuario',
+      successRedirect:'/VerUsuario',         //Función que se ejecuta si la petición se ha realizado de forma correcta
       invalidRedirect: '/',
     });
   },
 
   logout: function (req, res) {
-
-    // "Forget" the user from the session.
-    // Subsequent requests from this user agent will NOT have `req.session.me`.
+   // "Olvida" al usuario de la sesión.
+    // Las solicitudes posteriores de este agente de usuario NO tendrán `req.session.me`.
     req.session.me = null;
 
-   //   res.clearCookie("user")
-
-    // If this is not an HTML-wanting browser, e.g. AJAX/sockets/cURL/etc.,
-    // send a simple response letting the user agent know they were logged out
-    // successfully.
+    // enviar una respuesta simple para que el agente de usuario sepa que se desconectó
+    // exitosamente.
     if (req.wantsJSON) {
       return res.ok('Logged out successfully!');
     }
-
-    // Otherwise if this is an HTML-wanting browser, do a redirect.
+    // Borra la Cookie con informacion del usuario.
     return res.clearCookie("User"),
       res.redirect('/');
   },
 
   signup: function (req, res) {
-    // Attempt to signup a user using the provided parameters
 
     var parametros = req.allParams();
-    var nuevoUsuario = {
+    var nuevoUsuario = {                  // Registrar a un usuario usando los parámetros provistos
       name: parametros.name,
       email: parametros.email,
       password: parametros.password
     };
-    if(parametros.email) {
+    if(parametros.email) {                // Controlamos que no se guarde otro usuario con el mismo email
       User
         .findOne()
         .where({
@@ -64,8 +58,8 @@ module.exports = {
           }
           else {
             //No encontro
-            User.create(nuevoUsuario)
-              .exec(function (error, usuarioCreado) {
+            User.create(nuevoUsuario)                   //Si no se trata de otro usuario con el mismo email
+              .exec(function (error, usuarioCreado) {   //se procede a guardar en la base los datos del usuario
                 if (error) {
                   return res.serverError(error);
                 }
@@ -74,8 +68,6 @@ module.exports = {
                     Mailer.sendWelcomeMail(usuarioCreado);  // <= Here we using
                     res.redirect('/');
                   }
-                  //res.cookie('User',usuarioCreado.id)
-                  //VerUsuario?email=nuevo2%40hotmail.com&password=1234
                 }
               });
           }
@@ -84,14 +76,12 @@ module.exports = {
 
   },
   VerUsuario: function (req, res) {
-
-    var parametros = req.allParams();
+    var parametros = req.allParams();         // Se obtiene los datos proporcionados por el usuario en el loguin
     if(parametros.email&&
       parametros.password) {
-
       User
         .findOne()
-        .where({
+        .where({                            // Buscamod en la base el usuario con los datos proporcionados
           email: parametros.email
         })
         .exec(function (err,User) {
@@ -101,14 +91,14 @@ module.exports = {
             //Si encontro:
             bcrypt.compare(parametros.password, User.password, function (err, valid) {
               console.log(err);
-              if (err) return next(err);
+              if (err) return next(err);         //Encriptamos la contraseña
 
               if(!valid) {
                 res.redirect('/');
                 return;
               }
               Articulo.find()
-                .where({
+                .where({                             //Indexamos los artículos del usuario para mostrarlos
                   fkIdUser:User.id,
                 }).exec(function (err, articulos) {
                 if (err) {
@@ -117,10 +107,10 @@ module.exports = {
                 if (!articulos) {
                   return res.view('/busqueda');
                 }
-                res.cookie('User',User.id)
+                res.cookie('User',User.id)            //Guardamos el id de usuario en una cookie
                 //res.send('Cookie seteada')
                 res.view('biblioteca',{
-                  articulos:articulos,
+                  articulos:articulos,               //Presentamos los datos en la vista biblioteca
                   User:User,
 
                 })

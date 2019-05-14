@@ -21,20 +21,20 @@ module.exports = {
     var parametros = req.allParams();
     sails.log.info("Parametros", parametros);
 
-    req.file('avatar') // this is the name of the file in your multipart form
+    req.file('avatar') // Este es el nombre del archivo en su formulario multiparte
       .upload({
         // optional
-        //  dirname: ['C:/Users/CEDIA/Desktop/Pasantia-Fernanda Escobar/webstorm/App-Web-2017-validaEntrdasPeroNoGuardaCompl/07-Backend-MVC/CarritoCompras/.tmp/uploads']
+        //  dirname: ['C:/07-Backend-MVC/CarritoCompras/.tmp/uploads']
       }, function(err, uploads) {
         // try to always handle errors
-        if (err) { return res.serverError(err) }
+        if (err) { return res.serverError(err) } // Controlamos errores
         // uploads is an array of files uploaded
         // so remember to expect an array object
-        if (uploads.length === 0) { return res.badRequest('No file was uploaded') }
+        if (uploads.length === 0) { return res.badRequest('Ningun archivo por subir') }
         // if file was uploaded create a new registry
         // at this point the file is phisicaly available in the hard drive
 
-        File.create({
+        File.create({                             //Guardamos los datos del archivo en la base
 
           path: uploads[0].fd,
           filename: uploads[0].filename,
@@ -69,8 +69,8 @@ module.exports = {
   download: function(req, res) {
     var params = req.allParams();
     sails.log.info("Parametros", params);
-    //var fileID = req.param('id')
-    // gets the id either in urlencode, body or url query
+      // var fileID = req.param ('id')
+    // obtiene el ID en urlencode, body o url query
     if (req.method == "GET" && params.id) {
       File.findOne({id: params.id})
         .exec(function (err, file) {
@@ -82,9 +82,8 @@ module.exports = {
               'There is no file attached to this article .'
             );
           }
-          // we use the res.download function to download the file
-          // and send a ok response
-
+          // usamos la función res.download para descargar el archivo
+          // y envía una res.ok()
           res.download(file.path, function (err) {
             if (err) {
               return res.serverError(err)
@@ -99,10 +98,10 @@ module.exports = {
   eliminarFile: function (req, res) {
     var params = req.allParams();
     sails.log.info("Parametros", params);
-    if (req.method == "POST" && params.id) {
-      File.destroy({
+    if (req.method == "POST" && params.id) {       //Obtenemos la Id del archivo
+      File.destroy({                               //Borramos el archivo de la base
         id: params.id
-      }).exec(function (err, articuloBorrado) {
+      }).exec(function (err, articuloBorrado) {    //Controlamos errores
         if (err)
           return res.serverError(err);
         return res.redirect('/VerArticulo?id=' + params.idArticulo);

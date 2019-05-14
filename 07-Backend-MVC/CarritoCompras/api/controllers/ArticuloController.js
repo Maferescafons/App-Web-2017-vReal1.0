@@ -1,14 +1,14 @@
 //    localhost:1337/Articulo/metodos
 module.exports = {
     eliminarArticulo: function (req, res) {
-        var params = req.allParams();
+        var params = req.allParams(); //obtenemos todos los datos de artículo
         sails.log.info("Parametros", params);
         if (req.method == "POST" && params.id) {
             Articulo.destroy({
-                id: params.id
+                id: params.id //Buscamos la id del artículo
             }).exec(function (err, articuloBorrado) {
                 if (err)
-                    return res.serverError(err);
+                    return res.serverError(err); //Controlamos errores
                 return res.redirect("/bibliotecaUser");
             });
         }
@@ -17,7 +17,7 @@ module.exports = {
         }
     },
     VerArticulo: function (req, res) {
-        var parametros = req.allParams();
+        var parametros = req.allParams(); //obtenemos todos los datos del artículo
         if (parametros.id) {
             Articulo.findOne({
                 id: parametros.id
@@ -26,10 +26,9 @@ module.exports = {
                 if (err)
                     return res.serverError(err);
                 if (articuloEditado) {
-                    //Si encontro
-                    File.find()
+                    File.find() //Si encontro el artículo
                         .where({
-                        fkIdArticulo: parametros.id
+                        fkIdArticulo: parametros.id //Indexamos los archivos que tenga el artículo
                     }).exec(function (error, File) {
                         if (error) {
                             return res.serverError(error);

@@ -11,17 +11,17 @@ declare var File;
 
 module.exports = {
 
-  eliminarArticulo: (req, res) => {
+  eliminarArticulo: (req, res) => { //Función para eliminar artículos de la biblioteca
 
-    let params = req.allParams();
+    let params = req.allParams();    //obtenemos todos los datos de artículo
     sails.log.info("Parametros", params);
 
     if (req.method == "POST" && params.id) {
 
-      Articulo.destroy({
-        id: params.id
+      Articulo.destroy({       //Utilizamos la función destroy() de Sails
+        id: params.id           //Buscamos la id del artículo
       }).exec((err, articuloBorrado) => {
-        if (err) return res.serverError(err);
+        if (err) return res.serverError(err); //Controlamos errores
         return res.redirect("/bibliotecaUser")
       })
 
@@ -32,35 +32,34 @@ module.exports = {
   },
 
   VerArticulo:(req,res)=>{
-
-    let parametros = req.allParams();
+    let parametros = req.allParams();  //obtenemos todos los datos del artículo
 
     if(parametros.id){
-      Articulo.findOne({
+      Articulo.findOne({              //Buscamos los datos del artículo en la base de datos
         id:parametros.id
       })
 
         .exec((err,articuloEditado)=>{
           if(err) return res.serverError(err);
           if(articuloEditado){
-            //Si encontro
-            File.find()
+
+            File.find()                      //Si encontro el artículo
               .where({
-                fkIdArticulo:parametros.id
+                fkIdArticulo:parametros.id    //Indexamos los archivos que tenga el artículo
 
               }).exec(
               (error,File)=>{
-                if(error){
+                if(error){                       //Controlamos errores
                   return res.serverError(error);
                 }
-                if (!File) {
-                  return res.view('editarArticulo',{
+                if (!File) {                            //Si no existen archivos indexados solo presentamos
+                  return res.view('editarArticulo',{    //los datos del artículo en la vista editarArtículo
                     articulos:articuloEditado
 
                   })
                 }
-                return res.view('editarArticulo',{
-                  articulos:articuloEditado,
+                return res.view('editarArticulo',{     //enviamos los datos del archivo para
+                  articulos:articuloEditado,          // presentarlos en la vista editarArtículo
                   File:File
 
                 })
