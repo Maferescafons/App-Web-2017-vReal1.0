@@ -7,7 +7,7 @@
 
 module.exports = {
   connection: 'Mysqladapter',
-  tableName: 'MiFiles', // entirely optional
+  tableName: 'mifiles', // entirely optional
   attributes: {
     filename: {
       type: 'string',
