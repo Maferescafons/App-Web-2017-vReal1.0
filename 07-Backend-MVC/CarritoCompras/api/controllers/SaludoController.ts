@@ -552,12 +552,12 @@ module.exports = {
                   return res.serverError(err);
                 }
                 if (!MiFile) {
-                  return res.view('verMisArticulos',{
+                  return res.view('VerMisArticulos',{
                     Miarticulo:articuloEditado
 
                   })
                 }
-                return res.view('verMisArticulos',{
+                return res.view('VerMisArticulos',{
                   Miarticulo:articuloEditado,
                   MiFile:MiFile
 
