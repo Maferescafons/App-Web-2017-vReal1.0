@@ -10,7 +10,7 @@ module.exports = {
 
     res.writeHead(200, {'content-type': 'text/html'});
     res.end(
-      '<form action="http://localhost:1337/file/upload" enctype="multipart/form-data" method="post">'+
+      '<form action="http://http://35.198.47.176:8081/file/upload" enctype="multipart/form-data" method="post">'+
       '<input type="text" name="title"><br>'+
       '<input type="file" name="avatar" multiple="multiple"><br>'+
       '<input type="submit" value="Upload">'+
